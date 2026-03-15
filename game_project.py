@@ -101,7 +101,7 @@ class GameView(arcade.Window):
             )
         
         self.scene.draw()
-
+        
         self.camera_ui.use()
         
         #self.draw_health_bar()
