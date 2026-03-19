@@ -16,7 +16,7 @@ class GameView(arcade.View):
 
     def __init__(self):
         super().__init__()
-
+        
         self.p1 = None
         self.e1 = None
 
@@ -26,10 +26,11 @@ class GameView(arcade.View):
         self.camera = None
         self.camera_ui = None
 
-    def on_show_view(self):
-        """Viene chiamato quando la view diventa attiva"""
-        self.setup()
-
+    # def on_show_view(self):
+    #     """Viene chiamato quando la view diventa attiva"""
+    #     self.window.show_view(MenuView())
+    #     self.setup()
+    
     def setup(self):
         self.scene = arcade.Scene()
 
@@ -118,13 +119,3 @@ class GameView(arcade.View):
             self.p1.stop()
         elif tasto == arcade.key.ESCAPE:
             self.setup()
-def main():
-    window = arcade.Window(960, 540, "Il mio giochino", fullscreen=False)
-
-    game_view = GameView()
-    window.show_view(game_view)
-
-    arcade.run()
-
-if __name__ == "__main__":
-    main()
