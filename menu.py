@@ -2,13 +2,22 @@ import arcade
 from game_project import GameView
 
 class MenuView(arcade.View):
+
+    SCREEN_WIDTH = 960
+    SCREEN_HEIGHT = 540
+
     def __init__(self):
         super().__init__()
 
+        self.background = arcade.load_texture("./assets/sfondo_menu.png")
+
+    def setup(self):
+        pass
+
     def on_draw(self):
         self.clear()
-        arcade.draw_text("IL MIO GIOCO", 480, 350,
-                         arcade.color.WHITE, font_size=48, anchor_x="center")
+        arcade.draw_texture_rect(self.background,
+                                 arcade.LBWH(0,0,self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
         arcade.draw_text("Premi INVIO per iniziare", 480, 250,
                          arcade.color.LIGHT_GRAY, font_size=20, anchor_x="center")
         

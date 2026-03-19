@@ -27,11 +27,6 @@ class GameView(arcade.View):
         self.camera = None
         self.camera_ui = None
 
-    # def on_show_view(self):
-    #     """Viene chiamato quando la view diventa attiva"""
-    #     self.window.show_view(MenuView())
-    #     self.setup()
-    
     def setup(self):
         self.scene = arcade.Scene()
 
