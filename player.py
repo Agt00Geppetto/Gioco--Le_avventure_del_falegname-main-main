@@ -9,6 +9,11 @@ class Player(SpriteAnimato):
         super().__init__(scala = 2.0)
 
         self.scene = scene
+        p1 = arcade.Sprite("./assets/IDLE1.png")
+        self.center_x = 100
+        self.center_y = 240
+        self.scene.add_sprite("Player", p1)
+
         # Variabili per il movimento e i salti
         self.jump_since_ground = 0
         self.max_jumps = 2
@@ -24,11 +29,12 @@ class Player(SpriteAnimato):
 
         self.direzione = "giu"
         self.su = self.giu = self.sinistra = self.destra = False
+        
 
     def setup(self):
-        p1 = arcade.Sprite("./assets/IDLE1.png")
-        p1 = SpriteAnimato(scale = 1.5)
-        p1.aggiungi_animazione(
+
+        self.scene = SpriteAnimato(scale = 1.5)
+        self.scene.aggiungi_animazione(
             nome = "attack",
             percorso = "./assets/ATTACK 1.png",
             frame_width=64, frame_height=64,
@@ -36,7 +42,7 @@ class Player(SpriteAnimato):
             durata=0.6,
             loop=False
         )
-        p1.aggiungi_animazione(
+        self.scene.aggiungi_animazione(
             nome = "idle",
             percorso = "./assets/IDLE.png",
             frame_width=64, frame_height=64,
@@ -45,7 +51,7 @@ class Player(SpriteAnimato):
             loop=True,
             default=True, # possiamo avere solo 1 animazione di default
         )
-        p1.aggiungi_animazione(
+        self.scene.aggiungi_animazione(
             nome = "run",
             percorso = "./assets/RUN.png",
             frame_width=64, frame_height=64,
@@ -53,7 +59,7 @@ class Player(SpriteAnimato):
             durata=0.6,
             loop=False
         )
-        p1.aggiungi_animazione(
+        self.scene.aggiungi_animazione(
             nome = "hurt",
             percorso = "./assets/HURT.png",
             frame_width=64, frame_height=64,
@@ -61,7 +67,7 @@ class Player(SpriteAnimato):
             durata=0.6,
             loop=False
         )
-        p1.aggiungi_animazione(
+        self.scene.aggiungi_animazione(
             nome = "walk",
             percorso = "./assets/RUN.png",
             frame_width=64, frame_height=64,
@@ -69,10 +75,6 @@ class Player(SpriteAnimato):
             durata=1.0,
             loop=False
         )
-
-        self.center_x = 100
-        self.center_y = 240
-        self.scene.add_sprite("Player", p1)
 
     def update_animation(self, delta_time: float = 1 / 60):
 
