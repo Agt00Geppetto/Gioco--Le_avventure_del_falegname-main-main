@@ -5,9 +5,10 @@ from animazione import SpriteAnimato
 class Player(SpriteAnimato):
     DIREZIONI = ["su", "sinistra", "giu", "destra"]
 
-    def __init__(self):
+    def __init__(self, scene):
         super().__init__(scala = 2.0)
 
+        self.scene = scene
         # Variabili per il movimento e i salti
         self.jump_since_ground = 0
         self.max_jumps = 2
@@ -25,6 +26,7 @@ class Player(SpriteAnimato):
         self.su = self.giu = self.sinistra = self.destra = False
 
     def setup(self):
+        p1 = arcade.Sprite("./assets/IDLE1.png")
         p1 = SpriteAnimato(scale = 1.5)
         p1.aggiungi_animazione(
             nome = "attack",
@@ -67,6 +69,10 @@ class Player(SpriteAnimato):
             durata=1.0,
             loop=False
         )
+
+        self.center_x = 100
+        self.center_y = 240
+        self.scene.add_sprite("Player", p1)
 
     def update_animation(self, delta_time: float = 1 / 60):
 
