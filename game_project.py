@@ -5,6 +5,7 @@ import random
 from player import Player
 from muri import Muri
 from nemici import Enemy
+from pausa import PauseView
 #from barra_vita import Barra
 
 class GameView(arcade.View):
@@ -113,9 +114,12 @@ class GameView(arcade.View):
             self.p1.move_right()
             if modificatori & arcade.key.MOD_SHIFT:
                 self.p1.run_right()
+        elif tasto == arcade.key.ESCAPE:
+            pausa = PauseView(self)  # passiamo noi stessi per poter tornare in futuro, allo stato del gioco che avviene in questo momento
+            self.window.show_view(pausa)
 
     def on_key_release(self, tasto, modificatori):
         if tasto in (arcade.key.A, arcade.key.D, arcade.key.RIGHT, arcade.key.LEFT):
             self.p1.stop()
-        elif tasto == arcade.key.ESCAPE:
+        elif tasto == arcade.key.R:
             self.setup()
