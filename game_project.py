@@ -79,7 +79,7 @@ class GameView(arcade.View):
         self.camera.use()
         self.scene.draw()
 
-        arcade.draw_circle_filled(self.p1.center_x, self.p1.center_y, 10, arcade.color.RED)
+        arcade.draw_circle_filled(self.p1.center_x, self.p1.center_y, 10, arcade.color.BLUE)
 
 
     def on_update(self, delta_time):
