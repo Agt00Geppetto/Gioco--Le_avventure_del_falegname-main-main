@@ -1,15 +1,15 @@
-import arcade  # Importa la libreria arcade per gestire grafica, sprite e giochi
+import arcade
 
-class SpriteAnimato(arcade.Sprite):  # Definisce una classe che estende Sprite di arcade
-    def __init__(self, scala: float = 1.0):  # Costruttore della classe con parametro scala
-        super().__init__(scale=scala)  # Chiama il costruttore della classe base Sprite
-        self.animazioni = {}          # Dizionario che conterrà tutte le animazioni
+class SpriteAnimato(arcade.Sprite):
+    def __init__(self, scala: float = 1.0):
+        super().__init__(scale=scala)
+        self.animazioni = {} 
         self.animazione_corrente = None  # Nome dell'animazione attualmente attiva
         self.animazione_default = None  # Nome dell'animazione di default
         self.tempo_frame = 0.0  # Tempo accumulato per il frame corrente
         self.indice_frame = 0  # Indice del frame corrente nell'animazione
 
-    def aggiungi_animazione(  # Metodo per aggiungere una nuova animazione
+    def aggiungi_animazione(
         self,
         nome: str,  # Nome dell'animazione
         percorso: str,  # Percorso dello spritesheet

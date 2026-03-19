@@ -91,11 +91,15 @@ class Player(SpriteAnimato):
 
         # da fare: capire in che direzione stiamo andando e impostare self.direzione
 
-        if self.direzione == "giù":
+        if dx > 0:
             self.direzione = "destra"
-        else:
+        elif dx < 0:
             self.direzione = "sinistra"
-
+        elif dy > 0:
+            self.direzione = "su"
+        elif dy < 0:
+            self.direzione = "giu"
+            
         # Scegliamo walk o idle
         if dx != 0 or dy != 0:
             self.imposta_animazione(f"walk_{self.direzione}")
