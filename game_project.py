@@ -52,7 +52,6 @@ class GameView(arcade.View):
         )
 
         self.p1.set_physics_engine(self.physics_engine)
-        self.scene = Player(self.p1.set_physics_engine)
         self.e1.set_physics_engine(self.physics_engine)
 
         self.physics_engine.enable_multi_jump(1)
@@ -80,6 +79,8 @@ class GameView(arcade.View):
         self.camera.use()
         self.scene.draw()
 
+        arcade.draw_circle_filled(self.p1.center_x, self.p1.center_y, 10, arcade.color.RED)
+
 
     def on_update(self, delta_time):
         self.scene.update(delta_time)
@@ -87,7 +88,7 @@ class GameView(arcade.View):
         self.physics_engine.update()
 
         self.aggiorna_camera()
-        Player(self.p1.update_jump_reset())
+        self.p1.update_jump_reset()
  
     def aggiorna_camera( self):
         cam_x, cam_y = self.camera.position

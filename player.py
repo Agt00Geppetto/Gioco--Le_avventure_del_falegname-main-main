@@ -6,13 +6,14 @@ class Player(SpriteAnimato):
     DIREZIONI = ["su", "sinistra", "giu", "destra"]
 
     def __init__(self, scene):
-        super().__init__(scala = 2.0)
+        super().__init__(scala = 3.0)
+
+        self.texture = arcade.load_texture("./assets/IDLE1.png")
 
         self.scene = scene
-        p1 = arcade.Sprite("./assets/IDLE1.png")
         self.center_x = 100
         self.center_y = 240
-        self.scene.add_sprite("Player", p1)
+        self.scene.add_sprite("Player", self)
 
         # Variabili per il movimento e i salti
         self.jump_since_ground = 0
@@ -89,6 +90,8 @@ class Player(SpriteAnimato):
             dx += 4
 
         # da fare: capire in che direzione stiamo andando e impostare self.direzione
+
+        
 
         # Scegliamo walk o idle
         if dx != 0 or dy != 0:
