@@ -6,7 +6,7 @@ from player import Player
 from muri import Muri
 from nemici import Enemy
 from pausa import PauseView
-#from barra_vita import Barra
+from barra_vita import Barra
 
 class GameView(arcade.View):
 
@@ -23,7 +23,7 @@ class GameView(arcade.View):
 
         self.physics_engine = None
         self.scene = None
-
+        
         self.camera = None
         self.camera_ui = None
 
@@ -78,6 +78,8 @@ class GameView(arcade.View):
 
         arcade.draw_circle_filled(self.p1.center_x, self.p1.center_y, 10, arcade.color.BLUE)
 
+    def danno_vita(self):
+        pass
 
     def on_update(self, delta_time):
         self.scene.update(delta_time)
