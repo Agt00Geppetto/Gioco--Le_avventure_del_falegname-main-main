@@ -6,7 +6,7 @@ from player import Player
 from muri import Muri
 from nemici import Enemy
 from pausa import PauseView
-from barra_vita import Barra
+from barra import BarraProgressiva
 
 class GameView(arcade.View):
 
@@ -78,7 +78,16 @@ class GameView(arcade.View):
 
         arcade.draw_circle_filled(self.p1.center_x, self.p1.center_y, 10, arcade.color.BLUE)
 
-    def on_update(self, delta_time):
+    def on_update(self, delta_time, collisioni,percentuale, danno):
+        from barra import BarraProgressiva
+        percentuale = self.vita_corrente/self.max_valore
+        collisioni = arcade.check_for_collision(self.p1, self.e1)
+
+        if len(collisioni) == None:
+            percentuale = percentuale
+        elif len(collisioni) == 0:
+            self.percentuale = self.percentuale - danno
+        
         self.scene.update(delta_time)
         self.p1.update_animation(delta_time)
         self.physics_engine.update()
