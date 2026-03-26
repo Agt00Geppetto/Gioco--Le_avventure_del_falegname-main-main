@@ -23,7 +23,7 @@ class GameView(arcade.View):
 
         self.physics_engine = None
         self.scene = None
-        
+
         self.camera = None
         self.camera_ui = None
 
@@ -77,9 +77,6 @@ class GameView(arcade.View):
         self.scene.draw()
 
         arcade.draw_circle_filled(self.p1.center_x, self.p1.center_y, 10, arcade.color.BLUE)
-
-    def danno_vita(self):
-        pass
 
     def on_update(self, delta_time):
         self.scene.update(delta_time)

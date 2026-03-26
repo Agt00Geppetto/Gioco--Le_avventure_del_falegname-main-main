@@ -23,10 +23,10 @@ class Player(SpriteAnimato):
         self.direzione = "giu"
         self.su = self.giu = self.sinistra = self.destra = False
 
-        #self.setup()
+        self.setup()
         
 
-    #def setup(self):
+    def setup(self):
 
         self.aggiungi_animazione(
             nome = "attack",

@@ -3,13 +3,15 @@ import arcade
 
 class Barra:
 
-    WIDTH_BARRA = 50
-    HEIGHT_BARRA = 25
+    WIDTH_BARRA = 100
+    HEIGHT_BARRA = 40
 
     def __init__(self):
+        super().__init__()
         
         self.max_vita: float = 100.0
         self.vita_corrente: float = 100.0
+        percentuale = None
 
     def draw_barra(self):
 
@@ -27,11 +29,15 @@ class Barra:
             arcade.color.GREEN
         )
 
+    def update(self):
+        pass
+
     def morte(self):
         pass
 
     def cura(self):
         pass
 
-
+    def danno(self):
+        pass
 
