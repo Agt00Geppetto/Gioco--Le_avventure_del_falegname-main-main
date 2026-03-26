@@ -1,8 +1,8 @@
 import arcade
 
 class SpriteAnimato(arcade.Sprite):
-    def __init__(self, scala: float = 1.0):
-        super().__init__(scale=scala)
+    def __init__(self, scala: float = 3.0):
+        super().__init__(scale = scala)
         self.animazioni = {} 
         self.animazione_corrente = None  # Nome dell'animazione attualmente attiva
         self.animazione_default = None  # Nome dell'animazione di default

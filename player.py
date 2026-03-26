@@ -6,79 +6,71 @@ class Player(SpriteAnimato):
     DIREZIONI = ["su", "sinistra", "giu", "destra"]
 
     def __init__(self, scene):
-        super().__init__(scala = 3.0)
+        super().__init__()
 
         self.texture = arcade.load_texture("./assets/IDLE1.png")
 
         self.scene = scene
         self.center_x = 100
         self.center_y = 240
-        self.scene.add_sprite("Player", self)
+        self.scene.add_sprite("Player",self)
 
         # Variabili per il movimento e i salti
         self.jump_since_ground = 0
         self.max_jumps = 2
         self.physics_engine = None
 
-        for i, dir in enumerate(self.DIREZIONI):
-            self.aggiungi_animazione(f"idle_{dir}", "./assets/IDLE.png",
-                frame_width=64, frame_height=64, num_frame=10, colonne=1,
-                durata=0.8, loop=True, default=(dir == "giu"), riga=i)
-            self.aggiungi_animazione(f"walk_{dir}", "./assets/RUN.png",
-                frame_width=64, frame_height=64, num_frame=16, colonne=1,
-                durata=1.0, loop=True, riga=i)
-
         self.direzione = "giu"
         self.su = self.giu = self.sinistra = self.destra = False
+
+        #self.setup()
         
 
-    def setup(self):
+    #def setup(self):
 
-        self.scene = SpriteAnimato(scale = 1.5)
-        self.scene.aggiungi_animazione(
+        self.aggiungi_animazione(
             nome = "attack",
             percorso = "./assets/ATTACK 1.png",
-            frame_width=64, frame_height=64,
-            num_frame=7, colonne=1,
+            frame_width=96, frame_height=96,
+            num_frame=7, colonne=7,
             durata=0.6,
             loop=False
         )
-        self.scene.aggiungi_animazione(
+        self.aggiungi_animazione(
             nome = "idle",
             percorso = "./assets/IDLE.png",
-            frame_width=64, frame_height=64,
-            num_frame=10, colonne=1,
+            frame_width=96, frame_height=96,
+            num_frame=10, colonne=10,
             durata=0.6,
             loop=True,
             default=True, # possiamo avere solo 1 animazione di default
         )
-        self.scene.aggiungi_animazione(
+        self.aggiungi_animazione(
             nome = "run",
             percorso = "./assets/RUN.png",
-            frame_width=64, frame_height=64,
-            num_frame=16, colonne=1,
+            frame_width=96, frame_height=96,
+            num_frame=16, colonne=16,
             durata=0.6,
             loop=False
         )
-        self.scene.aggiungi_animazione(
+        self.aggiungi_animazione(
             nome = "hurt",
             percorso = "./assets/HURT.png",
-            frame_width=64, frame_height=64,
-            num_frame=4, colonne=1,
+            frame_width=96, frame_height=96,
+            num_frame=4, colonne=4,
             durata=0.6,
             loop=False
         )
-        self.scene.aggiungi_animazione(
+        self.aggiungi_animazione(
             nome = "walk",
             percorso = "./assets/RUN.png",
-            frame_width=64, frame_height=64,
-            num_frame=16, colonne=1,
+            frame_width=96, frame_height=96,
+            num_frame=16, colonne=16,
             durata=1.0,
             loop=False
         )
 
     def update_animation(self, delta_time: float = 1 / 60):
-
         dx = dy = 0
         if self.su:       
             dy += 4
@@ -99,12 +91,12 @@ class Player(SpriteAnimato):
             self.direzione = "su"
         elif dy < 0:
             self.direzione = "giu"
-            
+        
         # Scegliamo walk o idle
         if dx != 0 or dy != 0:
-            self.imposta_animazione(f"walk_{self.direzione}")
+            self.imposta_animazione("walk")
         else:
-            self.imposta_animazione(f"idle_{self.direzione}")
+            self.imposta_animazione("idle")
 
         super().update_animation(delta_time)
 
@@ -112,13 +104,21 @@ class Player(SpriteAnimato):
     def set_physics_engine(self, engine):
         self.physics_engine = engine
 
-    def move_left(self): self.change_x = -5
+    def move_left(self): 
+        self.sinistra = True
+        self.change_x = -5
 
-    def run_left(self): self.change_x = -10
+    def run_left(self): 
+        self.sinistra = True
+        self.change_x = -10
 
-    def move_right(self): self.change_x = 5
+    def move_right(self): 
+        self.destra = True
+        self.change_x = 5
 
-    def run_right(self): self.change_x = 10
+    def run_right(self): 
+        self.destra = True
+        self.change_x = 10 
 
     def stop(self): self.change_x = 0
 

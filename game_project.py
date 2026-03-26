@@ -81,7 +81,7 @@ class GameView(arcade.View):
 
     def on_update(self, delta_time):
         self.scene.update(delta_time)
-        self.scene.update_animation(delta_time)
+        self.p1.update_animation(delta_time)
         self.physics_engine.update()
 
         self.aggiorna_camera()

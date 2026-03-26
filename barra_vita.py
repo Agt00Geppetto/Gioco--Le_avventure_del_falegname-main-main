@@ -15,3 +15,5 @@ class Barra:
 
     def danno(self):
         pass
+
+    
