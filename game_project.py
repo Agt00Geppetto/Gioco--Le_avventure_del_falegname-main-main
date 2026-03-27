@@ -19,6 +19,7 @@ class GameView(arcade.View):
         super().__init__()
         
         self.p1 = None
+        self.p1_vita: float = 100
         self.e1 = None
 
         self.physics_engine = None
@@ -35,10 +36,12 @@ class GameView(arcade.View):
 
         self.p1 = Player(self.scene)
 
-        self.e1 = Enemy("./assets/Legnamorta.png", 0.8)
-        self.e1.center_x = 800
-        self.e1.center_y = 350
-        self.scene.add_sprite("Enemy", self.e1)
+        self.barra = BarraProgressiva()
+
+        # self.e1 = Enemy("./assets/Legnamorta.png", 0.8)
+        # self.e1.center_x = 800
+        # self.e1.center_y = 350
+        # self.scene.add_sprite("Enemy", self.e1)
 
         self.muri = Muri(self.scene)
 
@@ -49,7 +52,7 @@ class GameView(arcade.View):
         )
 
         self.p1.set_physics_engine(self.physics_engine)
-        self.e1.set_physics_engine(self.physics_engine)
+        # self.e1.set_physics_engine(self.physics_engine)
 
         self.physics_engine.enable_multi_jump(1)
 
@@ -58,8 +61,8 @@ class GameView(arcade.View):
         self.camera.position = (self.p1.center_x, self.p1.center_y)
 
     def on_draw(self):
-        self.clear()
 
+        self.clear()
         
         self.camera_ui.use()
         arcade.draw_texture_rect(
@@ -72,21 +75,24 @@ class GameView(arcade.View):
             )
         )
 
+        self.barra.draw_barra()
 
         self.camera.use()
         self.scene.draw()
 
-        arcade.draw_circle_filled(self.p1.center_x, self.p1.center_y, 10, arcade.color.BLUE)
+    def on_update(self, delta_time):
 
-    def on_update(self, delta_time, collisioni, percentuale, danno):
         self.scene.update(delta_time)
         self.p1.update_animation(delta_time)
         self.physics_engine.update()
+
+        
 
         self.aggiorna_camera()
         self.p1.update_jump_reset()
  
     def aggiorna_camera( self):
+
         cam_x, cam_y = self.camera.position
 
         target_x = cam_x + (self.p1.center_x - cam_x) * 0.99
@@ -98,6 +104,7 @@ class GameView(arcade.View):
         self.camera.position = (target_x, target_y)
 
     def on_key_press(self, tasto, modificatori):
+
         if tasto == arcade.key.SPACE:
             self.p1.jump()
         elif tasto in (arcade.key.A, arcade.key.LEFT):
@@ -113,6 +120,7 @@ class GameView(arcade.View):
             self.window.show_view(pausa)
 
     def on_key_release(self, tasto, modificatori):
+
         if tasto in (arcade.key.A, arcade.key.D, arcade.key.RIGHT, arcade.key.LEFT):
             self.p1.stop()
         elif tasto == arcade.key.R:

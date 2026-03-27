@@ -4,7 +4,7 @@ import arcade
 class BarraProgressiva():
 
     WIDTH_BARRA = 100
-    HEIGHT_BARRA = 40
+    HEIGHT_BARRA = 20
 
     def __init__(self):
         super().__init__()
@@ -20,7 +20,7 @@ class BarraProgressiva():
         # quadrato di sfondo della vita
         arcade.draw_rect_filled(
             arcade.LBWH(
-                100,
+                50,
                 500,
                 self.WIDTH_BARRA,
                 self.HEIGHT_BARRA
@@ -31,7 +31,7 @@ class BarraProgressiva():
         # quadrato della vita
         arcade.draw_rect_filled(
             arcade.LBWH(
-                100,
+                50,
                 500,
                 larghezza_visiva,
                 self.HEIGHT_BARRA

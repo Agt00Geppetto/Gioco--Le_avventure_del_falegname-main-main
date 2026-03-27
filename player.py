@@ -3,13 +3,15 @@ import os
 from animazione import SpriteAnimato
 
 class Player(SpriteAnimato):
+
     DIREZIONI = ["su", "sinistra", "giu", "destra"]
 
     def __init__(self, scene):
         super().__init__()
 
-        self.texture = arcade.load_texture("./assets/IDLE1.png")
-
+        self.vita = 100
+        self.vita_massima = 100
+        
         self.scene = scene
         self.center_x = 100
         self.center_y = 240
@@ -51,7 +53,7 @@ class Player(SpriteAnimato):
             frame_width=96, frame_height=96,
             num_frame=16, colonne=16,
             durata=0.6,
-            loop=False
+            loop=True
         )
         self.aggiungi_animazione(
             nome = "hurt",
@@ -67,7 +69,7 @@ class Player(SpriteAnimato):
             frame_width=96, frame_height=96,
             num_frame=16, colonne=16,
             durata=1.0,
-            loop=False
+            loop=True
         )
 
     def update_animation(self, delta_time: float = 1 / 60):
