@@ -19,7 +19,6 @@ class GameView(arcade.View):
         super().__init__()
         
         self.p1 = None
-        self.p1_vita: float = 100
         self.e1 = None
 
         self.physics_engine = None
@@ -38,10 +37,7 @@ class GameView(arcade.View):
 
         self.barra = BarraProgressiva()
 
-        # self.e1 = Enemy("./assets/Legnamorta.png", 0.8)
-        # self.e1.center_x = 800
-        # self.e1.center_y = 350
-        # self.scene.add_sprite("Enemy", self.e1)
+        self.e1 = Enemy(self.scene)
 
         self.muri = Muri(self.scene)
 
@@ -52,7 +48,7 @@ class GameView(arcade.View):
         )
 
         self.p1.set_physics_engine(self.physics_engine)
-        # self.e1.set_physics_engine(self.physics_engine)
+        self.e1.set_physics_engine(self.physics_engine)
 
         self.physics_engine.enable_multi_jump(1)
 
@@ -86,7 +82,11 @@ class GameView(arcade.View):
         self.p1.update_animation(delta_time)
         self.physics_engine.update()
 
-        
+        # collisioni = arcade.check_for_collision(self.p1,self.e1)
+
+        # if len(collisioni) == 0:
+        #     self.e1.stato = "attack"
+
 
         self.aggiorna_camera()
         self.p1.update_jump_reset()

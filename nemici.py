@@ -88,6 +88,5 @@ class Enemy(SpriteAnimato):
 
         self.physics_engine = engine
 
-    def movimento(self):
 
 
