@@ -6,6 +6,7 @@ class PauseView(arcade.View):
         self.game_view = game_view  # teniamo il riferimento alla partita in corso
 
     def on_draw(self):
+
         # Disegniamo il gioco sottostante. Non chiamando mai on_update, il gioco viene "freezato"
         self.game_view.on_draw()
 
@@ -21,6 +22,7 @@ class PauseView(arcade.View):
                          480, 250, arcade.color.LIGHT_GRAY, font_size=16, anchor_x="center")
 
     def on_key_press(self, key, modifiers):
+        
         if key == arcade.key.RETURN:
             # Torniamo alla partita in corso
             self.window.show_view(self.game_view)
