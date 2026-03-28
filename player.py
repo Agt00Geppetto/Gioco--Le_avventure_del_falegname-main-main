@@ -9,6 +9,8 @@ class Player(SpriteAnimato):
     def __init__(self, scene):
         super().__init__()
 
+        self.stato = None 
+
         self.vita = 100
         self.vita_massima = 100
         
@@ -68,9 +70,17 @@ class Player(SpriteAnimato):
             percorso = "./assets/RUN.png",
             frame_width=96, frame_height=96,
             num_frame=16, colonne=16,
-            durata=1.0,
+            durata=1.5,
             loop=True
         )
+        # self.aggiungi_animazione(
+        #     nome = "jump",
+        #     percorso = "./assets/JUMP.png",
+        #     frame_width=96, frame_height=96,
+        #     num_frame=25, colonne=5,
+        #     durata=1.0,
+        #     loop=True
+        # )
 
     def update_animation(self, delta_time: float = 1 / 60):
         dx = dy = 0
@@ -96,7 +106,11 @@ class Player(SpriteAnimato):
         
         # Scegliamo walk o idle
         if dx != 0 or dy != 0:
+            print("walk")
             self.imposta_animazione("walk")
+            if abs(dx) > 10 or abs(dy) > 10:
+                print("run")
+                self.imposta_animazione("run")
         else:
             self.imposta_animazione("idle")
 
