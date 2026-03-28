@@ -30,7 +30,7 @@ class Enemy(SpriteAnimato):
             nome = "attack",
             percorso = "./assets/ATTACK-e1.png",
             frame_width=60, frame_height=40,
-            num_frame=5, colonne=5,
+            num_frame=9, colonne=3,
             durata=0.6,
             loop=False
         )
@@ -38,7 +38,7 @@ class Enemy(SpriteAnimato):
             nome = "walk",
             percorso = "./assets/WALK-e1.png",
             frame_width=60, frame_height=40,
-            num_frame=6, colonne=6,
+            num_frame=9, colonne=3,
             durata=0.6,
             loop=False
         )

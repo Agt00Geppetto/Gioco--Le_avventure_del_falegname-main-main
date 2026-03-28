@@ -67,20 +67,29 @@ class Player(SpriteAnimato):
         )
         self.aggiungi_animazione(
             nome = "walk",
-            percorso = "./assets/RUN.png",
+            percorso = "./assets/WALK.png",
             frame_width=96, frame_height=96,
-            num_frame=16, colonne=16,
+            num_frame=16, colonne=4,
             durata=1.5,
             loop=True
         )
-        # self.aggiungi_animazione(
-        #     nome = "jump",
-        #     percorso = "./assets/JUMP.png",
-        #     frame_width=96, frame_height=96,
-        #     num_frame=25, colonne=5,
-        #     durata=1.0,
-        #     loop=True
-        # )
+        self.aggiungi_animazione(
+            nome = "jump",
+            percorso = "./assets/JUMP.png",
+            frame_width=96, frame_height=96,
+            num_frame=16, colonne=4,
+            durata=0.6,
+            loop=True
+        )
+        self.aggiungi_animazione(
+            nome = "death",
+            percorso = "./assets/DEATH.png",
+            frame_width=96, frame_height=96,
+            num_frame=9, colonne=3,
+            durata=0.6,
+            loop=True
+        )
+
 
     def update_animation(self, delta_time: float = 1 / 60):
         dx = dy = 0
@@ -108,7 +117,7 @@ class Player(SpriteAnimato):
         if dx != 0 or dy != 0:
             print("walk")
             self.imposta_animazione("walk")
-            if abs(dx) > 10 or abs(dy) > 10:
+            if abs(dx) == 10 or abs(dy) == 10:
                 print("run")
                 self.imposta_animazione("run")
         else:

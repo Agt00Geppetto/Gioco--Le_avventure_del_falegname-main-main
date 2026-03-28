@@ -37,7 +37,7 @@ class GameView(arcade.View):
 
         self.barra = BarraProgressiva()
 
-        self.e1 = Enemy(self.scene)
+        #self.e1 = Enemy(self.scene)
 
         self.muri = Muri(self.scene)
 
@@ -48,7 +48,7 @@ class GameView(arcade.View):
         )
 
         self.p1.set_physics_engine(self.physics_engine)
-        self.e1.set_physics_engine(self.physics_engine)
+        #self.e1.set_physics_engine(self.physics_engine)
 
         self.physics_engine.enable_multi_jump(1)
 
