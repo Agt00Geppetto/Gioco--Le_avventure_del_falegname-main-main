@@ -10,6 +10,7 @@ class Player(SpriteAnimato):
         super().__init__()
 
         self.stato = None 
+        self.shift_premuto = False
 
         self.vita = 100
         self.vita_massima = 100
@@ -26,7 +27,6 @@ class Player(SpriteAnimato):
 
         self.direzione = "giu"
         self.su = self.giu = self.sinistra = self.destra = False
-        self.shift_premuto = False
 
         self.setup()
         
@@ -114,8 +114,6 @@ class Player(SpriteAnimato):
         elif dy < 0:
             self.direzione = "giu"
         
-        return dx, dy
-    
         # Scegliamo walk o idle
 
         if (dx != 0 or dy != 0) and self.shift_premuto:

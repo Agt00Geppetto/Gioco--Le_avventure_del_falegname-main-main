@@ -82,12 +82,12 @@ class GameView(arcade.View):
         self.p1.update_animation(delta_time)
         self.physics_engine.update()
 
-        distanza = self.p1.position - self.e1.position
+        # distanza = self.p1.position - self.e1.position
 
-        if distanza > self.e1.raggio_attacco:
-            self.e1.stato = "walk"
-        else:
-            self.e1.stato = "attack"
+        # if distanza > self.e1.raggio_attacco:
+        #     self.e1.stato = "walk"
+        # else:
+        #     self.e1.stato = "attack"
 
 
         self.aggiorna_camera()

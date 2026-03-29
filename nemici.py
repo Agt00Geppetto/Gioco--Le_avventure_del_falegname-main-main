@@ -46,7 +46,7 @@ class Enemy(SpriteAnimato):
 
         self.aggiungi_animazione(
             nome = "idle",
-            percorso = "./assets/IDLE.1.png",
+            percorso = "./assets/IDLE-1.png",
             frame_width=60, frame_height=40,
             num_frame=4, colonne=2,
             durata=0.6,
