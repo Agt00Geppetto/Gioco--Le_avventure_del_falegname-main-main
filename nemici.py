@@ -13,9 +13,10 @@ class Enemy(SpriteAnimato):
 
         self.vita_e1 = 50
         self.vita_massima_e1 = 50
+        self.raggio_attacco = 25
 
         self.scene = scene
-        self.center_x = 100
+        self.center_x = 400
         self.center_y = 240
         self.scene.add_sprite("Enemy",self)
 
@@ -28,7 +29,7 @@ class Enemy(SpriteAnimato):
 
         self.aggiungi_animazione(
             nome = "attack",
-            percorso = "./assets/ATTACK-e1.png",
+            percorso = "./assets/ATTACK-1.png",
             frame_width=60, frame_height=40,
             num_frame=9, colonne=3,
             durata=0.6,
@@ -36,7 +37,7 @@ class Enemy(SpriteAnimato):
         )
         self.aggiungi_animazione(
             nome = "walk",
-            percorso = "./assets/WALK-e1.png",
+            percorso = "./assets/WALK-1.png",
             frame_width=60, frame_height=40,
             num_frame=9, colonne=3,
             durata=0.6,
@@ -44,10 +45,10 @@ class Enemy(SpriteAnimato):
         )
 
         self.aggiungi_animazione(
-            nome = "death",
-            percorso = "./assets/DEATH-e1.png",
+            nome = "idle",
+            percorso = "./assets/IDLE.1.png",
             frame_width=60, frame_height=40,
-            num_frame=4, colonne=4,
+            num_frame=4, colonne=2,
             durata=0.6,
             loop=False
         )
@@ -79,7 +80,7 @@ class Enemy(SpriteAnimato):
         if dx != 0 or dy != 0:
             self.imposta_animazione("walk")
         else:
-            self.imposta_animazione("attack")
+            self.imposta_animazione("idle")
 
         super().update_animation(delta_time)
 

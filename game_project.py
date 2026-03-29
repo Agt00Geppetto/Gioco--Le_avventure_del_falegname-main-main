@@ -37,7 +37,7 @@ class GameView(arcade.View):
 
         self.barra = BarraProgressiva()
 
-        #self.e1 = Enemy(self.scene)
+        self.e1 = Enemy(self.scene)
 
         self.muri = Muri(self.scene)
 
@@ -48,7 +48,7 @@ class GameView(arcade.View):
         )
 
         self.p1.set_physics_engine(self.physics_engine)
-        #self.e1.set_physics_engine(self.physics_engine)
+        self.e1.set_physics_engine(self.physics_engine)
 
         self.physics_engine.enable_multi_jump(1)
 
@@ -82,10 +82,12 @@ class GameView(arcade.View):
         self.p1.update_animation(delta_time)
         self.physics_engine.update()
 
-        # collisioni = arcade.check_for_collision(self.p1,self.e1)
+        distanza = self.p1.position - self.e1.position
 
-        # if len(collisioni) == 0:
-        #     self.e1.stato = "attack"
+        if distanza > self.e1.raggio_attacco:
+            self.e1.stato = "walk"
+        else:
+            self.e1.stato = "attack"
 
 
         self.aggiorna_camera()
