@@ -26,6 +26,7 @@ class Player(SpriteAnimato):
 
         self.direzione = "giu"
         self.su = self.giu = self.sinistra = self.destra = False
+        self.shift_premuto = False
 
         self.setup()
         
@@ -113,13 +114,16 @@ class Player(SpriteAnimato):
         elif dy < 0:
             self.direzione = "giu"
         
+        return dx, dy
+    
         # Scegliamo walk o idle
-        if dx != 0 or dy != 0:
+
+        if (dx != 0 or dy != 0) and self.shift_premuto:
+            print("run")
+            self.imposta_animazione("run")  
+        elif (dx != 0 or dy != 0):
             print("walk")
-            self.imposta_animazione("walk")
-            if abs(dx) == 10 or abs(dy) == 10:
-                print("run")
-                self.imposta_animazione("run")
+            self.imposta_animazione("walk")           
         else:
             self.imposta_animazione("idle")
 

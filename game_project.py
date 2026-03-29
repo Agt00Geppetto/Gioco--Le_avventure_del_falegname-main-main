@@ -91,16 +91,21 @@ class GameView(arcade.View):
         self.aggiorna_camera()
         self.p1.update_jump_reset()
  
-    def aggiorna_camera( self):
-
+    def aggiorna_camera(self):
+        # Prende la posizione corrente della camera (coordinate x e y)
         cam_x, cam_y = self.camera.position
 
+        # Calcola la nuova posizione x della camera avvicinandola di 99% verso il centro del giocatore p1
         target_x = cam_x + (self.p1.center_x - cam_x) * 0.99
+        # Calcola la nuova posizione y della camera avvicinandola di 99% verso il centro del giocatore p1
         target_y = cam_y + (self.p1.center_y - cam_y) * 0.99
 
+        # Limita la posizione x della camera affinché non esca dai bordi del mondo di gioco
         target_x = max(self.SCREEN_WIDTH / 2, min(target_x, self.WORLD_WIDTH - self.SCREEN_WIDTH / 2))
+        # Limita la posizione y della camera affinché non esca dai bordi del mondo di gioco
         target_y = max(self.SCREEN_HEIGHT / 2, min(target_y, self.WORLD_HEIGHT - self.SCREEN_HEIGHT / 2))
 
+        # Aggiorna la posizione della camera con i valori calcolati
         self.camera.position = (target_x, target_y)
 
     def on_key_press(self, tasto, modificatori):
