@@ -18,8 +18,8 @@ class SpriteAnimato(arcade.Sprite):
         self.indice_frame = 0  # Indice del frame corrente nell'animazione
 
         self.aggiungi_animazione("idle", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, default=True, riga=0)
-        self.aggiungi_animazione("walk", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, riga=1)
-        self.aggiungi_animazione("run", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.4, loop=True, riga=1)
+        self.aggiungi_animazione("walk", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=1.0, loop=True, riga=1)
+        self.aggiungi_animazione("run", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, riga=1)
         self.aggiungi_animazione("jump", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=2)
         self.aggiungi_animazione("attack", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=3)
         self.aggiungi_animazione("hurt", SHEET_PATH, FRAME_W, FRAME_H, num_frame=1, colonne=SHEET_COLS, durata=0.6, loop=False, riga=4)

@@ -109,9 +109,9 @@ class GameView(arcade.View):
         self.p1.update_jump_reset()
 
         if self.p1.change_x < 0: 
-            self.p1.scale = (-0.5, 0.5)
+            self.p1.scale = (-1.0, 1.0)
         elif self.p1.change_x > 0:
-            self.p1.scale = (0.5, 0.5)
+            self.p1.scale = (1.0, 1.0)
  
         self.update_animation()
 
