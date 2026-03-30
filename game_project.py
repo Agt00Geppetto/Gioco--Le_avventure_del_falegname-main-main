@@ -26,6 +26,8 @@ class GameView(arcade.View):
 
         self.camera = None
         self.camera_ui = None
+        self.timer: float = 0.0
+        self.attack_on = False
 
     def setup(self):
         self.scene = arcade.Scene()
@@ -99,6 +101,29 @@ class GameView(arcade.View):
 
         self.aggiorna_camera()
         self.p1.update_jump_reset()
+
+        distanza = self.p1.center_x - self.e1.center_x 
+
+        if distanza > 200:
+            self.e1.imposta_animazione("idle")
+        elif distanza <= 200 and distanza > -self.e1.raggio_attacco:
+            self.e1.change_x = 3
+        elif distanza < self.e1.raggio_attacco and distanza >= -200:
+            self.e1.center_x -= 3
+        elif distanza < -200:
+            self.e1.imposta_animazione("idle")
+        elif distanza <= self.e1.raggio_attacco and distanza >= -self.e1.raggio_attacco:
+            self.e1.imposta_animazione("attack")
+            self.timer += delta_time
+            if self.timer == 1:
+                self.p1.vita -= 5
+                self.p1.imposta_animazione("hurt")
+                self.timer -= 1
+        if distanza <= 40 and distanza >= -40 and self.attack_on:
+            self.e1.imposta_animazione("hurt")
+            self.e1.vita_e1 -= 10
+        elif self.e1.vita_e1 == 0:
+            self.e1.imposta_animazione("death")
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-1.0, 1.0)

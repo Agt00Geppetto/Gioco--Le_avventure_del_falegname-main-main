@@ -7,7 +7,7 @@ FRAME_H = 220
 FRAME_W = 288
 SHEET_COLS = 3
 NUM_FRAME = 3
-FRAME_W_e1 = 350
+FRAME_W_e1 = 150
 FRAME_H_e1 = 150
 
 class SpriteAnimato(arcade.Sprite):
