@@ -28,30 +28,6 @@ class Player(SpriteAnimato):
         self.max_jumps = 2
         self.physics_engine = None
 
-        # #Animazioni
-        # for i, dir in enumerate(self.DIREZIONI):
-        #     self.aggiungi_animazione(f"idle_{dir}", SHEET_PATH,
-        #         frame_width=288, frame_height=225, num_frame= 3, colonne= 3,
-        #         durata=0.6, loop=True, default=(dir == "giu"), riga=i)
-        #     self.aggiungi_animazione(f"walk_{dir}", SHEET_PATH,
-        #         frame_width=288, frame_height=225, num_frame = 3, colonne= 3,
-        #         durata=1.0, loop=True, riga=i)
-        #     self.aggiungi_animazione(f"run_{dir}", SHEET_PATH,
-        #         frame_width=288, frame_height=225, num_frame = 3, colonne= 3,
-        #         durata=0.6, loop=True, riga=i)
-        #     self.aggiungi_animazione(f"jump_{dir}", SHEET_PATH,
-        #         frame_width=288, frame_height=225, num_frame = 3, colonne= 3,
-        #         durata=0.6, loop=False, riga=i)
-        #     self.aggiungi_animazione(f"attack_{dir}", SHEET_PATH,
-        #         frame_width=288, frame_height=225, num_frame = 3, colonne= 3,
-        #         durata=0.6, loop=False, riga=i)
-        #     self.aggiungi_animazione(f"hurt_{dir}", SHEET_PATH,
-        #         frame_width=288, frame_height=225, num_frame = 3, colonne= 3,
-        #         durata=0.6, loop=False, riga=i)
-        #     self.aggiungi_animazione(f"death_{dir}", SHEET_PATH,
-        #         frame_width=288, frame_height=225, num_frame = 3, colonne= 3,
-        #         durata=1.0, loop=True, riga=i)
-
         self.direzione = "giu"
         self.su = self.giu = self.sinistra = self.destra = False
 

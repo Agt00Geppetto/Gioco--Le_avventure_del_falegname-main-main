@@ -9,7 +9,7 @@ class MenuView(arcade.View):
     def __init__(self):
         super().__init__()
 
-        self.background = arcade.load_texture("./assets/sfondo_menu.png")
+        self.background = arcade.load_texture("./assets/sfondo-menu2.png")
 
     def on_draw(self):
         self.clear()

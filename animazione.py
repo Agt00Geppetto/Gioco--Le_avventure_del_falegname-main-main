@@ -2,7 +2,7 @@ import arcade
 
 
 SHEET_PATH = "./assets/Geppetto-sheet.png"
-FRAME_H = 225
+FRAME_H = 220
 FRAME_W = 288
 SHEET_COLS = 3
 NUM_FRAME = 3
@@ -17,7 +17,7 @@ class SpriteAnimato(arcade.Sprite):
         self.tempo_frame = 0.0  # Tempo accumulato per il frame corrente
         self.indice_frame = 0  # Indice del frame corrente nell'animazione
 
-        self.aggiungi_animazione("idle", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, default=True, riga=0)
+        self.aggiungi_animazione("idle", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=1.1, loop=True, default=True, riga=0)
         self.aggiungi_animazione("walk", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=1.0, loop=True, riga=1)
         self.aggiungi_animazione("run", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, riga=1)
         self.aggiungi_animazione("jump", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=2)

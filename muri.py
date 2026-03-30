@@ -28,7 +28,7 @@ class Muri:
             terreno = arcade.Sprite("./assets/terreno.png")
             terreno.center_x = x
             terreno.center_y = 0
-            terreno.scale = 1.75
+            terreno.scale = 1.8
             self.scene.add_sprite("Walls", terreno)
 
 
