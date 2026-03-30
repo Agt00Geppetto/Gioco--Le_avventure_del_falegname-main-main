@@ -10,6 +10,7 @@ class Enemy(SpriteAnimato):
         self.vita_e1 = 50
         self.vita_massima_e1 = 50
         self.raggio_attacco = 20
+        self.raggio_movimento = 200
 
         self.scene = scene
         self.center_x = 400

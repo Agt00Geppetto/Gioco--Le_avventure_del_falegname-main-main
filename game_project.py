@@ -104,14 +104,14 @@ class GameView(arcade.View):
 
         distanza = self.p1.center_x - self.e1.center_x 
 
-        if distanza > 200:
+        if distanza > self.e1.raggio_movimento:
             self.e1.imposta_animazione("idle")
-        elif distanza <= 200 and distanza > -self.e1.raggio_attacco:
-            self.e1.change_x = 3
-        elif distanza < self.e1.raggio_attacco and distanza >= -200:
+        elif distanza < -self.e1.raggio_movimento:
+            self.e1.imposta_animazione("idle")
+        elif distanza < self.e1.raggio_attacco and distanza >= -self.e1.raggio_movimento:
             self.e1.center_x -= 3
-        elif distanza < -200:
-            self.e1.imposta_animazione("idle")
+        elif distanza <= self.e1.raggio_movimento and distanza > -self.e1.raggio_attacco:
+            self.e1.change_x = 3
         elif distanza <= self.e1.raggio_attacco and distanza >= -self.e1.raggio_attacco:
             self.e1.imposta_animazione("attack")
             self.timer += delta_time
