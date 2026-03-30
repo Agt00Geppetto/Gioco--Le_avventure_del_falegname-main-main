@@ -1,11 +1,14 @@
 import arcade
 
 
-SHEET_PATH = "./assets/Geppetto-sheet.png"
+SHEET_PATH_p1 = "./assets/Geppetto-sheet.png"
+SHEET_PATH_e1 = "./assets/e1-st.png"
 FRAME_H = 220
 FRAME_W = 288
 SHEET_COLS = 3
 NUM_FRAME = 3
+FRAME_W_e1 = 350
+FRAME_H_e1 = 150
 
 class SpriteAnimato(arcade.Sprite):
     
@@ -17,13 +20,20 @@ class SpriteAnimato(arcade.Sprite):
         self.tempo_frame = 0.0  # Tempo accumulato per il frame corrente
         self.indice_frame = 0  # Indice del frame corrente nell'animazione
 
-        self.aggiungi_animazione("idle", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=1.1, loop=True, default=True, riga=0)
-        self.aggiungi_animazione("walk", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=1.0, loop=True, riga=1)
-        self.aggiungi_animazione("run", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, riga=1)
-        self.aggiungi_animazione("jump", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=2)
-        self.aggiungi_animazione("attack", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=3)
-        self.aggiungi_animazione("hurt", SHEET_PATH, FRAME_W, FRAME_H, num_frame=1, colonne=SHEET_COLS, durata=0.6, loop=False, riga=4)
-        self.aggiungi_animazione("death", SHEET_PATH, FRAME_W, FRAME_H, num_frame=1, colonne=SHEET_COLS, durata=1.0, loop=True, riga=5)
+        self.aggiungi_animazione("idle", SHEET_PATH_p1, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=1.1, loop=True, default=True, riga=0)
+        self.aggiungi_animazione("walk", SHEET_PATH_p1, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=1.0, loop=True, riga=1)
+        self.aggiungi_animazione("run", SHEET_PATH_p1, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, riga=1)
+        self.aggiungi_animazione("jump", SHEET_PATH_p1, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=2)
+        self.aggiungi_animazione("attack", SHEET_PATH_p1, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=3)
+        self.aggiungi_animazione("hurt", SHEET_PATH_p1, FRAME_W, FRAME_H, num_frame=1, colonne=SHEET_COLS, durata=0.6, loop=False, riga=4)
+        self.aggiungi_animazione("death", SHEET_PATH_p1, FRAME_W, FRAME_H, num_frame=1, colonne=SHEET_COLS, durata=1.0, loop=True, riga=5)
+
+        self.aggiungi_animazione("idle", SHEET_PATH_e1, FRAME_W_e1, FRAME_H_e1, num_frame=3, colonne=SHEET_COLS, durata=1.1, loop=True, default=True, riga=0)
+        self.aggiungi_animazione("walk", SHEET_PATH_e1, FRAME_W_e1, FRAME_H_e1, num_frame=3, colonne=SHEET_COLS, durata=1.0, loop=True, riga=1)
+        self.aggiungi_animazione("run", SHEET_PATH_e1, FRAME_W_e1, FRAME_H_e1, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, riga=1)
+        self.aggiungi_animazione("attack", SHEET_PATH_e1, FRAME_W_e1, FRAME_H_e1, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=3)
+        self.aggiungi_animazione("hurt", SHEET_PATH_e1, FRAME_W_e1, FRAME_H_e1, num_frame=1, colonne=SHEET_COLS, durata=0.6, loop=False, riga=4)
+        self.aggiungi_animazione("death", SHEET_PATH_e1, FRAME_W_e1, FRAME_H_e1, num_frame=1, colonne=SHEET_COLS, durata=1.0, loop=True, riga=5)
 
     def aggiungi_animazione(
         self,

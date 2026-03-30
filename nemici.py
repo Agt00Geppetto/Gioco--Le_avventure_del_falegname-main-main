@@ -22,37 +22,7 @@ class Enemy(SpriteAnimato):
 
         self.direzione = "giu"
         self.su = self.giu = self.sinistra = self.destra = False
-
-        self.setup()
-
-    def setup(self):
-
-        self.aggiungi_animazione(
-            nome = "attack",
-            percorso = "./assets/ATTACK-1.png",
-            frame_width=60, frame_height=40,
-            num_frame=9, colonne=3,
-            durata=0.6,
-            loop=False
-        )
-        self.aggiungi_animazione(
-            nome = "walk",
-            percorso = "./assets/WALK-1.png",
-            frame_width=60, frame_height=40,
-            num_frame=9, colonne=3,
-            durata=0.6,
-            loop=False
-        )
-
-        self.aggiungi_animazione(
-            nome = "idle",
-            percorso = "./assets/IDLE-1.png",
-            frame_width=60, frame_height=40,
-            num_frame=4, colonne=2,
-            durata=0.6,
-            loop=False
-        )
-
+        
     def update_animation(self, delta_time: float = 1 / 60):
 
         dx = dy = 0

@@ -2,12 +2,8 @@ import arcade
 import os
 from animazione import SpriteAnimato
 
-SHEET_PATH = "./assets/Geppetto-sheet.png"
-
 class Player(SpriteAnimato):
-
-    DIREZIONI = ["su", "sinistra", "giu", "destra"]
-
+    
     def __init__(self, scene):
         super().__init__()
 
