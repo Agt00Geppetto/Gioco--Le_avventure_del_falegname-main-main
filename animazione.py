@@ -1,13 +1,29 @@
 import arcade
 
+
+SHEET_PATH = "./assets/Geppetto-sheet.png"
+FRAME_H = 225
+FRAME_W = 288
+SHEET_COLS = 3
+NUM_FRAME = 3
+
 class SpriteAnimato(arcade.Sprite):
-    def __init__(self, scala: float = 3.0):
+    
+    def __init__(self, scala: float = 1.0):
         super().__init__(scale = scala)
         self.animazioni = {} 
         self.animazione_corrente = None  # Nome dell'animazione attualmente attiva
         self.animazione_default = None  # Nome dell'animazione di default
         self.tempo_frame = 0.0  # Tempo accumulato per il frame corrente
         self.indice_frame = 0  # Indice del frame corrente nell'animazione
+
+        self.aggiungi_animazione("idle", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, default=True, riga=0)
+        self.aggiungi_animazione("walk", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=True, riga=1)
+        self.aggiungi_animazione("run", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.4, loop=True, riga=1)
+        self.aggiungi_animazione("jump", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=2)
+        self.aggiungi_animazione("attack", SHEET_PATH, FRAME_W, FRAME_H, num_frame=3, colonne=SHEET_COLS, durata=0.6, loop=False, riga=3)
+        self.aggiungi_animazione("hurt", SHEET_PATH, FRAME_W, FRAME_H, num_frame=1, colonne=SHEET_COLS, durata=0.6, loop=False, riga=4)
+        self.aggiungi_animazione("death", SHEET_PATH, FRAME_W, FRAME_H, num_frame=1, colonne=SHEET_COLS, durata=1.0, loop=True, riga=5)
 
     def aggiungi_animazione(
         self,

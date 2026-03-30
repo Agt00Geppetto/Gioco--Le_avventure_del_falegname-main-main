@@ -37,7 +37,7 @@ class GameView(arcade.View):
 
         self.barra = BarraProgressiva()
 
-        self.e1 = Enemy(self.scene)
+        # self.e1 = Enemy(self.scene)
 
         self.muri = Muri(self.scene)
 
@@ -48,13 +48,28 @@ class GameView(arcade.View):
         )
 
         self.p1.set_physics_engine(self.physics_engine)
-        self.e1.set_physics_engine(self.physics_engine)
+        # self.e1.set_physics_engine(self.physics_engine)
 
         self.physics_engine.enable_multi_jump(1)
 
         self.background = arcade.load_texture("./assets/sfondoG3.png")
 
         self.camera.position = (self.p1.center_x, self.p1.center_y)
+
+
+    def update_animation(self):
+        on_ground = self.physics_engine.can_jump()
+
+        self.era_in_aria = not on_ground
+
+        if (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.shift_premuto:
+             print("run")
+             self.p1.imposta_animazione("run")  
+        elif (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.shift_premuto == False:
+             print("walk")
+             self.p1.imposta_animazione("walk")           
+        else:
+             self.p1.imposta_animazione("idle")
 
     def on_draw(self):
 
@@ -92,7 +107,14 @@ class GameView(arcade.View):
 
         self.aggiorna_camera()
         self.p1.update_jump_reset()
+
+        if self.p1.change_x < 0: 
+            self.p1.scale = (-0.5, 0.5)
+        elif self.p1.change_x > 0:
+            self.p1.scale = (0.5, 0.5)
  
+        self.update_animation()
+
     def aggiorna_camera(self):
         # Prende la posizione corrente della camera (coordinate x e y)
         cam_x, cam_y = self.camera.position
