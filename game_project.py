@@ -80,6 +80,19 @@ class Gioco(arcade.View):
         else:
              self.p1.imposta_animazione("idle")
 
+    def aggiorna_camera(self):
+        cam_x, cam_y = self.camera.position
+
+        # Lerp verso il player
+        target_x = cam_x + (self.p1.center_x - cam_x) * 0.1
+        target_y = cam_y + (self.p1.center_y - cam_y) * 0.1
+
+        # Clamping ai bordi
+        target_x = max(self.SCREEN_WIDTH / 2, min(target_x, self.WORLD_WIDTH - self.SCREEN_WIDTH / 2))
+        target_y = max(self.SCREEN_HEIGHT / 2, min(target_y, self.WORLD_HEIGHT - self.SCREEN_HEIGHT / 2))
+
+        self.camera.position = (target_x, target_y)
+
     def on_draw(self):
         
         self.clear()
@@ -94,6 +107,7 @@ class Gioco(arcade.View):
     def on_update(self, delta_time):
 
         self.scene.update(delta_time)
+        self.aggiorna_camera()
         self.p1.update_animation(delta_time)
         self.physics_engine.update()
 
