@@ -38,5 +38,3 @@ class BarraProgressiva():
             ),
             arcade.color.GREEN
         )
-    
-

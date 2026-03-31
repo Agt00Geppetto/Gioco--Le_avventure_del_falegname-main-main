@@ -19,7 +19,7 @@ class Player(SpriteAnimato):
         self.vita = 100
         self.vita_massima = 100
         
-        self.scene = scene
+        self.scene = arcade.Scene()
         self.center_x = 100
         self.center_y = 200
         self.scene.add_sprite("Player",self)

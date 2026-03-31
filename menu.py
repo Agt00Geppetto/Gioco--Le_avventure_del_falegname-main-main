@@ -1,5 +1,5 @@
 import arcade
-from game_project import GameView
+from game_project import Gioco
 
 class MenuView(arcade.View):
 
@@ -21,6 +21,6 @@ class MenuView(arcade.View):
 
     def on_key_press(self, tasto, modifiers):
         if tasto == arcade.key.RETURN:
-            game_view = GameView()
+            game_view = Gioco()
             game_view.setup()
             self.window.show_view(game_view)

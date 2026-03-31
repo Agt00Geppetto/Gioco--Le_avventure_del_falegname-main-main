@@ -24,4 +24,3 @@ class Enemy(enemy):
 class Fungo(Enemy):
 
     pass
-

@@ -1,4 +1,5 @@
 import arcade
+import arcade.future.background as background
 import os
 import random
 #from inventario import Inventario
@@ -7,13 +8,15 @@ from muri import Muri
 from nemici import Enemy
 from pausa import PauseView
 from barra import BarraProgressiva
+from sfondo import GameView
 
-class GameView(arcade.View):
+class Gioco(arcade.View):
 
     WORLD_WIDTH = 3000
     WORLD_HEIGHT = 3000
-    SCREEN_WIDTH = 960
-    SCREEN_HEIGHT = 540
+    SCREEN_WIDTH = 1280
+    SCREEN_HEIGHT = 800
+    CAMERAA_SPEED = 0.1
 
     def __init__(self):
         super().__init__()
@@ -34,7 +37,7 @@ class GameView(arcade.View):
         self.camera = arcade.Camera2D()
         self.camera_ui = arcade.Camera2D()
 
-        self.p1 = Player(self.scene)
+        self.p1 = 
 
         self.barra = BarraProgressiva()
 
