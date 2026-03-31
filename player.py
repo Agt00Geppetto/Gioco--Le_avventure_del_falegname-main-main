@@ -12,6 +12,9 @@ class Player(SpriteAnimato):
         self.salto = False
         self.raggio_attacco = 150
         self.corre = False
+        self.attack_on = False
+        self.danno = 0.0
+
 
         self.vita = 100
         self.vita_massima = 100
@@ -30,27 +33,35 @@ class Player(SpriteAnimato):
         self.physics_engine = engine
 
     def move_left(self):
+        self.attack_on = False
         self.corre = False 
         self.salto = False
         self.change_x = -5
 
     def run_left(self): 
+        self.attack_on = False
         self.corre = True
         self.salto = False
         self.change_x = -10
 
     def move_right(self):
+        self.attack_on = False
         self.corre = False 
         self.salto = False
         self.change_x = 5
 
     def run_right(self): 
+        self.attack_on = False
         self.corre = True
         self.salto = False
         self.change_x = 10 
 
     def stop(self): 
         self.change_x = 0
+
+    def attack(self):
+        self.attack_on = True
+        self.danno = 10.0
 
     def jump(self):
         if self.physics_engine and (self.physics_engine.can_jump() or self.jump_since_ground < self.max_jumps):

@@ -19,7 +19,7 @@ class Enemy(enemy):
 
     def set_physics_engine(self, engine):
 
-        self.physics_engine = engine
+        self.physic_engine = engine
 
 class Fungo(Enemy):
 

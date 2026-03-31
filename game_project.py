@@ -27,7 +27,6 @@ class GameView(arcade.View):
         self.camera = None
         self.camera_ui = None
         self.timer: float = 0.0
-        self.attack_on = False
 
     def setup(self):
         self.scene = arcade.Scene()
@@ -44,13 +43,18 @@ class GameView(arcade.View):
         self.muri = Muri(self.scene)
 
         self.physics_engine = arcade.PhysicsEnginePlatformer(
-            player_sprite=self.p1,
-            walls=self.scene["Walls"],
-            gravity_constant=1.5,
+            player_sprite = self.p1,
+            walls = self.scene["Walls"],
+            gravity_constant = 1.5,
+        )
+
+        self.physic_engine = arcade.PhysicsEngineSimple(
+            player_sprite = self.e1,
+            walls = self.scene["Walls"]
         )
 
         self.p1.set_physics_engine(self.physics_engine)
-        self.e1.set_physics_engine(self.physics_engine)
+        self.e1.set_physics_engine(self.physic_engine)
 
         self.physics_engine.enable_multi_jump(1)
 
@@ -62,13 +66,14 @@ class GameView(arcade.View):
     def update_animation(self):
 
         if (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.corre == False:
-             print("walk")
              self.p1.imposta_animazione("walk")
         elif (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.corre == True:
-             print("run")
              self.p1.imposta_animazione("run")
         elif self.p1.salto == True:
-            self.p1.imposta_animazione("jump")           
+            print("jump")
+            self.p1.imposta_animazione("jump")
+        elif self.p1.attack_on == True:
+            self.p1.imposta_animazione()           
         else:
              self.p1.imposta_animazione("idle")
 
@@ -119,9 +124,10 @@ class GameView(arcade.View):
                 self.p1.vita -= 5
                 self.p1.imposta_animazione("hurt")
                 self.timer -= 1
-        if distanza <= 150 and distanza >= -150 and self.attack_on:
+        if distanza <= self.p1.raggio_attacco and distanza >= -self.p1.raggio_attacco and self.p1.attack_on == True:
             self.e1.imposta_animazione("hurt")
-            self.e1.vita_e1 -= 10
+            self.e1.vita_e1 -= self.p1.danno
+            print("vita_e1")
         elif self.e1.vita_e1 == 0:
             self.e1.imposta_animazione("death")
 
@@ -169,6 +175,8 @@ class GameView(arcade.View):
         elif tasto == arcade.key.ESCAPE:
             pausa = PauseView(self)  # passiamo noi stessi per poter tornare in futuro, allo stato del gioco che avviene in questo momento
             self.window.show_view(pausa)
+        elif tasto == arcade.key.E:
+            self.barra.valore_corrente -= self.p1.danno
 
     def on_key_release(self, tasto, modificatori):
 
