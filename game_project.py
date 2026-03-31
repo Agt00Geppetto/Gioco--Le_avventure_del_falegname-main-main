@@ -60,16 +60,15 @@ class GameView(arcade.View):
 
 
     def update_animation(self):
-        on_ground = self.physics_engine.can_jump()
 
-        self.era_in_aria = not on_ground
-
-        if (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.shift_premuto:
-             print("run")
-             self.p1.imposta_animazione("run")  
-        elif (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.shift_premuto == False:
+        if (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.corre == False:
              print("walk")
-             self.p1.imposta_animazione("walk")           
+             self.p1.imposta_animazione("walk")
+        elif (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.corre == True:
+             print("run")
+             self.p1.imposta_animazione("run")
+        elif self.p1.salto == True:
+            self.p1.imposta_animazione("jump")           
         else:
              self.p1.imposta_animazione("idle")
 
@@ -104,36 +103,37 @@ class GameView(arcade.View):
 
         distanza = self.p1.center_x - self.e1.center_x 
 
-        if distanza > self.e1.raggio_movimento:
+        if distanza > self.e1.raggio_movimento or distanza < -self.e1.raggio_movimento:
             self.e1.imposta_animazione("idle")
-        elif distanza < -self.e1.raggio_movimento:
-            self.e1.imposta_animazione("idle")
+            self.e1.change_x = 0
         elif distanza < self.e1.raggio_attacco and distanza >= -self.e1.raggio_movimento:
-            self.e1.center_x -= 3
+            self.e1.change_x = -3
         elif distanza <= self.e1.raggio_movimento and distanza > -self.e1.raggio_attacco:
             self.e1.change_x = 3
         elif distanza <= self.e1.raggio_attacco and distanza >= -self.e1.raggio_attacco:
             self.e1.imposta_animazione("attack")
+            self.e1.change_x = 0
+            self.e1.change_y = 0
             self.timer += delta_time
             if self.timer == 1:
                 self.p1.vita -= 5
                 self.p1.imposta_animazione("hurt")
                 self.timer -= 1
-        if distanza <= 40 and distanza >= -40 and self.attack_on:
+        if distanza <= 150 and distanza >= -150 and self.attack_on:
             self.e1.imposta_animazione("hurt")
             self.e1.vita_e1 -= 10
         elif self.e1.vita_e1 == 0:
             self.e1.imposta_animazione("death")
 
         if self.p1.change_x < 0: 
-            self.p1.scale = (-1.0, 1.0)
+            self.p1.scale = (-2.0, 2.0)
         elif self.p1.change_x > 0:
-            self.p1.scale = (1.0, 1.0)
+            self.p1.scale = (2.0, 2.0)
         
         if self.e1.change_x < 0: 
-            self.e1.scale = (-1.0, 1.0)
+            self.e1.scale = (-2.0, 2.0)
         elif self.e1.change_x > 0:
-            self.e1.scale = (1.0, 1.0)
+            self.e1.scale = (2.0, 2.0)
 
         self.update_animation()
 

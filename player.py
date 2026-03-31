@@ -10,6 +10,8 @@ class Player(SpriteAnimato):
         self.stato = None 
         self.shift_premuto = False
         self.salto = False
+        self.raggio_attacco = 150
+        self.corre = False
 
         self.vita = 100
         self.vita_massima = 100
@@ -24,34 +26,37 @@ class Player(SpriteAnimato):
         self.max_jumps = 2
         self.physics_engine = None
 
-        self.direzione = "giu"
-        self.su = self.giu = self.sinistra = self.destra = False
-
     def set_physics_engine(self, engine):
         self.physics_engine = engine
 
-    def move_left(self): 
-        self.sinistra = True
+    def move_left(self):
+        self.corre = False 
+        self.salto = False
         self.change_x = -5
 
     def run_left(self): 
-        self.sinistra = True
+        self.corre = True
+        self.salto = False
         self.change_x = -10
 
-    def move_right(self): 
-        self.destra = True
+    def move_right(self):
+        self.corre = False 
+        self.salto = False
         self.change_x = 5
 
     def run_right(self): 
-        self.destra = True
+        self.corre = True
+        self.salto = False
         self.change_x = 10 
 
-    def stop(self): self.change_x = 0
+    def stop(self): 
+        self.change_x = 0
 
     def jump(self):
         if self.physics_engine and (self.physics_engine.can_jump() or self.jump_since_ground < self.max_jumps):
             self.physics_engine.jump(10)
             self.jump_since_ground += 1
+        self.salto = True
 
     def update_jump_reset(self):
         if self.physics_engine and self.physics_engine.can_jump():
