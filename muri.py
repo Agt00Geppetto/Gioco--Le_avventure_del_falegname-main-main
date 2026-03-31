@@ -7,8 +7,9 @@ class Muri:
         
         self.scene = scene
         self.crea_muri()
-
+        
     def crea_muri(self):
+        from sfondo import ParallaxBackground
         # Barile
         barile = arcade.Sprite("./assets/barile.png")
         barile.center_x = random.randint(50, 10000)
@@ -25,9 +26,9 @@ class Muri:
 
         # Terreno
         for x in range(-1000, 10000, 1000):
-            terreno = arcade.Sprite("./assets/terreno.png")
+            terreno = arcade.Sprite("assets/Wood/Background layers/sfondo10.png")
             terreno.center_x = x
-            terreno.center_y = 0
+            terreno.center_y = 540
             terreno.scale = 1.8
             self.scene.add_sprite("Walls", terreno)
 

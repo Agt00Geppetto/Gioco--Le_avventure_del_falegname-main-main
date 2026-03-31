@@ -14,8 +14,8 @@ class Gioco(arcade.View):
 
     WORLD_WIDTH = 3000
     WORLD_HEIGHT = 3000
-    SCREEN_WIDTH = 1280
-    SCREEN_HEIGHT = 800
+    SCREEN_WIDTH = 960
+    SCREEN_HEIGHT = 540
     CAMERAA_SPEED = 0.1
 
     def __init__(self):

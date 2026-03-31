@@ -1,8 +1,8 @@
 import arcade
 import arcade.future.background as background
 
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 800
+WINDOW_WIDTH = 960
+WINDOW_HEIGHT = 540
 
 
 class ParallaxBackground:
@@ -12,6 +12,9 @@ class ParallaxBackground:
 
         bg_size = (WINDOW_WIDTH, WINDOW_HEIGHT)
 
+
+        # Aggiungiamo i layer dal più lontano al più vicino.
+        # depth alto = lontano = scorre lento
         self.backgrounds.add_from_file("assets/Wood/Background layers/sfondo.png", size=bg_size, depth=11.0)
         self.backgrounds.add_from_file("assets/Wood/Background layers/sfondo1.png", size=bg_size, depth=10.0)
         self.backgrounds.add_from_file("assets/Wood/Background layers/sfondo2.png", size=bg_size, depth=9.0)
