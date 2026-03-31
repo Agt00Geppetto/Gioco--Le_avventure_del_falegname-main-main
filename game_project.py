@@ -63,8 +63,6 @@ class Gioco(arcade.View):
 
         self.physics_engine.enable_multi_jump(1)
 
-        self.background = arcade.load_texture("./assets/sfondoG3.png")
-
         self.camera.position = (self.p1.center_x, self.p1.center_y)
 
 
@@ -99,7 +97,6 @@ class Gioco(arcade.View):
         self.p1.update_animation(delta_time)
         self.physics_engine.update()
 
-        self.aggiorna_camera()
         self.p1.update_jump_reset()
 
         distanza = self.p1.center_x - self.e1.center_x 

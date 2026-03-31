@@ -4,7 +4,7 @@ from animazione import SpriteAnimato
 
 class Player(SpriteAnimato):
     
-    def __init__(self):
+    def __init__(self, scene):
         super().__init__()
 
         self.stato = None 
@@ -19,7 +19,7 @@ class Player(SpriteAnimato):
         self.vita = 100
         self.vita_massima = 100
         
-        self.scene = arcade.Scene()
+        self.scene = scene
         self.center_x = 100
         self.center_y = 200
         self.scene.add_sprite("Player",self)
