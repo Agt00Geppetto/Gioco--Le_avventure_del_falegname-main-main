@@ -4,7 +4,7 @@ from animazione import SpriteAnimato
 
 class Player(SpriteAnimato):
     
-    def __init__(self, scene):
+    def __init__(self):
         super().__init__()
 
         self.stato = None 
