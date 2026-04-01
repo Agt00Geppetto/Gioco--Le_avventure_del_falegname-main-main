@@ -25,10 +25,10 @@ class ParallaxBackground:
         self.backgrounds.add_from_file("assets/Wood/Background layers/sfondo7.png", size=bg_size, depth=4.0)
         self.backgrounds.add_from_file("assets/Wood/Background layers/sfondo8.png", size=bg_size, depth=3.0)
         self.backgrounds.add_from_file("assets/Wood/Background layers/sfondo9.png", size=bg_size, depth=2.0)
-        # self.backgrounds.add_from_file("assets/Wood/Background layers/sfondo11.png", size=bg_size, depth=0.5)
+        self.backgrounds.add_from_file("assets/Wood/Background layers/sfondo11.png", size=bg_size, depth=0.5)
 
     def draw(self, camera):
-        
+
         bg = self.backgrounds
 
         bg.offset = camera.bottom_left

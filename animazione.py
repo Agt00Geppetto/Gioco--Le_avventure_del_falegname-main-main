@@ -95,7 +95,7 @@ class player(SpriteAnimato):
     def __init__(self):
         super().__init__()
 
-        self.aggiungi_animazione("idle", "./assets/Player-sheet/IDLE.png", FRAME_W, FRAME_H, num_frame=8, colonne=8, durata=1.0, loop=True, default=True)
+        self.aggiungi_animazione("idle", "./assets/Player-sheet/IDLE.png", FRAME_W, FRAME_H, num_frame=7, colonne=7, durata=1.0, loop=True, default=True)
         self.aggiungi_animazione("walk", "./assets/Player-sheet/WALK.png", FRAME_W, FRAME_H, num_frame=8, colonne=8, durata=1.0, loop=True)
         self.aggiungi_animazione("run", "./assets/Player-sheet/RUN.png", FRAME_W, FRAME_H, num_frame=8, colonne=8, durata=0.8, loop=True)
         self.aggiungi_animazione("jump", "./assets/Player-sheet/JUMP.png", FRAME_W, FRAME_H, num_frame=5, colonne=5, durata=0.5, loop=False)
