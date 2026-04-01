@@ -1,8 +1,9 @@
 import arcade
 import os
-from animazione import SpriteAnimato
+from animazione import player
+#from barra import BarraProgressiva
 
-class Player(SpriteAnimato):
+class Player(player):
     
     def __init__(self, scene):
         super().__init__()
@@ -21,7 +22,7 @@ class Player(SpriteAnimato):
         
         self.scene = scene
         self.center_x = 100
-        self.center_y = 200
+        self.center_y = 170
         self.scene.add_sprite("Player",self)
 
         # Variabili per il movimento e i salti

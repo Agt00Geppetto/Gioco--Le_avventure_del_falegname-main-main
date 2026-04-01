@@ -1,6 +1,7 @@
 import arcade
 import random
 from animazione import enemy
+#from barra import BarraProgressiva
 
 class Enemy(enemy):
 
@@ -14,7 +15,7 @@ class Enemy(enemy):
 
         self.scene = scene
         self.center_x = 700
-        self.center_y = 200
+        self.center_y = 120
         self.scene.add_sprite("Enemy",self)
 
     def set_physics_engine(self, engine):
