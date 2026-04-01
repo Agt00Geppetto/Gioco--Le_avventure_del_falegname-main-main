@@ -58,6 +58,8 @@ class Gioco(arcade.View):
             walls = self.scene["Walls"]
         )
 
+        self.background = arcade.load_texture("./assets/Wood/Background layers/sfondo11.png")
+
         self.p1.set_physics_engine(self.physics_engine)
         self.e1.set_physics_engine(self.physic_engine)
 
@@ -76,11 +78,13 @@ class Gioco(arcade.View):
             print("jump")
             self.p1.imposta_animazione("jump")
         elif self.p1.attack_on == True:
+            print("attack")
             self.p1.imposta_animazione("attack")           
         else:
              self.p1.imposta_animazione("idle")
 
     def aggiorna_camera(self):
+
         cam_x, cam_y = self.camera.position
 
         # Lerp verso il player
@@ -102,6 +106,15 @@ class Gioco(arcade.View):
         self.scene.draw()
 
         self.camera_ui.use()
+        arcade.draw_texture_rect(
+            self.background,
+            arcade.LBWH(
+                300,
+                650,
+                self.SCREEN_WIDTH * 2,
+                self.SCREEN_HEIGHT
+            )
+        )
         self.barra.draw_barra()
 
     def on_update(self, delta_time):
