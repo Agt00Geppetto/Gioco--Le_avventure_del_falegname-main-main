@@ -76,7 +76,7 @@ class Gioco(arcade.View):
             print("jump")
             self.p1.imposta_animazione("jump")
         elif self.p1.attack_on == True:
-            self.p1.imposta_animazione()           
+            self.p1.imposta_animazione("attack")           
         else:
              self.p1.imposta_animazione("idle")
 
