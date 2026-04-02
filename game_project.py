@@ -6,7 +6,7 @@ import random
 from player import Player
 from muri import Muri
 from piattaforme import Piattaforme
-from nemici import Enemy
+from nemici import Fungo
 from pausa import PauseView
 from sfondo import ParallaxBackground
 from monete import Monete
@@ -23,7 +23,7 @@ class Gioco(arcade.View):
         super().__init__()
         
         self.p1 = None
-        self.e1 = None
+        self.fungo = None
 
         self.physics_engine = None
         self.scene = None
@@ -45,7 +45,7 @@ class Gioco(arcade.View):
 
         self.soldi = Monete(self.scene) 
 
-        self.e1 = Enemy(self.scene)
+        self.fungo = Fungo(self.scene)
 
         self.muri = Muri(self.scene)
         self.piattaforme = Piattaforme(self.scene)
@@ -58,12 +58,11 @@ class Gioco(arcade.View):
         )
 
         self.physic_engine = arcade.PhysicsEngineSimple(
-            player_sprite = self.e1,
+            player_sprite = self.fungo,
             walls = self.scene["Walls"]
         )
 
         self.p1.set_physics_engine(self.physics_engine)
-        self.e1.set_physics_engine(self.physic_engine)
 
         self.physics_engine.enable_multi_jump(1)
 
@@ -76,8 +75,7 @@ class Gioco(arcade.View):
              self.p1.imposta_animazione("walk")
         elif (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.corre == True:
              self.p1.imposta_animazione("run")
-        elif self.p1.salto == True:
-            # print("jump")
+        elif self.p1.salto == True and not self.p1.physics_engine.can_jump():
             self.p1.imposta_animazione("jump")
         elif self.p1.attack_on == True:
             print("attack")
@@ -118,45 +116,45 @@ class Gioco(arcade.View):
 
         self.p1.update_jump_reset()
 
-        collisioni = arcade.check_for_collision(self.scene["Player"], self.scene["Coins"])
+        collisioni = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
 
-        if len(collisioni) < 0:
-            pass
+        for soldi in collisioni:
+            soldi.kill()
 
-        distanza = self.p1.center_x - self.e1.center_x 
+        distanza = self.p1.center_x - self.fungo.center_x 
 
-        if distanza > self.e1.raggio_movimento or distanza < -self.e1.raggio_movimento:
-            self.e1.imposta_animazione("idle")
-            self.e1.change_x = 0
-        elif distanza < self.e1.raggio_attacco and distanza >= -self.e1.raggio_movimento:
-            self.e1.change_x = -3
-        elif distanza <= self.e1.raggio_movimento and distanza > -self.e1.raggio_attacco:
-            self.e1.change_x = 3
-        elif distanza <= self.e1.raggio_attacco and distanza >= -self.e1.raggio_attacco:
-            self.e1.imposta_animazione("attack")
-            self.e1.change_x = 0
-            self.e1.change_y = 0
+        if distanza > self.fungo.raggio_movimento or distanza < -self.fungo.raggio_movimento:
+            self.fungo.imposta_animazione("idle")
+            self.fungo.change_x = 0
+        elif distanza < self.fungo.raggio_attacco and distanza >= -self.fungo.raggio_movimento:
+            self.fungo.change_x = -3
+        elif distanza <= self.fungo.raggio_movimento and distanza > -self.fungo.raggio_attacco:
+            self.fungo.change_x = 3
+        elif distanza <= self.fungo.raggio_attacco or distanza >= -self.fungo.raggio_attacco:
+            self.fungo.imposta_animazione("attack")
+            self.fungo.change_x = 0
+            self.fungo.change_y = 0
             self.timer += delta_time
             if self.timer == 1:
                 self.p1.vita -= 5
                 self.p1.imposta_animazione("hurt")
                 self.timer -= 1
         if distanza <= self.p1.raggio_attacco and distanza >= -self.p1.raggio_attacco and self.p1.attack_on == True:
-            self.e1.imposta_animazione("hurt")
-            self.e1.vita_e1 -= self.p1.danno
-            print("vita_e1")
-        elif self.e1.vita_e1 == 0:
-            self.e1.imposta_animazione("death")
+            self.fungo.imposta_animazione("hurt")
+            self.fungo.vita_fungo -= self.p1.danno
+            print("vita_fungo")
+        elif self.fungo.vita_fungo == 0:
+            self.fungo.imposta_animazione("death")
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-2.0, 2.0)
         elif self.p1.change_x > 0:
             self.p1.scale = (2.0, 2.0)
         
-        if self.e1.change_x < 0: 
-            self.e1.scale = (-2.0, 2.0)
-        elif self.e1.change_x > 0:
-            self.e1.scale = (2.0, 2.0)
+        if self.fungo.change_x < 0: 
+            self.fungo.scale = (-2.0, 2.0)
+        elif self.fungo.change_x > 0:
+            self.fungo.scale = (2.0, 2.0)
 
         self.update_animation()
 

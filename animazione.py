@@ -98,12 +98,12 @@ class player(SpriteAnimato):
         self.aggiungi_animazione("idle", "./assets/Player-sheet/IDLE.png", FRAME_W, FRAME_H, num_frame=7, colonne=7, durata=1.0, loop=True, default=True)
         self.aggiungi_animazione("walk", "./assets/Player-sheet/WALK.png", FRAME_W, FRAME_H, num_frame=8, colonne=8, durata=1.0, loop=True)
         self.aggiungi_animazione("run", "./assets/Player-sheet/RUN.png", FRAME_W, FRAME_H, num_frame=8, colonne=8, durata=0.8, loop=True)
-        self.aggiungi_animazione("jump", "./assets/Player-sheet/JUMP.png", FRAME_W, FRAME_H, num_frame=5, colonne=5, durata=0.5, loop=False)
+        self.aggiungi_animazione("jump", "./assets/Player-sheet/JUMP.png", FRAME_W, FRAME_H, num_frame=5, colonne=5, durata=1.0, loop=False)
         self.aggiungi_animazione("attack", "./assets/Player-sheet/ATTACK 3.png", FRAME_W, FRAME_H, num_frame=6, colonne=6, durata=1.0, loop=False)
         self.aggiungi_animazione("hurt", "./assets/Player-sheet/HURT.png", FRAME_W, FRAME_H, num_frame=4, colonne=4, durata=0.6, loop=False)
         self.aggiungi_animazione("death", "./assets/Player-sheet/DEATH.png", FRAME_W, FRAME_H, num_frame=12, colonne=12, durata=1.0, loop=False)
 
-class enemy(SpriteAnimato):
+class fungo(SpriteAnimato):
 
     def __init__(self):
         super().__init__()
