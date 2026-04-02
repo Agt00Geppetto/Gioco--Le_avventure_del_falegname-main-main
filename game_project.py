@@ -114,7 +114,7 @@ class Gioco(arcade.View):
         arcade.draw_text(
             x = 480,
             y = 25,
-            text = f"Il tuo punteggio è di:{self.punteggio}",  
+            text = f"Il tuo punteggio è di : {self.punteggio}",  
             color = arcade.color.WHITE, 
             font_size = 10,
             font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"),
