@@ -10,6 +10,7 @@ from nemici import Enemy
 from pausa import PauseView
 from barra import BarraProgressiva
 from sfondo import ParallaxBackground
+from monete import Monete
 
 class Gioco(arcade.View):
 
@@ -43,7 +44,7 @@ class Gioco(arcade.View):
         self.sfondo = ParallaxBackground()
         # self.scene.add_sprite_list_after("Player", "Foreground")
 
-        self.barra = BarraProgressiva()
+        self.soldi = Monete(self.scene) 
 
         self.e1 = Enemy(self.scene)
 
@@ -108,7 +109,6 @@ class Gioco(arcade.View):
         self.scene.draw()
 
         self.camera_ui.use()
-        self.barra.draw_barra()
 
     def on_update(self, delta_time):
 
@@ -118,6 +118,11 @@ class Gioco(arcade.View):
         self.physics_engine.update()
 
         self.p1.update_jump_reset()
+
+        collisioni = arcade.check_for_collision(self.scene["Player"], self.scene["Coins"])
+
+        if len(collisioni) < 0:
+            pass
 
         distanza = self.p1.center_x - self.e1.center_x 
 
