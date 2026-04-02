@@ -11,11 +11,14 @@ class Muri:
     def crea_muri(self):
 
         # Barile
-        barile = arcade.Sprite("./assets/barile.png")
-        barile.center_x = random.randint(50, 1000)
-        barile.center_y = 95
-        barile.scale = 0.4
-        self.scene.add_sprite("Walls", barile)
+        coordinate_list_b = [[200,95],[300,95],[550,95],[660,95],[1300,95],[1001,95],[1445,95],[1775,95],[2050,95],[2250,95],[2555,95],[2880,95]]
+        posizioni = random.sample(coordinate_list_b, k=5)
+
+        for coordinate in posizioni:
+            barile = arcade.Sprite("./assets/barile.png")
+            barile.position = coordinate
+            barile.scale = 0.4
+            self.scene.add_sprite("Walls", barile)
 
         # Secchio
         secchio = arcade.Sprite("./assets/secchio.png")
@@ -34,7 +37,7 @@ class Muri:
 
 
         # Portone (limite x, y)
-        for y in range(210, 1000, 100):
+        for y in range(200, 1000, 100):
             for x in range(-1000, 20, 65):
                 portone = arcade.Sprite("./assets/portone.png")
                 portone.center_y = y

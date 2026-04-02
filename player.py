@@ -66,7 +66,7 @@ class Player(player):
 
     def jump(self):
         if self.physics_engine and (self.physics_engine.can_jump() or self.jump_since_ground < self.max_jumps):
-            self.physics_engine.jump(11)
+            self.physics_engine.jump(11.5)
             self.jump_since_ground += 1
         self.salto = True
 
