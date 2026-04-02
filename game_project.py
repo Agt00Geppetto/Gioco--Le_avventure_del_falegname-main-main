@@ -8,7 +8,6 @@ from muri import Muri
 from piattaforme import Piattaforme
 from nemici import Enemy
 from pausa import PauseView
-from barra import BarraProgressiva
 from sfondo import ParallaxBackground
 from monete import Monete
 

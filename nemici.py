@@ -1,7 +1,7 @@
 import arcade
 import random
 from animazione import enemy
-#from barra import BarraProgressiva
+from barra import BarraProgressiva
 
 class Enemy(enemy):
 

@@ -1,7 +1,7 @@
 import arcade
 import os
 from animazione import player
-#from barra import BarraProgressiva
+from barra import BarraProgressiva
 
 class Player(player):
     
@@ -15,7 +15,6 @@ class Player(player):
         self.corre = False
         self.attack_on = False
         self.danno = 0.0
-
 
         self.vita = 100
         self.vita_massima = 100
