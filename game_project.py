@@ -7,6 +7,7 @@ from player import Player
 from muri import Muri
 from piattaforme import Piattaforme
 from nemici import Fungo
+from nemici import Occhio
 from pausa import PauseView
 from sfondo import ParallaxBackground
 from monete import Monete
@@ -24,6 +25,7 @@ class Gioco(arcade.View):
         
         self.p1 = None
         self.fungo = None
+        self.occhio = None
 
         self.physics_engine = None
         self.scene = None
@@ -46,6 +48,7 @@ class Gioco(arcade.View):
         self.soldi = Monete(self.scene) 
 
         self.fungo = Fungo(self.scene)
+        self.occhio = Occhio(self.scene)
 
         self.muri = Muri(self.scene)
         self.piattaforme = Piattaforme(self.scene)
@@ -57,10 +60,10 @@ class Gioco(arcade.View):
             gravity_constant = 1.5,
         )
 
-        self.physic_engine = arcade.PhysicsEngineSimple(
-            player_sprite = self.fungo,
-            walls = self.scene["Walls"]
-        )
+        # self.physic_engine = arcade.PhysicsEngineSimple(
+        #     player_sprite = self.fungo,
+        #     walls = self.scene["Walls"]
+        # )
 
         self.p1.set_physics_engine(self.physics_engine)
 
@@ -106,6 +109,7 @@ class Gioco(arcade.View):
         self.scene.draw()
 
         self.camera_ui.use()
+        self.p1.barra_vita.draw_barra()
 
     def on_update(self, delta_time):
 
@@ -120,7 +124,7 @@ class Gioco(arcade.View):
 
         for soldi in collisioni:
             soldi.kill()
-
+        
         distanza = self.p1.center_x - self.fungo.center_x 
 
         if distanza > self.fungo.raggio_movimento or distanza < -self.fungo.raggio_movimento:
@@ -141,9 +145,9 @@ class Gioco(arcade.View):
                 self.timer -= 1
         if distanza <= self.p1.raggio_attacco and distanza >= -self.p1.raggio_attacco and self.p1.attack_on == True:
             self.fungo.imposta_animazione("hurt")
-            self.fungo.vita_fungo -= self.p1.danno
+            self.fungo.vita -= self.p1.danno
             print("vita_fungo")
-        elif self.fungo.vita_fungo == 0:
+        elif self.fungo.vita == 0:
             self.fungo.imposta_animazione("death")
 
         if self.p1.change_x < 0: 
@@ -155,6 +159,11 @@ class Gioco(arcade.View):
             self.fungo.scale = (-2.0, 2.0)
         elif self.fungo.change_x > 0:
             self.fungo.scale = (2.0, 2.0)
+
+        if self.occhio.change_x < 0: 
+            self.occhio.scale = (-2.0, 2.0)
+        elif self.occhio.change_x > 0:
+            self.occhio.scale = (2.0, 2.0)
 
         self.update_animation()
 
@@ -174,7 +183,7 @@ class Gioco(arcade.View):
             pausa = PauseView(self)  # passiamo noi stessi per poter tornare in futuro, allo stato del gioco che avviene in questo momento
             self.window.show_view(pausa)
         elif tasto == arcade.key.E:
-            self.barra.valore_corrente -= self.p1.danno
+            self.barra -= self.p1.danno
 
     def on_key_release(self, tasto, modificatori):
 

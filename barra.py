@@ -6,8 +6,7 @@ class BarraProgressiva():
     WIDTH_BARRA = 100
     HEIGHT_BARRA = 20
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, valore_corrente, max_valore):
         
         self.max_valore: float = 100.0
         self.valore_corrente: float = 100.0   

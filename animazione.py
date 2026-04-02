@@ -5,6 +5,8 @@ FRAME_H = 84
 FRAME_W = 96
 FRAME_W_e1 = 150
 FRAME_H_e1 = 150
+FRAME_H_e2 = 150
+FRAME_W_e2 = 150
 
 class SpriteAnimato(arcade.Sprite):
     
@@ -113,3 +115,13 @@ class fungo(SpriteAnimato):
         self.aggiungi_animazione("attack", "./assets/Mushroom/Attack.png", FRAME_W_e1, FRAME_H_e1, num_frame=8, colonne=8, durata=0.6, loop=False)
         self.aggiungi_animazione("hurt", "./assets/Mushroom/Hurt.png", FRAME_W_e1, FRAME_H_e1, num_frame=4, colonne=4, durata=0.6, loop=False)
         self.aggiungi_animazione("death", "./assets/Mushroom/Death.png", FRAME_W_e1, FRAME_H_e1, num_frame=4, colonne=4, durata=1.0, loop=True)
+
+class occhio(SpriteAnimato):
+
+    def __init__(self):
+        super().__init__()
+
+        self.aggiungi_animazione("flight", "./assets/Flying eye/Flight.png", FRAME_W_e2, FRAME_H_e2, num_frame=8, colonne=8, durata=1.0, loop=True, default=True)
+        self.aggiungi_animazione("attack", "./assets/Flying eye/Attack.png", FRAME_W_e2, FRAME_H_e2, num_frame=8, colonne=8, durata=0.8, loop=False)
+        self.aggiungi_animazione("hurt", "./assets/Flying eye/Hurt.png", FRAME_W_e2, FRAME_H_e2, num_frame=4, colonne=4, durata=0.6, loop=False)
+        self.aggiungi_animazione("death", "./assets/Flying eye/Death.png", FRAME_W_e2, FRAME_H_e2, num_frame=4, colonne=4, durata=1.0, loop=True)
