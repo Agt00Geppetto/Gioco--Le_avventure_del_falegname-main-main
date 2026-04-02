@@ -26,6 +26,7 @@ class Gioco(arcade.View):
         self.p1 = None
         self.fungo = None
         self.occhio = None
+        self.punteggio = 0
 
         self.physics_engine = None
         self.scene = None
@@ -110,6 +111,15 @@ class Gioco(arcade.View):
 
         self.camera_ui.use()
         self.p1.barra_vita.draw_barra()
+        arcade.draw_text(
+            f"Il tuo punteggio è di:{self.punteggio}", 
+            self.p1.center_x - 100, 
+            self.p1.center_y, 
+            arcade.color.WHITE, 
+            font_size = 15,
+            font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"),
+            bold = True 
+            )
 
     def on_update(self, delta_time):
 
@@ -123,6 +133,7 @@ class Gioco(arcade.View):
         collisioni = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
 
         for soldi in collisioni:
+            self.punteggio += 20
             soldi.kill()
         
         distanza = self.p1.center_x - self.fungo.center_x 
