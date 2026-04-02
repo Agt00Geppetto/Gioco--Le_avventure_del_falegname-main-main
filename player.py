@@ -37,25 +37,25 @@ class Player(player):
         self.attack_on = False
         self.corre = False 
         self.salto = False
-        self.change_x = -5
+        self.change_x = -3
 
     def run_left(self): 
         self.attack_on = False
         self.corre = True
         self.salto = False
-        self.change_x = -10
+        self.change_x = -7
 
     def move_right(self):
         self.attack_on = False
         self.corre = False 
         self.salto = False
-        self.change_x = 5
+        self.change_x = 3
 
     def run_right(self): 
         self.attack_on = False
         self.corre = True
         self.salto = False
-        self.change_x = 10 
+        self.change_x = 7 
 
     def stop(self): 
         self.change_x = 0
@@ -66,7 +66,7 @@ class Player(player):
 
     def jump(self):
         if self.physics_engine and (self.physics_engine.can_jump() or self.jump_since_ground < self.max_jumps):
-            self.physics_engine.jump(10)
+            self.physics_engine.jump(11)
             self.jump_since_ground += 1
         self.salto = True
 

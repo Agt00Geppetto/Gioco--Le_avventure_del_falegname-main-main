@@ -9,19 +9,19 @@ class Muri:
         self.crea_muri()
         
     def crea_muri(self):
-        from sfondo import ParallaxBackground
+
         # Barile
         barile = arcade.Sprite("./assets/barile.png")
-        barile.center_x = random.randint(50, 10000)
-        barile.center_y = 200
-        barile.scale = 0.75
+        barile.center_x = random.randint(50, 1000)
+        barile.center_y = 95
+        barile.scale = 0.4
         self.scene.add_sprite("Walls", barile)
 
         # Secchio
         secchio = arcade.Sprite("./assets/secchio.png")
-        secchio.center_x = random.randint(50, 10000)
-        secchio.center_y = 170
-        secchio.scale = 0.5
+        secchio.center_x = random.randint(50, 1000)
+        secchio.center_y = 80
+        secchio.scale = 0.25
         self.scene.add_sprite("Walls", secchio)
 
         # Terreno

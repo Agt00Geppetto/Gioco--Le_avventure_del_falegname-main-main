@@ -15,7 +15,7 @@ class Enemy(enemy):
 
         self.scene = scene
         self.center_x = 700
-        self.center_y = 120
+        self.center_y = 125
         self.scene.add_sprite("Enemy",self)
 
     def set_physics_engine(self, engine):

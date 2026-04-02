@@ -5,6 +5,7 @@ import random
 #from inventario import Inventario
 from player import Player
 from muri import Muri
+from piattaforme import Piattaforme
 from nemici import Enemy
 from pausa import PauseView
 from barra import BarraProgressiva
@@ -40,16 +41,19 @@ class Gioco(arcade.View):
 
         self.p1 = Player(self.scene)
         self.sfondo = ParallaxBackground()
+        # self.scene.add_sprite_list_after("Player", "Foreground")
 
         self.barra = BarraProgressiva()
 
         self.e1 = Enemy(self.scene)
 
         self.muri = Muri(self.scene)
+        self.piattaforme = Piattaforme(self.scene)
 
         self.physics_engine = arcade.PhysicsEnginePlatformer(
             player_sprite = self.p1,
             walls = self.scene["Walls"],
+            platforms = self.scene["Piattaforme"],
             gravity_constant = 1.5,
         )
 
@@ -73,7 +77,7 @@ class Gioco(arcade.View):
         elif (self.p1.change_x != 0 or self.p1.change_y != 0) and self.p1.corre == True:
              self.p1.imposta_animazione("run")
         elif self.p1.salto == True:
-            print("jump")
+            # print("jump")
             self.p1.imposta_animazione("jump")
         elif self.p1.attack_on == True:
             print("attack")
