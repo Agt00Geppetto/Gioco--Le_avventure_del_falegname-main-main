@@ -10,6 +10,7 @@ class MyGame(arcade.Window):
 
 
 def main():
+
     window = MyGame()
     arcade.run()
 

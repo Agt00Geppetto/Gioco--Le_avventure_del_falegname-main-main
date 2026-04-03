@@ -1,28 +1,35 @@
 import arcade 
 import random
 
-class Monete(arcade.Sprite):
+class Monete:
     
     def __init__(self,scene):
-        super().__init__()
 
         self.scene = scene
+        self.m = "./assets/moneta.png"
+        self.valore_m = 10
+        self.m_c = "./assets/moneta-corrotta.png"
+        self.valore_mc = 15
+        self.l = "./assets/lingotto.png"
+        self.valore_l = 30
+        self.l_c = "./assets/lingotto-corrotto.png"
+        self.valore_lc = 40
         self.genera_gioielli()
         
     def genera_gioielli(self):
 
         for x in range(200, 2900, 100):
             gioielli = ["monete", "lingotti"]
-            probabilità = [60, 40]
+            probabilità = [75, 25]
             gioiello_estratto = random.choices(gioielli, weights = probabilità, k = 1)[0]
 
             # Monete estraibili
             if gioiello_estratto == "monete":
-                opzioni =  ["./assets/moneta.png","./assets/moneta-corrotta.png"]
+                opzioni =  [self.m, self.m_c]
                 pesi = [70, 30]
             # Lingotti estraibili
             elif gioiello_estratto == "lingotti":
-                opzioni = ["./assets/lingotto.png","./assets/lingotto-corrotto.png"]
+                opzioni = [self.l, self.l_c]
                 pesi = [80, 20]
 
             risultato = random.choices(opzioni, weights = pesi, k=1)[0]

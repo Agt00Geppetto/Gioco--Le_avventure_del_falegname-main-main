@@ -26,6 +26,7 @@ class Gioco(arcade.View):
         self.p1 = None
         self.fungo = None
         self.occhio = None
+        self.soldi = None
         self.punteggio = 0
 
         self.physics_engine = None
@@ -112,7 +113,7 @@ class Gioco(arcade.View):
         self.camera_ui.use()
         self.p1.barra_vita.draw_barra()
         arcade.draw_text(
-            x = 480,
+            x = 450,
             y = 25,
             text = f"Il tuo punteggio è di : {self.punteggio}",  
             color = arcade.color.WHITE, 
@@ -133,8 +134,15 @@ class Gioco(arcade.View):
         collisioni = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
 
         for soldi in collisioni:
-            self.punteggio += 20
-            soldi.kill()
+            if soldi == self.soldi.m:
+                self.punteggio += self.soldi.valore_m
+            elif soldi == self.soldi.m_c:
+                self.punteggio += self.soldi.valore_mc
+            elif soldi == self.soldi.l:
+                self.punteggio += self.soldi.valore_l
+            elif soldi == self.soldi.l_c:
+                self.punteggio += self.soldi.valore_lc
+            soldi.remove_from_sprite_lists()
         
         distanza = self.p1.center_x - self.fungo.center_x 
 
