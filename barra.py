@@ -18,7 +18,7 @@ class BarraProgressiva():
 
         # quadrato di sfondo della vita
         arcade.draw_rect_filled(
-            arcade.LBWH(
+            arcade.XYWH(
                 50,
                 500,
                 self.WIDTH_BARRA,

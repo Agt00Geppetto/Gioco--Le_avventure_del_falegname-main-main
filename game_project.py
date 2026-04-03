@@ -35,6 +35,7 @@ class Gioco(arcade.View):
         self.camera = None
         self.camera_ui = None
         self.timer: float = 0.0
+        self.preso_danno = False
 
     def setup(self):
 
@@ -78,8 +79,9 @@ class Gioco(arcade.View):
         elif self.p1.salto == True and not self.p1.physics_engine.can_jump():
             self.p1.imposta_animazione("jump")
         elif self.p1.attack_on == True:
-            print("attack")
-            self.p1.imposta_animazione("attack")           
+            self.p1.imposta_animazione("attack")
+        elif self.p1.preso_danno == True:
+            self.p1.imposta_animazione("hurt")          
         else:
              self.p1.imposta_animazione("idle")
 
@@ -116,6 +118,7 @@ class Gioco(arcade.View):
             font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"),
             bold = True 
             )
+        self.fungo.barra_vita.draw_barra()
 
     def on_update(self, delta_time):
 
@@ -143,27 +146,30 @@ class Gioco(arcade.View):
         distanza = self.p1.center_x - self.fungo.center_x 
 
         if distanza > self.fungo.raggio_movimento or distanza < -self.fungo.raggio_movimento:
-            self.fungo.imposta_animazione("idle")
             self.fungo.change_x = 0
-        elif distanza < self.fungo.raggio_attacco and distanza >= -self.fungo.raggio_movimento:
+            self.fungo.change_y = 0
+            self.fungo.imposta_animazione("idle")
+        elif distanza >= -self.fungo.raggio_movimento or distanza <= self.fungo.raggio_movimento:
+            self.fungo.imposta_animazione("run")
             self.fungo.change_x = -3
-        elif distanza <= self.fungo.raggio_movimento and distanza > -self.fungo.raggio_attacco:
             self.fungo.change_x = 3
-        elif distanza <= self.fungo.raggio_attacco or distanza >= -self.fungo.raggio_attacco:
+        else:
             self.fungo.imposta_animazione("attack")
             self.fungo.change_x = 0
             self.fungo.change_y = 0
             self.timer += delta_time
-            if self.timer == 1:
-                self.p1.vita -= 5
+            if self.timer == 1.0:
+                self.p1.vita -= self.fungo.danno
                 self.p1.imposta_animazione("hurt")
-                self.timer -= 1
+                self.timer = 0
+
         if distanza <= self.p1.raggio_attacco and distanza >= -self.p1.raggio_attacco and self.p1.attack_on == True:
             self.fungo.imposta_animazione("hurt")
             self.fungo.vita -= self.p1.danno
-            print("vita_fungo")
-        elif self.fungo.vita == 0:
+            print(self.fungo.vita)
+        elif self.fungo.vita <= 0:
             self.fungo.imposta_animazione("death")
+            self.punteggio += 100
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-2.0, 2.0)
@@ -198,7 +204,7 @@ class Gioco(arcade.View):
             pausa = PauseView(self)  # passiamo noi stessi per poter tornare in futuro, allo stato del gioco che avviene in questo momento
             self.window.show_view(pausa)
         elif tasto == arcade.key.E:
-            self.barra -= self.p1.danno
+            self.p1.attack()
 
     def on_key_release(self, tasto, modificatori):
 
@@ -207,3 +213,5 @@ class Gioco(arcade.View):
         elif tasto == arcade.key.R:
             self.setup()
             self.punteggio = 0
+        elif tasto == arcade.key.E:
+            self.p1.attack_on = False

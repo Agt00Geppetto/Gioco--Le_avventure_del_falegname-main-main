@@ -14,6 +14,7 @@ class Player(player):
         self.raggio_attacco = 150
         self.corre = False
         self.attack_on = False
+        self.preso_danno = False
         self.danno = 0.0
 
         self.vita = 100
