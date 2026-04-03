@@ -62,11 +62,6 @@ class Gioco(arcade.View):
             gravity_constant = 1.5,
         )
 
-        # self.physic_engine = arcade.PhysicsEngineSimple(
-        #     player_sprite = self.fungo,
-        #     walls = self.scene["Walls"]
-        # )
-
         self.p1.set_physics_engine(self.physics_engine)
 
         self.physics_engine.enable_multi_jump(1)
@@ -134,14 +129,15 @@ class Gioco(arcade.View):
         collisioni = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
 
         for soldi in collisioni:
-            if soldi == self.soldi.m:
+
+            if str(soldi.texture.file_path) == str(self.soldi.m):
                 self.punteggio += self.soldi.valore_m
-            elif soldi == self.soldi.m_c:
+            elif str(soldi.texture.file_path) == str(self.soldi.m_c):
                 self.punteggio += self.soldi.valore_mc
-            elif soldi == self.soldi.l:
+            elif str(soldi.texture.file_path) == str(self.soldi.l):
                 self.punteggio += self.soldi.valore_l
-            elif soldi == self.soldi.l_c:
-                self.punteggio += self.soldi.valore_lc
+            elif str(soldi.texture.file_path) == str(self.soldi.l_c):
+                self.punteggio += self.soldi.valore_l_c
             soldi.remove_from_sprite_lists()
         
         distanza = self.p1.center_x - self.fungo.center_x 
@@ -210,3 +206,4 @@ class Gioco(arcade.View):
             self.p1.stop()
         elif tasto == arcade.key.R:
             self.setup()
+            self.punteggio = 0
