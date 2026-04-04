@@ -5,22 +5,27 @@ class BarraProgressiva():
 
     WIDTH_BARRA = 100
     HEIGHT_BARRA = 20
+    OFFSET_Y = 50
 
-    def __init__(self, valore_corrente, max_valore):
+    def __init__(self, valore_corrente, max_valore, entità = arcade.Sprite):
         
-        self.max_valore: float = 100.0
-        self.valore_corrente: float = 100.0   
+        self.max_valore: float = max_valore
+        self.valore_corrente: float = valore_corrente 
+        self.entità = entità  
 
     def draw_barra(self):
 
         percentuale = self.valore_corrente/self.max_valore
-        larghezza_visiva = self.WIDTH_BARRA * percentuale 
+        larghezza_visiva = self.WIDTH_BARRA * percentuale
+
+        left = self.entità.center_x - self.WIDTH_BARRA
+        bottom = self.entità.center_y + self.OFFSET_Y 
 
         # quadrato di sfondo della vita
         arcade.draw_rect_filled(
-            arcade.XYWH(
-                50,
-                500,
+            arcade.LBWH(
+                left,
+                bottom,
                 self.WIDTH_BARRA,
                 self.HEIGHT_BARRA
             ),
@@ -30,8 +35,8 @@ class BarraProgressiva():
         # quadrato della vita
         arcade.draw_rect_filled(
             arcade.LBWH(
-                50,
-                500,
+                left,
+                bottom,
                 larghezza_visiva,
                 self.HEIGHT_BARRA
             ),
