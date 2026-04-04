@@ -4,10 +4,10 @@ import arcade
 class BarraProgressiva():
 
     WIDTH_BARRA = 100
-    HEIGHT_BARRA = 20
+    HEIGHT_BARRA = 10
     OFFSET_Y = 50
 
-    def __init__(self, valore_corrente, max_valore, entità = arcade.Sprite):
+    def __init__(self, valore_corrente, max_valore, entità: arcade.Sprite = None):
         
         self.max_valore: float = max_valore
         self.valore_corrente: float = valore_corrente 

@@ -16,7 +16,7 @@ class Enemy(arcade.Sprite):
         self.danno = danno
         self.scene = scene
 
-        self.barra_vita = BarraProgressiva(self.vita, self.vita_massima, entità= scene)
+        self.barra_vita = BarraProgressiva(self.vita, self.vita_massima, entità = self)
 
 
 class Fungo(Enemy,fungo):

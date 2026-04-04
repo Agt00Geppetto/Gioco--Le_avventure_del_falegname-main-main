@@ -20,7 +20,7 @@ class Player(player):
         self.vita = 100
         self.vita_massima = 100
 
-        self.barra_vita = BarraProgressiva(self.vita, self.vita_massima, entità= scene)
+        self.barra_vita = BarraProgressiva(self.vita, self.vita_massima, entità= self)
         
         self.scene = scene
         self.center_x = 100
