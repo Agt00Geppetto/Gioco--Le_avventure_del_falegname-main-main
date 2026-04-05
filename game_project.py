@@ -19,6 +19,8 @@ class Gioco(arcade.View):
     SCREEN_WIDTH = 960
     SCREEN_HEIGHT = 540
     CAMERAA_SPEED = 0.1
+    HEIGHT_BARRA = 10
+    WIDTH_BARRA = 100
 
     def __init__(self):
         super().__init__()
@@ -36,6 +38,7 @@ class Gioco(arcade.View):
         self.camera_ui = None
         self.timer: float = 0.0
         self.preso_danno = False
+        self.fungo_morto = False
 
     def setup(self):
 
@@ -108,7 +111,10 @@ class Gioco(arcade.View):
         self.scene.draw()
 
         self.camera_ui.use()
-        self.p1.barra_vita.draw_barra()
+        self.p1.barra_vita.draw_barra(
+            left = 50,
+            bottom = self.SCREEN_HEIGHT - 40
+        )
         arcade.draw_text(
             x = 450,
             y = 25,
@@ -118,7 +124,19 @@ class Gioco(arcade.View):
             font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"),
             bold = True 
             )
-        self.fungo.barra_vita.draw_barra()
+        
+        old_y = 500
+        for i, nemico in enumerate(self.scene["Enemy"]):
+            nemico.barra_vita.valore_corrente = nemico.vita
+            new_y = i * (self.HEIGHT_BARRA*2)
+            current_y = old_y - new_y
+            if nemico.vita <= 0:
+                nemico.kill()
+
+            nemico.barra_vita.draw_barra( 
+                left = self.SCREEN_WIDTH - (self.WIDTH_BARRA + (self.WIDTH_BARRA//2)),
+                bottom = current_y
+            )
 
     def on_update(self, delta_time):
 
@@ -141,35 +159,37 @@ class Gioco(arcade.View):
                 self.punteggio += self.soldi.valore_l
             elif str(soldi.texture.file_path) == str(self.soldi.l_c):
                 self.punteggio += self.soldi.valore_l_c
-            soldi.remove_from_sprite_lists()
+            soldi.kill()
         
-        distanza = self.p1.center_x - self.fungo.center_x 
+        distanza = self.p1.center_x - self.fungo.center_x
 
-        if distanza > self.fungo.raggio_movimento or distanza < -self.fungo.raggio_movimento:
-            self.fungo.change_x = 0
-            self.fungo.change_y = 0
-            self.fungo.imposta_animazione("idle")
-        elif distanza >= -self.fungo.raggio_movimento or distanza <= self.fungo.raggio_movimento:
-            self.fungo.imposta_animazione("run")
-            self.fungo.change_x = -3
-            self.fungo.change_x = 3
-        else:
-            self.fungo.imposta_animazione("attack")
-            self.fungo.change_x = 0
-            self.fungo.change_y = 0
+        if self.fungo.vita <= 0:
+            self.fungo_morto = True
+            self.fungo.imposta_animazione("death")
+            self.punteggio += 100 
+        elif abs(distanza) <= self.fungo.raggio_attacco:
             self.timer += delta_time
-            if self.timer == 1.0:
+            if self.timer <= 1.0:
+                self.fungo.change_x = 0
+                self.fungo.imposta_animazione("attack")
                 self.p1.vita -= self.fungo.danno
                 self.p1.imposta_animazione("hurt")
                 self.timer = 0
+        elif abs(distanza) <= self.fungo.raggio_movimento:
+            if distanza > 0:
+                self.fungo.change_x = 3
+            else:
+                self.fungo.change_x = -3
+            self.fungo.imposta_animazione("run")
+        else:
+            self.fungo.change_x = 0
+            self.fungo.change_y = 0
+            self.fungo.imposta_animazione("idle")
 
-        if distanza <= self.p1.raggio_attacco and distanza >= -self.p1.raggio_attacco and self.p1.attack_on == True:
-            self.fungo.imposta_animazione("hurt")
+        if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True:
             self.fungo.vita -= self.p1.danno
+            self.fungo.imposta_animazione("hurt")
             print(self.fungo.vita)
-        elif self.fungo.vita <= 0:
-            self.fungo.imposta_animazione("death")
-            self.punteggio += 100
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-2.0, 2.0)
