@@ -37,6 +37,7 @@ class Gioco(arcade.View):
         self.camera = None
         self.camera_ui = None
         self.timer: float = 0.0
+
         self.preso_danno = False
         self.fungo_morto = False
 
@@ -113,7 +114,8 @@ class Gioco(arcade.View):
         self.camera_ui.use()
         self.p1.barra_vita.draw_barra(
             left = 50,
-            bottom = self.SCREEN_HEIGHT - 40
+            bottom = self.SCREEN_HEIGHT - 40,
+            color = arcade.color.GREEN
         )
         arcade.draw_text(
             x = 450,
@@ -135,7 +137,8 @@ class Gioco(arcade.View):
 
             nemico.barra_vita.draw_barra( 
                 left = self.SCREEN_WIDTH - (self.WIDTH_BARRA + (self.WIDTH_BARRA//2)),
-                bottom = current_y
+                bottom = current_y,
+                color = arcade.color.RED
             )
 
     def on_update(self, delta_time):
@@ -163,13 +166,17 @@ class Gioco(arcade.View):
         
         distanza = self.p1.center_x - self.fungo.center_x
 
-        if self.fungo.vita <= 0:
+        if self.fungo.vita <= 0 and self.fungo_morto == False: 
             self.fungo_morto = True
             self.fungo.imposta_animazione("death")
-            self.punteggio += 100 
+            self.punteggio += 100
+        elif self.fungo_morto == True:
+            self.timer += delta_time
+            if self.timer >= 1.5:
+                self.fungo.remove_from_sprite_lists()
         elif abs(distanza) <= self.fungo.raggio_attacco:
             self.timer += delta_time
-            if self.timer <= 1.0:
+            if self.timer >= 1.0:
                 self.fungo.change_x = 0
                 self.fungo.imposta_animazione("attack")
                 self.p1.vita -= self.fungo.danno
@@ -186,10 +193,13 @@ class Gioco(arcade.View):
             self.fungo.change_y = 0
             self.fungo.imposta_animazione("idle")
 
-        if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True:
+        if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and self.preso_danno == False:
             self.fungo.vita -= self.p1.danno
-            self.fungo.imposta_animazione("hurt")
             print(self.fungo.vita)
+            self.fungo.imposta_animazione("hurt")
+            self.preso_danno = True
+        elif self.p1.attack_on == False:
+            self.preso_danno == False
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-2.0, 2.0)

@@ -12,7 +12,7 @@ class BarraProgressiva():
         self.max_valore: float = max_valore
         self.valore_corrente: float = valore_corrente
 
-    def draw_barra(self, left, bottom):
+    def draw_barra(self, left, bottom, color):
 
         percentuale = self.valore_corrente/self.max_valore
         larghezza_visiva = self.WIDTH_BARRA * percentuale
@@ -36,5 +36,5 @@ class BarraProgressiva():
                 larghezza_visiva,
                 self.HEIGHT_BARRA
             ),
-            arcade.color.GREEN
+            color
         )

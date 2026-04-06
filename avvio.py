@@ -2,6 +2,7 @@ import arcade
 from menu import MenuView
 
 class MyGame(arcade.Window):
+    
     def __init__(self):
         super().__init__(960, 540, "Le avventure del falegname")
         
