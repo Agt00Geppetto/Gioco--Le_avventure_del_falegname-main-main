@@ -45,7 +45,7 @@ class Player(player):
         self.attack_on = False
         self.corre = True
         self.salto = False
-        self.change_x = -7
+        self.change_x = -5
 
     def move_right(self):
         self.attack_on = False
@@ -57,7 +57,7 @@ class Player(player):
         self.attack_on = False
         self.corre = True
         self.salto = False
-        self.change_x = 7 
+        self.change_x = 5
 
     def stop(self): 
         self.change_x = 0
