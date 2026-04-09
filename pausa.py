@@ -3,6 +3,7 @@ import arcade
 class PauseView(arcade.View):
     def __init__(self, game_view):
         super().__init__()
+        
         self.game_view = game_view  # teniamo il riferimento alla partita in corso
 
     def on_draw(self):
