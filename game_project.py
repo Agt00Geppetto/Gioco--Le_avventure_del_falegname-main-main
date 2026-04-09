@@ -36,7 +36,8 @@ class Gioco(arcade.View):
 
         self.camera = None
         self.camera_ui = None
-        self.timer: float = 0.0
+        self.timer_attacco: float = 0.0
+        self.timer_morte: float = 0.0
 
         self.preso_danno = False
         self.fungo_morto = False
@@ -171,17 +172,17 @@ class Gioco(arcade.View):
             self.fungo.imposta_animazione("death")
             self.punteggio += 100
         elif self.fungo_morto == True:
-            self.timer += delta_time
-            if self.timer >= 1.5:
+            self.timer_morte += delta_time
+            if self.timer_morte >= 1.5:
                 self.fungo.remove_from_sprite_lists()
         elif abs(distanza) <= self.fungo.raggio_attacco:
-            self.timer += delta_time
-            if self.timer >= 1.0:
+            self.timer_attacco += delta_time
+            if self.timer_attacco >= 1.0:
                 self.fungo.change_x = 0
                 self.fungo.imposta_animazione("attack")
                 self.p1.vita -= self.fungo.danno
                 self.p1.imposta_animazione("hurt")
-                self.timer = 0
+                self.timer_attacco = 0
         elif abs(distanza) <= self.fungo.raggio_movimento:
             if distanza > 0:
                 self.fungo.change_x = 3
@@ -199,7 +200,7 @@ class Gioco(arcade.View):
             self.fungo.imposta_animazione("hurt")
             self.preso_danno = True
         elif self.p1.attack_on == False:
-            self.preso_danno == False
+            self.preso_danno = False
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-2.0, 2.0)
@@ -243,5 +244,6 @@ class Gioco(arcade.View):
         elif tasto == arcade.key.R:
             self.setup()
             self.punteggio = 0
+
         elif tasto == arcade.key.E:
             self.p1.attack_on = False

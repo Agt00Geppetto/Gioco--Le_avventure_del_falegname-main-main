@@ -4,7 +4,7 @@ from game_project import Gioco
 class CreditiView(arcade.View):
 
     SCREEN_WIDTH = 960
-    SCREEN_HEIGHT = 540
+    SCREEN_HEIGHT = 650
 
     def __init__(self):
         super().__init__()
@@ -15,7 +15,7 @@ class CreditiView(arcade.View):
         
         self.clear()
         arcade.draw_texture_rect(self.background,
-                                 arcade.LBWH(0,0,self.SCREEN_WIDTH, self.SCREEN_HEIGHT))  
+                                 arcade.LBWH(0,-50,self.SCREEN_WIDTH, self.SCREEN_HEIGHT))  
         
     def on_key_press(self, tasto, modifiers):
 
