@@ -6,13 +6,13 @@ class Monete:
     def __init__(self,scene):
 
         self.scene = scene
-        self.m = 'C:\\Users\\gabriele.bonaventura\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\moneta.png' #'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\moneta.png'
+        self.m = 'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\moneta.png' #'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\moneta.png'
         self.valore_m = 10
-        self.m_c = 'C:\\Users\\gabriele.bonaventura\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\moneta-corrotta.png' #'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\moneta-corrotta.png'
+        self.m_c = 'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\moneta-corrotta.png' #'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\moneta-corrotta.png'
         self.valore_mc = 15
-        self.l = 'C:\\Users\\gabriele.bonaventura\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\lingotto.png' #'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\lingotto.png'
+        self.l = 'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\lingotto.png' #'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\lingotto.png'
         self.valore_l = 30
-        self.l_c = 'C:\\Users\\gabriele.bonaventura\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\lingotto-corrotto.png' #'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\lingotto-corrotto.png'
+        self.l_c = 'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\lingotto-corrotto.png' #'C:\\Users\\gabry\\Desktop\\Gioco--Le_avventure_del_falegname-main-main\\assets\\lingotto-corrotto.png'
         self.valore_l_c = 40
         self.genera_gioielli()
         

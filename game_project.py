@@ -91,44 +91,44 @@ class Gioco(arcade.View):
         else:
              self.p1.imposta_animazione("idle")
 
-    def fungo_animation(self, delta_time, stato):
+    def fungo_animation(self, delta_time):
 
         distanza = self.p1.center_x - self.fungo.center_x
 
         if self.p1.attack_on == False:
             self.preso_danno = False
 
-        if self.stato == Death:
+        if self.stato == "Death":
             return
 
-        elif self.fungo.vita <= 0 and self.stato != Death:
-            self.fungo.imposta_animazione("Death")
+        elif self.fungo.vita <= 0 and self.stato != "Death":
+            self.fungo.imposta_animazione("death")
             self.fungo.remove_from_sprite_lists()
-            self.stato = Death
+            self.stato = "Death"
             self.punteggio += 100
             return
 
-        if self.stato != Attack:
+        if self.stato != "Attack":
             if distanza < 0:
                 self.fungo.scale = (-2.0, 2.0)
             elif distanza > 0:
                 self.fungo.scale = (2.0, 2.0)
 
-        if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and self.preso_danno == False and self.stato != Hurt:
-            self.stato = Hurt
+        if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and self.preso_danno == False and self.stato != "Hurt":
+            self.stato = "Hurt"
             self.preso_danno = True
             self.fungo.vita -= self.p1.danno
             self.timer_attack = 0.0
-        elif self.stato == Hurt:
+        elif self.stato == "Hurt":
             self.timer_danno += delta_time
             self.fungo.change_x = 0
             self.fungo.imposta_animazione("hurt")
             if self.timer_danno >= 1.0:
                 self.timer_danno = 0.0
                 self.stato = None
-        elif abs(distanza) <= self.fungo.raggio_attacco or self.stato == Attack:
-            if self.stato != Attack:
-                self.stato = Attack
+        elif abs(distanza) <= self.fungo.raggio_attacco or self.stato == "Attack":
+            if self.stato != "Attack":
+                self.stato = "Attack"
                 self.timer_attack = 0.0
             self.timer_attack += delta_time
             self.fungo.change_x = 0
@@ -137,16 +137,16 @@ class Gioco(arcade.View):
                 self.p1.vita -= self.fungo.danno
                 self.timer_attack = 0.0
                 self.stato = None
-        elif abs(distanza) <= self.fungo.raggio_movimento and self.stato != Attack:
-            if self.stato != Run:
+        elif abs(distanza) <= self.fungo.raggio_movimento and self.stato != "Attack":
+            if self.stato != "Run":
                 self.fungo.imposta_animazione("run")
-            self.stato = Run
+            self.stato = "Run"
             if distanza > 0:
                 self.fungo.change_x = 3
             else:
                 self.fungo.change_x = -3
         else:
-            self.stato = Idle
+            self.stato = "Idle"
             self.fungo.change_x = 0
             self.fungo.imposta_animazione("idle")
             
@@ -225,52 +225,12 @@ class Gioco(arcade.View):
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
         
-        distanza = self.p1.center_x - self.fungo.center_x
-
-        if self.fungo.vita <= 0 and self.fungo_morto == False: 
-            self.fungo_morto = True
-            self.fungo.imposta_animazione("death")
-            self.punteggio += 100
-        elif self.fungo_morto == True:
-            self.timer_morte += delta_time
-            if self.timer_morte >= 1.5:
-                self.fungo.remove_from_sprite_lists()
-        elif abs(distanza) <= self.fungo.raggio_attacco:
-            self.timer_attacco += delta_time
-            if self.timer_attacco >= 1.0:
-                self.fungo.change_x = 0
-                self.fungo.imposta_animazione("attack")
-                self.p1.vita -= self.fungo.danno
-                self.p1.imposta_animazione("hurt")
-                self.timer_attacco = 0
-        elif abs(distanza) <= self.fungo.raggio_movimento:
-            if distanza > 0:
-                self.fungo.change_x = 3
-            else:
-                self.fungo.change_x = -3
-            self.fungo.imposta_animazione("run")
-        else:
-            self.fungo.change_x = 0
-            self.fungo.change_y = 0
-            self.fungo.imposta_animazione("idle")
-
-        if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and self.preso_danno == False:
-            self.fungo.vita -= self.p1.danno
-            print(self.fungo.vita)
-            self.fungo.imposta_animazione("hurt")
-            self.preso_danno = True
-        elif self.p1.attack_on == False:
-            self.preso_danno = False
+        self.fungo_animation(delta_time)
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-2.0, 2.0)
         elif self.p1.change_x > 0:
             self.p1.scale = (2.0, 2.0)
-        
-        if self.fungo.change_x < 0: 
-            self.fungo.scale = (-2.0, 2.0)
-        elif self.fungo.change_x > 0:
-            self.fungo.scale = (2.0, 2.0)
 
         if self.occhio.change_x < 0: 
             self.occhio.scale = (-2.0, 2.0)
