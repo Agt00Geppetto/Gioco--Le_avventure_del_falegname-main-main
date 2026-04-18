@@ -103,7 +103,7 @@ class Gioco(arcade.View):
 
         elif self.fungo.vita <= 0 and self.stato != "Death":
             self.fungo.imposta_animazione("death")
-            self.fungo.remove_from_sprite_lists()
+            # self.fungo.remove_from_sprite_lists()
             self.stato = "Death"
             self.punteggio += 100
             return

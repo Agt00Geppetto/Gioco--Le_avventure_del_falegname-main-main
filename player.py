@@ -11,7 +11,7 @@ class Player(player):
         self.stato = None 
         self.shift_premuto = False
         self.salto = False
-        self.raggio_attacco = 150
+        self.raggio_attacco = 100
         self.corre = False
         self.attack_on = False
         self.preso_danno = False
