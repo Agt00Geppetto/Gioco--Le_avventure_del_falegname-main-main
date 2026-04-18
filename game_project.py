@@ -91,63 +91,64 @@ class Gioco(arcade.View):
         else:
              self.p1.imposta_animazione("idle")
 
-    # def fungo_animation(self, delta_time):
+    def fungo_animation(self, delta_time, stato):
 
-	#     distanza = self.p1.center_x - self.fungo.center_x
+        distanza = self.p1.center_x - self.fungo.center_x
 
-	#     if self.p1.attack_on == False:
-	# 	    self.preso_danno = False
+        if self.p1.attack_on == False:
+            self.preso_danno = False
 
-	#     if self.stato == Death:
-	# 	    return
-	#     elif self.fungo.vita <= 0 and self.stato != Death:
-	# 	    self.fungo.imposta_animazione("Death")
-	# 	    self.stato = Death
-	# 	    self.punteggio += 100
-	# 	    return
+        if self.stato == Death:
+            return
 
-	#     if self.stato != Attack:
-    #     	if distanza < 0:
-    #         	self.fungo.scale = (-2.0, 2.0)
-    #     	elif distanza > 0:
-    #         	self.fungo.scale = (2.0, 2.0)
+        elif self.fungo.vita <= 0 and self.stato != Death:
+            self.fungo.imposta_animazione("Death")
+            self.stato = Death
+            self.punteggio += 100
+            return
 
-	#     if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and self.preso_danno == False and self.stato != Hurt:
-	# 	    self.stato = Hurt
-	# 	    self.preso_danno = True
-	# 	    self.fungo.vita -= self.p1.danno
-	# 	    self.timer_attack = 0.0
-	#     elif self.stato == Hurt:
-	# 	    self.timer_danno += delta_time
-	# 	    self.fungo.change_x = 0
-	# 	    self.fungo.imposta_animazione("hurt")
-	# 	    if self.timer_danno >= 1.0:
-	# 		    self.timer_danno = 0.0
-	# 		    self.stato = None
-	#     elif abs(distanza) <= self.fungo.raggio_attacco or self.stato == Attack:
-	# 	    if self.stato != Attack:
-    #         	self.stato = Attack
-    #         	self.timer_attack = 0.0
-    #         self.timer_attack += delta_time
-    #         self.fungo.change_x = 0
-    #         self.fungo.imposta_animazione("attack")
-    #    	    if self.timer_attack >= 1.0:
-    #         	self.p1.vita -= self.fungo.danno
-    #         	self.timer_attack = 0.0
-    #         	self.stato = None
-	#     elif abs(distanza) <= self.fungo.raggio_movimento and self.stato != Attack:
-	# 	    if self.stato != Run:
-	# 		    self.fungo.imposta_animazione("run")
-	# 	    self.stato = Run
-	# 	    if distanza > 0:
-	# 		    self.fungo.change_x = 3
-	# 	    else:
-	# 		    self.fungo.change_x = -3
-	#     else:
-	# 	    self.stato = Idle
-	# 	    self.fungo.change_x = 0
-	# 	    self.fungo.imposta_animazione("idle")
+        if self.stato != Attack:
+            if distanza < 0:
+                self.fungo.scale = (-2.0, 2.0)
+            elif distanza > 0:
+                self.fungo.scale = (2.0, 2.0)
 
+        if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and self.preso_danno == False and self.stato != Hurt:
+            self.stato = Hurt
+            self.preso_danno = True
+            self.fungo.vita -= self.p1.danno
+            self.timer_attack = 0.0
+        elif self.stato == Hurt:
+            self.timer_danno += delta_time
+            self.fungo.change_x = 0
+            self.fungo.imposta_animazione("hurt")
+            if self.timer_danno >= 1.0:
+                self.timer_danno = 0.0
+                self.stato = None
+        elif abs(distanza) <= self.fungo.raggio_attacco or self.stato == Attack:
+            if self.stato != Attack:
+                self.stato = Attack
+                self.timer_attack = 0.0
+            self.timer_attack += delta_time
+            self.fungo.change_x = 0
+            self.fungo.imposta_animazione("attack")
+            if self.timer_attack >= 1.0:
+                self.p1.vita -= self.fungo.danno
+                self.timer_attack = 0.0
+                self.stato = None
+        elif abs(distanza) <= self.fungo.raggio_movimento and self.stato != Attack:
+            if self.stato != Run:
+                self.fungo.imposta_animazione("run")
+            self.stato = Run
+            if distanza > 0:
+                self.fungo.change_x = 3
+            else:
+                self.fungo.change_x = -3
+        else:
+            self.stato = Idle
+            self.fungo.change_x = 0
+            self.fungo.imposta_animazione("idle")
+            
     def aggiorna_camera(self):
 
         cam_x, cam_y = self.camera.position
