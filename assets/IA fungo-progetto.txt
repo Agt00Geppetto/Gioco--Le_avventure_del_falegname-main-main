@@ -1,0 +1,35 @@
+def __init__(self):
+
+	self.stato = None
+	self.timer_danno = 0.0
+
+def fungo_animation(self, delta_time):
+
+	if self.stato == Death:
+
+		return
+
+	elif self.fungo_vita <= 0 and self.stato != Death:
+		
+		self.fungo.imposta_animazione("Death")
+		self.stato = Death
+
+	elif abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and self.preso_danno == False and self.stato != Hurt:
+		
+		self.stato = Hurt
+		self.preso_danno = True
+
+	elif self.stato == Hurt:
+
+		self.timer_danno += delta_time
+		self.fungo.imposta_animazione("hurt")
+
+		if self.timer_danno >= 1.0:
+
+			self.timer_danno = 0.0
+			self.fungo.imposta_animazine("run")
+			self.stato = Run
+		
+	if self.p1.attack_on == False:
+
+		self.preso_danno = False
