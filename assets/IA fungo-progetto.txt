@@ -62,4 +62,3 @@ def fungo_animation(self, delta_time):
 		self.stato = Idle
 		self.fungo.change_x = 0
 		self.fungo.imposta_animazione("idle")
-		

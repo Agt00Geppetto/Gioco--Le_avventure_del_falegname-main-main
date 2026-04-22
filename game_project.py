@@ -211,6 +211,9 @@ class Gioco(arcade.View):
 
         self.p1.update_jump_reset()
 
+        self.fungo.update_animation(delta_time)
+        self.occhio.update_animation(delta_time)
+
         collisioni = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
 
         for soldi in collisioni:
@@ -264,6 +267,5 @@ class Gioco(arcade.View):
         elif tasto == arcade.key.R:
             self.setup()
             self.punteggio = 0
-
         elif tasto == arcade.key.E:
             self.p1.attack_on = False
