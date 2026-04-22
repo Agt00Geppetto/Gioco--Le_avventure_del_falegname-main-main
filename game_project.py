@@ -11,6 +11,7 @@ from nemici import Occhio
 from pausa import PauseView
 from sfondo import ParallaxBackground
 from monete import Monete
+from vittoria import WinView
 
 class Gioco(arcade.View):
 
@@ -227,6 +228,12 @@ class Gioco(arcade.View):
             elif str(soldi.texture.file_path) == str(self.soldi.l_c):
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
+
+
+        if self.punteggio >= 500:
+            self.clear()
+            vittoria = WinView()
+            self.window.show_view(vittoria)
         
         self.fungo_animation(delta_time)
 
@@ -267,5 +274,6 @@ class Gioco(arcade.View):
         elif tasto == arcade.key.R:
             self.setup()
             self.punteggio = 0
+            self.stato = None
         elif tasto == arcade.key.E:
             self.p1.attack_on = False
