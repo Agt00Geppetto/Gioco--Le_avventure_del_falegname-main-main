@@ -28,7 +28,6 @@ class MenuView(arcade.View):
 
         if tasto == arcade.key.RETURN:
             crediti_view = CreditiView()
-            # crediti_view.setup()
             self.window.show_view(crediti_view)
         elif tasto == arcade.key.Q:
             self.exit()

@@ -1,5 +1,5 @@
 import arcade
-from game_project import Gioco
+from comandi import ComandiView
 
 class CreditiView(arcade.View):
 
@@ -20,6 +20,5 @@ class CreditiView(arcade.View):
     def on_key_press(self, tasto, modifiers):
 
         if tasto == arcade.key.RETURN:
-            game_view = Gioco()
-            game_view.setup()
-            self.window.show_view(game_view)
+            comandi_view = ComandiView()
+            self.window.show_view(comandi_view)
