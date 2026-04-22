@@ -18,9 +18,9 @@ class PauseView(arcade.View):
         )
         # scriviamo quello che dobbiamo scrivere
         arcade.draw_text("PAUSA", 480, 350,
-                         arcade.color.WHITE, font_size=48, anchor_x="center")
+                         arcade.color.BLEU_DE_FRANCE, font_size=48, anchor_x="center")
         arcade.draw_text("INVIO: Riprendi    ESC: Menu principale",
-                         480, 250, arcade.color.LIGHT_GRAY, font_size=16, anchor_x="center")
+                         480, 250, arcade.color.BLEU_DE_FRANCE, font_size=16, anchor_x="center")
 
     def on_key_press(self, key, modifiers):
         
