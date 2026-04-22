@@ -19,11 +19,3 @@ class Piattaforme:
             piattaforma.position = coordinate
             piattaforma.scale = 0.1
             self.scene.add_sprite("Piattaforme", piattaforma)
-
-        # Piattaforme elaborate
-        #for x in range (1001, 2000):
-        # piattaforma_e = arcade.Sprite("./assets/piattaforma-elaborata.png")
-        # piattaforma_e.center_x = 300
-        # piattaforma_e.center_y = 180
-        # piattaforma_e.scale = 0.75
-        # self.scene.add_sprite("Piattaforme", piattaforma_e)

@@ -12,6 +12,7 @@ from pausa import PauseView
 from sfondo import ParallaxBackground
 from monete import Monete
 from vittoria import WinView
+from sconfitta import GameOverView
 
 class Gioco(arcade.View):
 
@@ -53,7 +54,6 @@ class Gioco(arcade.View):
 
         self.p1 = Player(self.scene)
         self.sfondo = ParallaxBackground()
-        # self.scene.add_sprite_list_after("Player", "Foreground")
 
         self.soldi = Monete(self.scene) 
 
@@ -134,8 +134,9 @@ class Gioco(arcade.View):
             self.timer_attack += delta_time
             self.fungo.change_x = 0
             self.fungo.imposta_animazione("attack")
-            if self.timer_attack >= 1.0:
+            if self.timer_attack >= 1.0 and self.stato == "Attack":
                 self.p1.vita -= self.fungo.danno
+                print(self.p1.vita)
                 self.timer_attack = 0.0
                 self.stato = None
         elif abs(distanza) <= self.fungo.raggio_movimento and self.stato != "Attack":
@@ -229,12 +230,17 @@ class Gioco(arcade.View):
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
 
-
         if self.punteggio >= 500:
             self.clear()
             vittoria = WinView()
             self.window.show_view(vittoria)
-        
+
+        if self.p1.vita <= 0:
+            self.clear()
+            sconfitta = GameOverView(self.punteggio)
+            self.window.show_view(sconfitta)
+
+        self.p1.barra_vita.valore_corrente = self.p1.vita
         self.fungo_animation(delta_time)
 
         if self.p1.change_x < 0: 
