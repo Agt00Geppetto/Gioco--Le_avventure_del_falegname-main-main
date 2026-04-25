@@ -6,7 +6,7 @@ from barra import BarraProgressiva
 
 class Enemy(arcade.Sprite):
 
-    def __init__(self, scene, danno, vita, vita_max, r_a, r_m, punti):
+    def __init__(self, scene, danno, vita, vita_max, r_a, r_m, punteggio):
         super().__init__()
 
         self.vita = vita
@@ -15,14 +15,14 @@ class Enemy(arcade.Sprite):
         self.raggio_movimento = r_m
         self.danno = danno
         self.scene = scene
+        self.punteggio = punteggio
 
         self.barra_vita = BarraProgressiva(self.vita, self.vita_massima)
 
-        self.stato = "Idle"
+        self.stato = None
         self.timer_attacco = 0.0
         self.timer_danno = 0.0
         self.preso_danno = False
-        self.punteggio = punti
 
 
 class Fungo(Enemy,fungo):
@@ -37,7 +37,7 @@ class Fungo(Enemy,fungo):
             vita_max = 50, 
             r_a = 75, 
             r_m = 450,
-            punti = 100)
+            punteggio = 100)
 
         fungo.__init__(self)
 
@@ -58,7 +58,7 @@ class Occhio(Enemy, occhio):
             vita_max = 30, 
             r_a = 50, 
             r_m = 450,
-            punti = 150)
+            punteggio = 150)
         
         occhio.__init__(self)
 

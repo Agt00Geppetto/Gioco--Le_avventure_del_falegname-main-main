@@ -102,10 +102,10 @@ class Gioco(arcade.View):
                 continue
 
             if nemico.vita <= 0 and nemico.stato != "Death":
-                nemico.imposta_animazione("death")
                 nemico.stato = "Death"
+                nemico.imposta_animazione("death") 
                 print("Nemico sconfitto")
-                self.punteggio += nemico.punti
+                self.punteggio += nemico.punteggio
                 print(self.punteggio)
                 continue
 
