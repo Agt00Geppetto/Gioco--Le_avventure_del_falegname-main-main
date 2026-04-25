@@ -101,7 +101,7 @@ class Gioco(arcade.View):
             if nemico.stato == "Death":
                 continue
 
-            elif nemico.vita <= 0 and nemico.stato != "Death":
+            if nemico.vita <= 0 and nemico.stato != "Death":
                 nemico.imposta_animazione("death")
                 nemico.stato = "Death"
                 print("Nemico sconfitto")
@@ -128,6 +128,7 @@ class Gioco(arcade.View):
                 nemico.imposta_animazione("hurt")
                 if nemico.timer_danno >= 1.0:
                     nemico.timer_danno = 0.0
+                    nemico.preso_danno = False
                     nemico.stato = None
             elif abs(distanza) <= nemico.raggio_attacco or nemico.stato == "Attack":
                 if nemico.stato != "Attack":
