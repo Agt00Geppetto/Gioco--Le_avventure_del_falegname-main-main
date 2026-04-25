@@ -39,11 +39,6 @@ class Gioco(arcade.View):
 
         self.camera = None
         self.camera_ui = None
-        self.timer_attacco: float = 0.0
-        self.timer_danno: float = 0.0
-
-        self.preso_danno = False
-        self.fungo_morto = False
 
     def setup(self):
 
@@ -92,65 +87,83 @@ class Gioco(arcade.View):
         else:
              self.p1.imposta_animazione("idle")
 
-    def fungo_animation(self, delta_time):
+    def nemici_animation(self, delta_time):
+         
+        for nemico in self.scene["Enemy"]:
 
-        distanza = self.p1.center_x - self.fungo.center_x
+            distanza = self.p1.center_x - nemico.center_x
+            altezza = self.p1.center_y - nemico.center_y
 
-        if self.p1.attack_on == False:
-            self.preso_danno = False
+            if self.p1.attack_on == False:
+                nemico.preso_danno = False
 
-        if self.stato == "Death":
-            return
+            if nemico.stato == "Death":
+                continue
 
-        elif self.fungo.vita <= 0 and self.stato != "Death":
-            self.fungo.imposta_animazione("death")
-            # self.fungo.remove_from_sprite_lists()
-            self.stato = "Death"
-            self.punteggio += 100
-            return
+            elif nemico.vita <= 0 and nemico.stato != "Death":
+                nemico.imposta_animazione("death")
+                nemico.stato = "Death"
+                self.punteggio += nemico.punti
+                continue
 
-        if self.stato != "Attack":
-            if distanza < 0:
-                self.fungo.scale = (-2.0, 2.0)
-            elif distanza > 0:
-                self.fungo.scale = (2.0, 2.0)
+            if nemico.stato != "Attack":
+                if distanza < 0:
+                    nemico.scale = (-2.0, 2.0)
+                elif distanza > 0:
+                    nemico.scale = (2.0, 2.0)
 
-        if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and self.preso_danno == False and self.stato != "Hurt":
-            self.stato = "Hurt"
-            self.preso_danno = True
-            self.fungo.vita -= self.p1.danno
-            self.timer_attack = 0.0
-        elif self.stato == "Hurt":
-            self.timer_danno += delta_time
-            self.fungo.change_x = 0
-            self.fungo.imposta_animazione("hurt")
-            if self.timer_danno >= 1.0:
-                self.timer_danno = 0.0
-                self.stato = None
-        elif abs(distanza) <= self.fungo.raggio_attacco or self.stato == "Attack":
-            if self.stato != "Attack":
-                self.stato = "Attack"
-                self.timer_attack = 0.0
-            self.timer_attack += delta_time
-            self.fungo.change_x = 0
-            self.fungo.imposta_animazione("attack")
-            if self.timer_attack >= 1.0 and self.stato == "Attack":
-                self.p1.vita -= self.fungo.danno
-                print(self.p1.vita)
-                self.timer_attack = 0.0
-                self.stato = None
-        elif abs(distanza) <= self.fungo.raggio_movimento and self.stato != "Attack":
-            if self.stato != "Run":
-                self.fungo.imposta_animazione("run")
-            self.stato = "Run"
-            if distanza > 0:
-                self.fungo.change_x = 3
+            if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and nemico.preso_danno == False and nemico.stato != "Hurt":
+                nemico.stato = "Hurt"
+                nemico.preso_danno = True
+                nemico.vita -= self.p1.danno
+                nemico.timer_attacco = 0.0
+            elif nemico.stato == "Hurt":
+                nemico.timer_danno += delta_time
+                nemico.change_x = 0
+                nemico.imposta_animazione("hurt")
+                if nemico.timer_danno >= 1.0:
+                    nemico.timer_danno = 0.0
+                    nemico.stato = None
+            elif abs(distanza) <= nemico.raggio_attacco or nemico.stato == "Attack":
+                if nemico.stato != "Attack":
+                    nemico.stato = "Attack"
+                    nemico.timer_attacco = 0.0
+                nemico.timer_attacco += delta_time
+                nemico.change_x = 0
+                nemico.imposta_animazione("attack")
+                if nemico.timer_attacco >= 1.0 and nemico.stato == "Attack":
+                    self.p1.vita -= nemico.danno
+                    print(self.p1.vita)
+                    nemico.timer_attacco = 0.0
+                    nemico.stato = None
+            elif abs(distanza) <= nemico.raggio_movimento and nemico.stato != "Attack":
+                if nemico.stato != "Run":
+                    if nemico == self.occhio:
+                        nemico.imposta_animazione("flight")
+                    else:
+                        nemico.imposta_animazione("run")        
+                nemico.stato = "Run"
+                if nemico == self.occhio:
+                    if distanza > 0:
+                        nemico.change_x = 3
+                    else:
+                        nemico.change_x = -3
+                    if altezza > 0:
+                        nemico.change_y = 3
+                    else:
+                        nemico.change_y = -3
+                else:
+                    if distanza > 0:
+                        nemico.change_x = 3
+                    else:
+                        nemico.change_x = -3
             else:
-                self.fungo.change_x = -3
-        else:
-            self.stato = "Idle"
-            self.fungo.change_x = 0
-            self.fungo.imposta_animazione("idle")
+                nemico.stato = "Idle"
+                nemico.change_x = 0
+                if nemico == self.occhio:
+                    nemico.imposta_animazione("flight") 
+                else:
+                    nemico.imposta_animazione("idle")
             
     def aggiorna_camera(self):
 
@@ -241,7 +254,7 @@ class Gioco(arcade.View):
             self.window.show_view(sconfitta)
 
         self.p1.barra_vita.valore_corrente = self.p1.vita
-        self.fungo_animation(delta_time)
+        self.nemici_animation(delta_time)
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-2.0, 2.0)
