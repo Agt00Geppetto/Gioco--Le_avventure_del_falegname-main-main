@@ -139,7 +139,7 @@ class Gioco(arcade.View):
                 if nemico == self.occhio:
                     nemico.change_y = 0
                 nemico.imposta_animazione("attack")
-                if nemico.timer_attacco >= 1.0 and nemico.stato == "Attack":
+                if nemico.timer_attacco >= 1.0 and nemico.stato == "Attack" and self.p1.preso_danno == False:
                     self.p1.vita -= nemico.danno
                     print(self.p1.vita)
                     nemico.timer_attacco = 0.0

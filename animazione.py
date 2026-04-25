@@ -113,7 +113,7 @@ class fungo(SpriteAnimato):
         self.aggiungi_animazione("idle", "./assets/Mushroom/Idle.png", FRAME_W_e1, FRAME_H_e1, num_frame=4, colonne=4, durata=1.1, loop=True, default=True)
         self.aggiungi_animazione("run", "./assets/Mushroom/Run.png", FRAME_W_e1, FRAME_H_e1, num_frame=8, colonne=8, durata=0.6, loop=True)
         self.aggiungi_animazione("attack", "./assets/Mushroom/Attack.png", FRAME_W_e1, FRAME_H_e1, num_frame=8, colonne=8, durata=0.6, loop=False)
-        self.aggiungi_animazione("hurt", "./assets/Mushroom/Hurt.png", FRAME_W_e1, FRAME_H_e1, num_frame=4, colonne=4, durata=0.6, loop=False)
+        self.aggiungi_animazione("hurt", "./assets/Mushroom/Hurt.png", FRAME_W_e1, FRAME_H_e1, num_frame=4, colonne=4, durata=0.8, loop=False)
         self.aggiungi_animazione("death", "./assets/Mushroom/Death.png", FRAME_W_e1, FRAME_H_e1, num_frame=4, colonne=4, durata=1.0, loop=True)
 
 class occhio(SpriteAnimato):
@@ -123,5 +123,5 @@ class occhio(SpriteAnimato):
 
         self.aggiungi_animazione("flight", "./assets/Flying eye/Flight.png", FRAME_W_e2, FRAME_H_e2, num_frame=8, colonne=8, durata=1.0, loop=True, default=True)
         self.aggiungi_animazione("attack", "./assets/Flying eye/Attack.png", FRAME_W_e2, FRAME_H_e2, num_frame=8, colonne=8, durata=0.8, loop=False)
-        self.aggiungi_animazione("hurt", "./assets/Flying eye/Hurt.png", FRAME_W_e2, FRAME_H_e2, num_frame=4, colonne=4, durata=0.6, loop=False)
+        self.aggiungi_animazione("hurt", "./assets/Flying eye/Hurt.png", FRAME_W_e2, FRAME_H_e2, num_frame=4, colonne=4, durata=0.8, loop=False)
         self.aggiungi_animazione("death", "./assets/Flying eye/Death.png", FRAME_W_e2, FRAME_H_e2, num_frame=4, colonne=4, durata=1.0, loop=True)
