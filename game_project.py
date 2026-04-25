@@ -87,7 +87,7 @@ class Gioco(arcade.View):
         else:
              self.p1.imposta_animazione("idle")
 
-    def nemici_animation(self, delta_time):
+    def ia_nemici(self, delta_time):
          
         for nemico in self.scene["Enemy"]:
             print(f"Sto controllando un nemico: Stato={nemico.stato}, Vita={nemico.vita}")
@@ -258,7 +258,7 @@ class Gioco(arcade.View):
             self.window.show_view(sconfitta)
 
         self.p1.barra_vita.valore_corrente = self.p1.vita
-        self.nemici_animation(delta_time)
+        self.ia_nemici(delta_time)
 
         if self.p1.change_x < 0: 
             self.p1.scale = (-2.0, 2.0)
