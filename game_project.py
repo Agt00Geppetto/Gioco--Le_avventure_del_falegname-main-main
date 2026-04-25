@@ -90,6 +90,7 @@ class Gioco(arcade.View):
     def nemici_animation(self, delta_time):
          
         for nemico in self.scene["Enemy"]:
+            print(f"Sto controllando un nemico: Stato={nemico.stato}, Vita={nemico.vita}")
 
             distanza = self.p1.center_x - nemico.center_x
             altezza = self.p1.center_y - nemico.center_y
@@ -103,7 +104,9 @@ class Gioco(arcade.View):
             elif nemico.vita <= 0 and nemico.stato != "Death":
                 nemico.imposta_animazione("death")
                 nemico.stato = "Death"
+                print("Nemico sconfitto")
                 self.punteggio += nemico.punti
+                print(self.punteggio)
                 continue
 
             if nemico.stato != "Attack":
@@ -120,6 +123,8 @@ class Gioco(arcade.View):
             elif nemico.stato == "Hurt":
                 nemico.timer_danno += delta_time
                 nemico.change_x = 0
+                if nemico == self.occhio:
+                    nemico.change_y = 0
                 nemico.imposta_animazione("hurt")
                 if nemico.timer_danno >= 1.0:
                     nemico.timer_danno = 0.0
@@ -130,6 +135,8 @@ class Gioco(arcade.View):
                     nemico.timer_attacco = 0.0
                 nemico.timer_attacco += delta_time
                 nemico.change_x = 0
+                if nemico == self.occhio:
+                    nemico.change_y = 0
                 nemico.imposta_animazione("attack")
                 if nemico.timer_attacco >= 1.0 and nemico.stato == "Attack":
                     self.p1.vita -= nemico.danno
@@ -144,22 +151,18 @@ class Gioco(arcade.View):
                         nemico.imposta_animazione("run")        
                 nemico.stato = "Run"
                 if nemico == self.occhio:
-                    if distanza > 0:
-                        nemico.change_x = 3
-                    else:
-                        nemico.change_x = -3
-                    if altezza > 0:
-                        nemico.change_y = 3
-                    else:
-                        nemico.change_y = -3
+                    if distanza > 0: nemico.change_x = 3
+                    else: nemico.change_x = -3
+                    if altezza > 0: nemico.change_y = 3
+                    else: nemico.change_y = -3
                 else:
-                    if distanza > 0:
-                        nemico.change_x = 3
-                    else:
-                        nemico.change_x = -3
+                    if distanza > 0: nemico.change_x = 3
+                    else: nemico.change_x = -3
             else:
                 nemico.stato = "Idle"
                 nemico.change_x = 0
+                if nemico == self.occhio:
+                    nemico.change_y = 0
                 if nemico == self.occhio:
                     nemico.imposta_animazione("flight") 
                 else:
@@ -260,11 +263,6 @@ class Gioco(arcade.View):
             self.p1.scale = (-2.0, 2.0)
         elif self.p1.change_x > 0:
             self.p1.scale = (2.0, 2.0)
-
-        if self.occhio.change_x < 0: 
-            self.occhio.scale = (-2.0, 2.0)
-        elif self.occhio.change_x > 0:
-            self.occhio.scale = (2.0, 2.0)
 
         self.update_animation()
 
