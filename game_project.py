@@ -105,8 +105,6 @@ class Gioco(arcade.View):
                 nemico.stato = "Death"
                 nemico.imposta_animazione("death") 
                 print("Nemico sconfitto")
-                self.punteggio += nemico.punteggio
-                print(self.punteggio)
                 continue
 
             if nemico.stato != "Attack":
@@ -213,6 +211,8 @@ class Gioco(arcade.View):
             new_y = i * (self.HEIGHT_BARRA*2)
             current_y = old_y - new_y
             if nemico.vita <= 0:
+                self.punteggio += nemico.punteggio
+                print(self.punteggio)
                 nemico.kill()
 
             nemico.barra_vita.draw_barra( 
@@ -247,7 +247,7 @@ class Gioco(arcade.View):
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
 
-        if self.punteggio >= 500:
+        if self.punteggio >= 700:
             self.clear()
             vittoria = WinView()
             self.window.show_view(vittoria)
