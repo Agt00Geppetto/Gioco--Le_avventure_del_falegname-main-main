@@ -13,6 +13,7 @@ from sfondo import ParallaxBackground
 from monete import Monete
 from vittoria import WinView
 from sconfitta import GameOverView
+from pozioni import Pozioni
 
 class Gioco(arcade.View):
 
@@ -31,6 +32,7 @@ class Gioco(arcade.View):
         self.fungo = None
         self.occhio = None
         self.soldi = None
+        self.pozioni = None
         self.punteggio = 0
         self.stato = None
 
@@ -49,6 +51,7 @@ class Gioco(arcade.View):
 
         self.p1 = Player(self.scene)
         self.sfondo = ParallaxBackground()
+        self.pozioni = Pozioni(self.scene)
 
         self.soldi = Monete(self.scene) 
 
@@ -90,7 +93,7 @@ class Gioco(arcade.View):
     def ia_nemici(self, delta_time):
          
         for nemico in self.scene["Enemy"]:
-            print(f"Sto controllando un nemico: Stato={nemico.stato}, Vita={nemico.vita}")
+            # print(f"Sto controllando un nemico: Stato={nemico.stato}, Vita={nemico.vita}")
 
             distanza = self.p1.center_x - nemico.center_x
             altezza = self.p1.center_y - nemico.center_y
@@ -246,6 +249,14 @@ class Gioco(arcade.View):
             elif str(soldi.texture.file_path) == str(self.soldi.l_c):
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
+
+        collisioni_2 = arcade.check_for_collision_with_list(self.p1, self.pozioni.scene["Potions"])
+
+        for pozioni in collisioni_2:
+
+            if len(collisioni_2) <= 0:
+                self.p1.vita += self.pozioni.cura
+            pozioni.kill()
 
         if self.punteggio >= 700:
             self.clear()
