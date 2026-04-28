@@ -256,11 +256,10 @@ class Gioco(arcade.View):
 
         if len(d_pozioni) > 0:
             for pozione in d_pozioni:
-                if str(pozione.texture.file_path) == str(self.pozioni.cura):
-                    if self.p1.vita <= (self.p1.vita - self.pozioni.valore_cura):
-                        self.p1.vita += self.pozioni.valore_cura
-                        print(self.p1.vita)
-            pozione.kill()
+                if self.p1.vita <= (self.p1.vita_massima - self.pozioni.valore_cura):
+                    self.p1.vita += self.pozioni.valore_cura
+                    print(self.p1.vita)
+                pozione.kill()
 
         if self.punteggio >= 600:
             self.clear()
