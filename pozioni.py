@@ -6,17 +6,18 @@ class Pozioni:
     def __init__(self, scene):
         
         self.scene = scene
-        self.cura = 20
+        self.cura = "./assets/pozione_cura.png"
+        self.valore_cura = 20
         self.pozioni_spawn()
 
     def pozioni_spawn(self):
 
         # Cura
-        coordinate_list_b = [[200,95],[300,95],[550,95],[660,95],[1300,95],[1001,95],[1445,95],[1775,95],[2050,95],[2250,95],[2555,95],[2880,95]]
+        coordinate_list_b = [[200,150],[300,150],[550,150],[660,150],[1300,150],[1001,150],[1445,150],[1775,150],[2050,150],[2250,150],[2555,150],[2880,150]]
         posizioni = random.sample(coordinate_list_b, k=3) # il comando random.sample(), mi consente di scegliere nel mio caso 5 coordinate a caso che non si ripetono mai della lista coordinate_list_b
 
         for coordinate in posizioni:
-            cura = arcade.Sprite("./assets/pozione_cura.png")
+            cura = arcade.Sprite(self.cura)
             cura.position = coordinate
             cura.scale = 0.1
             self.scene.add_sprite("Potions", cura)

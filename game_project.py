@@ -236,9 +236,9 @@ class Gioco(arcade.View):
         self.fungo.update_animation(delta_time)
         self.occhio.update_animation(delta_time)
 
-        collisioni = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
+        d_soldi = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
 
-        for soldi in collisioni:
+        for soldi in d_soldi:
 
             if str(soldi.texture.file_path) == str(self.soldi.m):
                 self.punteggio += self.soldi.valore_m
@@ -250,15 +250,19 @@ class Gioco(arcade.View):
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
 
-        collisioni_2 = arcade.check_for_collision_with_list(self.p1, self.pozioni.scene["Potions"])
+        self.p1.barra_vita.valore_corrente = self.p1.vita
 
-        for pozioni in collisioni_2:
+        d_pozioni = arcade.check_for_collision_with_list(self.p1, self.pozioni.scene["Potions"])
 
-            if len(collisioni_2) <= 0:
-                self.p1.vita += self.pozioni.cura
-            pozioni.kill()
+        if len(d_pozioni) > 0:
+            for pozione in d_pozioni:
+                if str(pozione.texture.file_path) == str(self.pozioni.cura):
+                    if self.p1.vita <= (self.p1.vita - self.pozioni.valore_cura):
+                        self.p1.vita += self.pozioni.valore_cura
+                        print(self.p1.vita)
+            pozione.kill()
 
-        if self.punteggio >= 700:
+        if self.punteggio >= 600:
             self.clear()
             vittoria = WinView()
             self.window.show_view(vittoria)
@@ -268,7 +272,6 @@ class Gioco(arcade.View):
             sconfitta = GameOverView(self.punteggio)
             self.window.show_view(sconfitta)
 
-        self.p1.barra_vita.valore_corrente = self.p1.vita
         self.ia_nemici(delta_time)
 
         if self.p1.change_x < 0: 
