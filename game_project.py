@@ -241,13 +241,13 @@ class Gioco(arcade.View):
 
         for soldi in d_soldi:
 
-            if str(soldi.texture.file_path) == str(self.soldi.m):
+            if soldi.texture == self.soldi.m:
                 self.punteggio += self.soldi.valore_m
-            elif str(soldi.texture.file_path) == str(self.soldi.m_c):
+            elif soldi.texture == self.soldi.m_c:
                 self.punteggio += self.soldi.valore_mc
-            elif str(soldi.texture.file_path) == str(self.soldi.l):
+            elif soldi.texture == self.soldi.l:
                 self.punteggio += self.soldi.valore_l
-            elif str(soldi.texture.file_path) == str(self.soldi.l_c):
+            elif soldi.texture == self.soldi.l_c:
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
 
