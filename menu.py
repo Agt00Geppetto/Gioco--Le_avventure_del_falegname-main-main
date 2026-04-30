@@ -40,6 +40,3 @@ class MenuView(arcade.View):
         
     def exit(self, event):
         arcade.exit()
-        
-    def on_hide_view(self):
-        self.manager.disable()

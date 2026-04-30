@@ -39,8 +39,8 @@ class PauseView(arcade.View):
             arcade.XYWH(480, 270, 960, 540),
             (0, 0, 0, 150)  # nero semitrasparente
         )
-        arcade.draw_text("PAUSA", 480, 350,
-                         arcade.color.BLEU_DE_FRANCE, font_size=48, anchor_x="center")
+        arcade.draw_text("PAUSA", 480, 400,
+                         arcade.color.BLEU_DE_FRANCE, font_size=48, font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"), anchor_x="center")
         self.manager.draw()
     
     def resume(self,event):
@@ -63,6 +63,3 @@ class PauseView(arcade.View):
 
     def quit(self, event):
         arcade.exit()
-
-    def on_hide_view(self):
-        self.manager.disable()

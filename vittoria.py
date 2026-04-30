@@ -1,5 +1,5 @@
 import arcade
-
+import arcade.gui
 
 class WinView(arcade.View):
 
@@ -9,6 +9,19 @@ class WinView(arcade.View):
     def __init__(self):
         super().__init__()
 
+        self.manager = arcade.gui.UIManager()
+        self.manager.enable()
+
+        menu_button = arcade.gui.UIFlatButton(text="Menu", width = 150)
+        quit_button = arcade.gui.UIFlatButton(text="Esci", width = 150)
+
+        menu_button.on_click = self.menu
+        quit_button.on_click = self.exit
+        layout = arcade.gui.UIBoxLayout(spacing = 50)
+        layout.add(menu_button)
+        layout.add(quit_button)
+        self.manager.add(arcade.gui.UIAnchorLayout(children=[layout]))
+
         self.background = arcade.load_texture("./assets/vittoria-view.png")
 
     def on_draw(self):
@@ -16,25 +29,13 @@ class WinView(arcade.View):
         self.clear()
         arcade.draw_texture_rect(self.background,
                                  arcade.LBWH(0,0,self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
-        arcade.draw_text("MENU -> Enter", 480, 250,
-                         arcade.color.BLEU_DE_FRANCE, font_size=20, anchor_x="center")
-        # arcade.draw_text("RIPRENDI -> Delete", 480, 150,
-        #                  arcade.color.BLEU_DE_FRANCE, font_size=20, anchor_x="center")
-        arcade.draw_text("ESCI -> Q", 480, 200,
-                         arcade.color.BLEU_DE_FRANCE, font_size=20, anchor_x="center")
+        self.manager.draw()
         
-    def exit(self):
+    def exit(self, event):
         arcade.exit()
-        
-    def on_key_press(self, tasto, modifiers):
 
-        if tasto == arcade.key.RETURN:
-            from menu import MenuView
-            menuvieww_view = MenuView()
-            self.window.show_view(menuvieww_view)
-        # elif tasto == arcade.key.BACKSPACE:
-        #     from game_project import Gioco
-        #     gameview_view = Gioco()
-        #     self.window.show_view(gameview_view)
-        elif tasto == arcade.key.Q:
-            self.exit()
+    def menu(self, event):
+        from menu import MenuView
+        self.manager.disable()
+        menu_view = MenuView()
+        self.window.show_view(menu_view)
