@@ -41,9 +41,12 @@ class Fungo(Enemy,fungo):
 
         fungo.__init__(self)
 
-        self.scene = scene
-        self.center_x = 700
-        self.center_y = 125
+        coordinate_list_fungo = [[150, 125], [280, 125], [540, 125], [800, 125], [1060, 125], [1320, 125], [1580, 125], [1840, 125], [2100, 125], [2360, 125], [2620, 125], [2900, 125]]
+        posizioni = random.sample(coordinate_list_fungo, k=3)
+
+        for coordinate in posizioni:
+            self.scene = scene
+            self.position = coordinate
         self.scene.add_sprite("Enemy",self)
 
 class Occhio(Enemy, occhio):
@@ -62,7 +65,10 @@ class Occhio(Enemy, occhio):
         
         occhio.__init__(self)
 
-        self.scene = scene
-        self.center_x = 800
-        self.center_y = 400
+        coordinate_list_occhio = [[150, 300], [280, 309], [540, 318], [800, 327], [1060, 336], [1320, 345], [1580, 354], [1840, 363], [2100, 372], [2360, 381], [2620, 390], [2900, 400]]
+        posizioni = random.sample(coordinate_list_occhio, k=2)
+
+        for coordinate in posizioni:
+            self.scene = scene
+            self.position = coordinate
         self.scene.add_sprite("Enemy", self)

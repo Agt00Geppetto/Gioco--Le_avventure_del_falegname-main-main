@@ -303,5 +303,9 @@ class Gioco(arcade.View):
 
         if tasto in (arcade.key.A, arcade.key.D, arcade.key.RIGHT, arcade.key.LEFT):
             self.p1.stop()
+        elif tasto == arcade.key.R:
+            self.setup()
+            self.punteggio = 0
+            self.stato = None
         elif tasto == arcade.key.E:
             self.p1.attack_on = False

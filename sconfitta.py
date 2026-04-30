@@ -36,7 +36,7 @@ class GameOverView(arcade.View):
         arcade.draw_texture_rect(self.background,
                                  arcade.LBWH(0,0,self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
         arcade.draw_text(f"Punteggio: {self.punteggio}", 480, 100,
-                         arcade.color.BLEU_DE_FRANCE, font_size=28, anchor_x="center")
+                         arcade.color.BLEU_DE_FRANCE, font_size=28, font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"), anchor_x="center")
         self.manager.draw()
 
     def reset(self, event):
