@@ -197,7 +197,14 @@ class Gioco(arcade.View):
         self.p1.barra_vita.draw_barra(
             left = 50,
             bottom = self.SCREEN_HEIGHT - 40,
+            altezza = 10,
             color = arcade.color.GREEN
+        )
+        self.p1.barra_stamina.draw_barra(
+            left = 50,
+            bottom = self.SCREEN_HEIGHT - 45,
+            altezza = 5,
+            color = arcade.color.BLUE
         )
         arcade.draw_text(
             x = 450,
@@ -222,6 +229,7 @@ class Gioco(arcade.View):
             nemico.barra_vita.draw_barra( 
                 left = self.SCREEN_WIDTH - (self.WIDTH_BARRA + (self.WIDTH_BARRA//2)),
                 bottom = current_y,
+                altezza = 10,
                 color = arcade.color.RED
             )
 
@@ -233,6 +241,9 @@ class Gioco(arcade.View):
         self.physics_engine.update()
 
         self.p1.update_jump_reset()
+        self.p1.barra_stamina.valore_corrente = self.p1.stamina
+        self.p1.aggiorna_stamina()
+        print(self.p1.stamina)
 
         self.fungo.update_animation(delta_time)
         self.occhio.update_animation(delta_time)

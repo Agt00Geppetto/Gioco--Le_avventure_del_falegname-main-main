@@ -19,8 +19,11 @@ class Player(player):
 
         self.vita = 100
         self.vita_massima = 100
+        self.stamina = 50
+        self.stamina_massima = 50
 
         self.barra_vita = BarraProgressiva(self.vita, self.vita_massima)
+        self.barra_stamina = BarraProgressiva(self.stamina, self.stamina_massima)
         
         self.scene = scene
         self.center_x = 100
@@ -75,3 +78,11 @@ class Player(player):
     def update_jump_reset(self):
         if self.physics_engine and self.physics_engine.can_jump():
             self.jump_since_ground = 0
+
+    def aggiorna_stamina(self):
+        if self.stamina <= 0 and (self.attack_on == False or self.corre == False):
+            self.stamina += 5
+        elif self.stamina >= 0 and self.corre == True:
+            self.stamina -=1
+        elif self.stamina >= 0 and self.attack_on == True:
+            self.stamina -= 5
