@@ -15,8 +15,6 @@ class Player(player):
         self.corre = False
         self.attack_on = False
         self.preso_danno = False
-        self.può_attaccare = False
-        self.può_correre = False
         self.danno = 0.0
 
         self.vita = 100
@@ -41,37 +39,33 @@ class Player(player):
         self.physics_engine = engine
 
     def move_left(self):
-        self.attack_on = False
-        self.corre = False 
+        self.attack_on = False 
         self.salto = False
         self.change_x = -3
 
     def run_left(self): 
         self.attack_on = False
-        self.può_correre = True
         self.corre = True
         self.salto = False
         self.change_x = -5
 
     def move_right(self):
         self.attack_on = False
-        self.corre = False 
         self.salto = False
         self.change_x = 3
 
     def run_right(self): 
         self.attack_on = False
-        self.può_correre = True
-        self.può = True
+        self.corre = True
         self.salto = False
         self.change_x = 5
 
     def stop(self): 
         self.change_x = 0
+        self.corre = False
 
     def attack(self):
         self.attack_on = True
-        self.può_attaccare = True
         self.danno = 10.0
 
     def jump(self):
@@ -85,11 +79,11 @@ class Player(player):
             self.jump_since_ground = 0
 
     def aggiorna_stamina(self, delta_time):
-        if self.stamina <= 0 and self.può == False:
-            self.stamina += 5
-        elif self.stamina >= 0 and self.corre == True and self.può_correre == True:
-            self.può = False
-            self.stamina -=1
-        elif self.stamina >= 0 and self.attack_on == True and self.può_attaccare == True:
-            self.può = False
+        if self.stamina == self.stamina_massima:
+            return
+        elif self.attack_on == False and self.corre == False:
+            self.stamina += 5    
+        elif self.stamina >= 0 and self.corre == True:
+            self.stamina -=  1
+        elif self.stamina >= 0 and self.attack_on == True:
             self.stamina -= 5

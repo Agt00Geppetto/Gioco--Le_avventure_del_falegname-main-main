@@ -241,9 +241,8 @@ class Gioco(arcade.View):
         self.physics_engine.update()
 
         self.p1.update_jump_reset()
-        self.p1.barra_stamina.valore_corrente = self.p1.stamina
         self.p1.aggiorna_stamina(delta_time)
-        print(self.p1.stamina)
+        self.p1.barra_stamina.valore_corrente = self.p1.stamina
 
         self.fungo.update_animation(delta_time)
         self.occhio.update_animation(delta_time)
