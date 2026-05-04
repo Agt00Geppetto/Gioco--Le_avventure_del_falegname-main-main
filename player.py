@@ -15,6 +15,8 @@ class Player(player):
         self.corre = False
         self.attack_on = False
         self.preso_danno = False
+        self.può_attaccare = False
+        self.può_correre = False
         self.danno = 0.0
 
         self.vita = 100
@@ -46,6 +48,7 @@ class Player(player):
 
     def run_left(self): 
         self.attack_on = False
+        self.può_correre = True
         self.corre = True
         self.salto = False
         self.change_x = -5
@@ -58,7 +61,8 @@ class Player(player):
 
     def run_right(self): 
         self.attack_on = False
-        self.corre = True
+        self.può_correre = True
+        self.può = True
         self.salto = False
         self.change_x = 5
 
@@ -67,6 +71,7 @@ class Player(player):
 
     def attack(self):
         self.attack_on = True
+        self.può_attaccare = True
         self.danno = 10.0
 
     def jump(self):
@@ -79,10 +84,12 @@ class Player(player):
         if self.physics_engine and self.physics_engine.can_jump():
             self.jump_since_ground = 0
 
-    def aggiorna_stamina(self):
-        if self.stamina <= 0 and (self.attack_on == False or self.corre == False):
+    def aggiorna_stamina(self, delta_time):
+        if self.stamina <= 0 and self.può == False:
             self.stamina += 5
-        elif self.stamina >= 0 and self.corre == True:
+        elif self.stamina >= 0 and self.corre == True and self.può_correre == True:
+            self.può = False
             self.stamina -=1
-        elif self.stamina >= 0 and self.attack_on == True:
+        elif self.stamina >= 0 and self.attack_on == True and self.può_attaccare == True:
+            self.può = False
             self.stamina -= 5
