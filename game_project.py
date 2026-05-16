@@ -36,6 +36,9 @@ class Gioco(arcade.View):
         self.punteggio = 0
         self.stato = None
 
+        # self.rotto = False
+        # barile_rotto = arcade.Sprite("./assets/barile_rotto.png")
+
         self.physics_engine = None
         self.scene = None
 
