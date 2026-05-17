@@ -36,8 +36,7 @@ class Gioco(arcade.View):
         self.punteggio = 0
         self.stato = None
 
-        # self.rotto = False
-        # barile_rotto = arcade.Sprite("./assets/barile_rotto.png")
+        barile_rotto = arcade.Sprite("./assets/barile_rotto.png")
 
         self.physics_engine = None
         self.scene = None
@@ -195,6 +194,7 @@ class Gioco(arcade.View):
         self.sfondo.draw(self.camera)
 
         self.scene.draw()
+        # self.scene.draw_hit_boxes(color=arcade.color.RED)
 
         self.camera_ui.use()
         self.p1.barra_vita.draw_barra(
@@ -263,6 +263,14 @@ class Gioco(arcade.View):
             elif soldi.texture == self.soldi.l_c:
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
+
+        d_muri = arcade.check_for_collision_with_list(self.p1, self.muri.scene["Walls"])
+
+        for muri in d_muri:
+
+            if self.p1.attack_on == True and muri.texture == self.muri.barile:
+                print("l'hai rotto")
+            muri.kill()
 
         self.p1.barra_vita.valore_corrente = self.p1.vita
 
