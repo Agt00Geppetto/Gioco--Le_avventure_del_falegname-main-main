@@ -16,10 +16,10 @@ class Muri:
         posizioni = random.sample(coordinate_list_b, k=5) # il comando random.sample(), mi consente di scegliere nel mio caso 5 coordinate a caso che non si ripetono mai della lista coordinate_list_b
 
         for coordinate in posizioni:
-            barili = arcade.Sprite(self.barile)
-            barili.position = coordinate
-            barili.scale = 0.4
-            self.scene.add_sprite("Walls", barili)
+            barile = arcade.Sprite(self.barile)
+            barile.position = coordinate
+            barile.scale = 0.4
+            self.scene.add_sprite("Walls", barile)
 
         # Secchio
         coordinate_list_s = [[342, 80],[615, 80],[980, 80],[1245, 80],[1510, 80],[1730, 80],[2025, 80],[2290, 80],[2455, 80],[2680, 80],[2815, 80],[455, 80]]

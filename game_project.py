@@ -36,7 +36,8 @@ class Gioco(arcade.View):
         self.punteggio = 0
         self.stato = None
 
-        barile_rotto = arcade.Sprite("./assets/barile_rotto.png")
+        # self.rotto = False
+        # barile_rotto = arcade.Sprite("./assets/barile_rotto.png")
 
         self.physics_engine = None
         self.scene = None
@@ -194,7 +195,6 @@ class Gioco(arcade.View):
         self.sfondo.draw(self.camera)
 
         self.scene.draw()
-        # self.scene.draw_hit_boxes(color=arcade.color.RED)
 
         self.camera_ui.use()
         self.p1.barra_vita.draw_barra(
@@ -264,14 +264,6 @@ class Gioco(arcade.View):
                 self.punteggio += self.soldi.valore_l_c
             soldi.kill()
 
-        d_muri = arcade.check_for_collision_with_list(self.p1, self.muri.scene["Walls"])
-
-        for muri in d_muri:
-
-            if self.p1.attack_on == True and muri.texture == self.muri.barile:
-                print("l'hai rotto")
-            muri.kill()
-
         self.p1.barra_vita.valore_corrente = self.p1.vita
 
         d_pozioni = arcade.check_for_collision_with_list(self.p1, self.pozioni.scene["Potions"])
@@ -282,6 +274,24 @@ class Gioco(arcade.View):
                     self.p1.vita += self.pozioni.valore_cura
                     print(self.p1.vita)
                 pozione.kill()
+
+        d_muri = arcade.get_sprites_at_point((self.p1.center_x, self.p1.center_y), self.muri.scene["Walls"])
+
+        for muri in d_muri:
+
+            print(muri.texture)
+            print(self.muri.barile)
+            print(muri.texture == self.muri.barile)
+
+            if muri in self.scene["Rimovibili"]:
+                continue
+            
+            if self.p1.attack_on == True and muri.texture == self.muri.barile:
+                if muri in self.muri.scene["Walls"]:
+                    self.muri.scene["Walls"].remove(muri)
+                    self.scene.add_sprite("Rimovibili", muri)
+                    print("l'hai rotto")
+                    muri.kill()
 
         if self.punteggio >= 600:
             self.clear()
