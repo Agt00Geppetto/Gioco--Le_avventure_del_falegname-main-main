@@ -1,12 +1,13 @@
 import arcade
 import random
+from oggetti import Barile
+from oggetti import Secchio
 
 class Muri:
 
     def __init__(self, scene):
         
         self.scene = scene
-        self.barile = arcade.load_texture("./assets/barile.png")
         self.crea_muri()
         
     def crea_muri(self):
@@ -16,20 +17,18 @@ class Muri:
         posizioni = random.sample(coordinate_list_b, k=5) # il comando random.sample(), mi consente di scegliere nel mio caso 5 coordinate a caso che non si ripetono mai della lista coordinate_list_b
 
         for coordinate in posizioni:
-            barile = arcade.Sprite(self.barile)
+            barile = Barile(scene=self.scene)
             barile.position = coordinate
-            barile.scale = 0.4
-            self.scene.add_sprite("Walls", barile)
+            self.scene.add_sprite("Colpibili", barile)
 
         # Secchio
         coordinate_list_s = [[342, 80],[615, 80],[980, 80],[1245, 80],[1510, 80],[1730, 80],[2025, 80],[2290, 80],[2455, 80],[2680, 80],[2815, 80],[455, 80]]
         posizioni = random.sample(coordinate_list_s, k=3)
 
         for coordinate in posizioni:
-            secchio = arcade.Sprite("./assets/secchio.png")
+            secchio = Secchio(scene=self.scene)
             secchio.position = coordinate
-            secchio.scale = 0.25
-            self.scene.add_sprite("Walls", secchio)
+            self.scene.add_sprite("Colpibili", secchio)
 
         # Terreno
         for x in range(-1000, 10000, 1000):

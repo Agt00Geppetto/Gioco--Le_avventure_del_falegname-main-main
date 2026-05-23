@@ -95,3 +95,11 @@ python avvio.py
 ## 👤 Autore
 
 **Agt00Geppetto** — [GitHub](https://github.com/Agt00Geppetto)
+
+---
+
+## Possibili aggiornamenti
+
+1. Ottimizzazione della stamina
+2. Possibilità di rompere i barili per guadagnare punti/monete
+3. Possibile spawn di più nemici
