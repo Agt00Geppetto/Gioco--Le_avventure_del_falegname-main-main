@@ -19,6 +19,7 @@ class Muri:
         for coordinate in posizioni:
             barile = Barile(scene=self.scene)
             barile.position = coordinate
+            self.scene.add_sprite("Walls", barile)
             self.scene.add_sprite("Colpibili", barile)
 
         # Secchio
@@ -28,6 +29,7 @@ class Muri:
         for coordinate in posizioni:
             secchio = Secchio(scene=self.scene)
             secchio.position = coordinate
+            self.scene.add_sprite("Walls", secchio)
             self.scene.add_sprite("Colpibili", secchio)
 
         # Terreno

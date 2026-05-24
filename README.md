@@ -71,23 +71,24 @@ python avvio.py
 ```
 ├── avvio.py          # Punto di ingresso del gioco
 ├── game_project.py   # Logica principale del gioco
-├── player.py         # Gestione del personaggio giocante
-├── nemici.py         # Comportamento dei nemici
-├── animazione.py     # Sistema di animazioni
-├── barra.py          # Barre vita e stamina
-├── menu.py           # Schermata del menu principale
-├── comandi.py        # Schermata dei comandi
-├── pausa.py          # Schermata di pausa
-├── inventario.py     # Sistema inventario
-├── pozioni.py        # Gestione pozioni
-├── monete.py         # Gestione monete
-├── muri.py           # Collisioni con i muri
-├── piattaforme.py    # Gestione piattaforme
-├── sfondo.py         # Gestione dello sfondo
-├── vittoria.py       # Schermata di vittoria
-├── sconfitta.py      # Schermata di sconfitta
-├── crediti.py        # Schermata crediti
-└── assets/           # Risorse grafiche e audio
+    ├── player.py         # Gestione del personaggio giocante
+    ├── nemici.py         # Comportamento dei nemici
+        ├── animazione.py     # Sistema di animazioni
+        ├── barra.py          # Barre vita e stamina
+    ├── menu.py           # Schermata del menu principale
+    ├── comandi.py        # Schermata dei comandi
+    ├── pausa.py          # Schermata di pausa
+    ├── inventario.py     # Sistema inventario
+    ├── pozioni.py        # Gestione pozioni
+    ├── monete.py         # Gestione monete
+    ├── muri.py           # Collisioni con i muri
+        ├── oggetti.py        # Classe per distinguere oggetti rompibili dai muri
+    ├── piattaforme.py    # Gestione piattaforme
+    ├── sfondo.py         # Gestione dello sfondo
+    ├── vittoria.py       # Schermata di vittoria
+    ├── sconfitta.py      # Schermata di sconfitta
+    ├── crediti.py        # Schermata crediti
+    └── assets/           # Risorse grafiche e audio
 ```
 
 ---

@@ -176,14 +176,16 @@ class Gioco(arcade.View):
 
     def rompo_oggetti(self): #Stai cercando di implementare il metodo per rompere barili e secchi, ricorda che devi partire dalla "fine" per implementare correttamente il tutto
 
-        d_muri = arcade.check_for_collision_with_list(self.p1, self.muri.scene["Colpibili"])
+        for muri in self.muri.scene["Walls"]:
 
-        for muri in d_muri:
+            if self.p1.attack_on == True and muri in self.muri.scene["Walls"]:
+                self.muri.scene["Walls"].remove(muri)
+                muri.vita -= self.p1.danno
+                if muri.vita <= 0:
+                    muri.kill()
 
-            if self.p1.attack_on == False:
-                muri.preso_danno = False
-
-        pass
+            elif self.p1.attack_on == False and muri not in self.muri.scene["Walls"] and muri.vita > 0:
+                self.muri.scene.add_sprite("Walls", muri)
             
     def aggiorna_camera(self):
 
@@ -285,6 +287,8 @@ class Gioco(arcade.View):
                     self.p1.vita += self.pozioni.valore_cura
                     print(self.p1.vita)
                 pozione.kill()
+
+        # self.rompo_oggetti()
 
         if self.punteggio >= 600:
             self.clear()
