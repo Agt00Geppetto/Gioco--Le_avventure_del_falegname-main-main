@@ -37,7 +37,7 @@ class Gioco(arcade.View):
         self.stato = None
 
         # self.rotto = False
-        # barile_rotto = arcade.Sprite("./assets/barile_rotto.png")
+        # self.barile_rotto = arcade.Sprite("./assets/barile_rotto.png")
 
         self.physics_engine = None
         self.scene = None
@@ -176,18 +176,21 @@ class Gioco(arcade.View):
 
     def rompo_oggetti(self, delta_time): #Stai cercando di implementare il metodo per rompere barili e secchi, ricorda che devi partire dalla "fine" per implementare correttamente il tutto
 
-        d_muri = arcade.check_for_collision_with_list(self.p1, self.muri.scene["Colpibili"])
+        for muri in self.scene["Colpibili"]:
 
-        for muri in d_muri:
+            distanza = self.p1.center_x - muri.center_x
 
-            if self.p1.attack_on == True and muri in self.muri.scene["Walls"]:
+            if abs(distanza) <= self.p1.raggio_attacco and self.p1.attack_on == True and muri in self.muri.scene["Walls"] and muri.preso_danno == False:
                 self.muri.scene["Walls"].remove(muri)
                 muri.vita -= self.p1.danno
+                muri.preso_danno = True
+                print(muri.vita)
                 if muri.vita <= 0:
                     self.punteggio += muri.punteggio
                     muri.kill()
 
-            elif self.p1.attack_on == False and muri not in self.muri.scene["Walls"] and muri.vita > 0:
+            elif self.p1.attack_on == False and muri not in self.muri.scene["Walls"] and muri.vita > 0 and muri.preso_danno == True:
+                muri.preso_danno = False
                 self.muri.scene.add_sprite("Walls", muri)
             
     def aggiorna_camera(self):
@@ -242,7 +245,6 @@ class Gioco(arcade.View):
             current_y = old_y - new_y
             if nemico.vita <= 0:
                 self.punteggio += nemico.punteggio
-                print(self.punteggio)
                 nemico.kill()
 
             nemico.barra_vita.draw_barra( 
@@ -252,6 +254,21 @@ class Gioco(arcade.View):
                 color = arcade.color.RED
             )
 
+        # for muri in self.scene["Colpibili"]:
+        #     muri.barra_vita.valore_corrente = muri.vita
+        #     y = muri.center_x + 100
+        #     if muri.vita <= 0:
+        #         self.punteggio += muri.punteggio
+        #         print(self.punteggio)
+        #         muri.kill()
+
+        #         muri.barra_vita.draw_barra( 
+        #         left = muri.center_x - (self.WIDTH_BARRA//2),
+        #         bottom = y,
+        #         altezza = 10,
+        #         color = arcade.color.RED
+        #     )
+        
     def on_update(self, delta_time):
 
         self.scene.update(delta_time)

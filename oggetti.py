@@ -15,6 +15,8 @@ class Oggetti(arcade.Sprite):
 
         self.barra_vita = BarraProgressiva(self.vita, self.vita_massima)
 
+        self.preso_danno = False
+
 class Barile(Oggetti):
 
     def __init__(self, scene):
