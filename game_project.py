@@ -174,14 +174,17 @@ class Gioco(arcade.View):
                 else:
                     nemico.imposta_animazione("idle")
 
-    def rompo_oggetti(self): #Stai cercando di implementare il metodo per rompere barili e secchi, ricorda che devi partire dalla "fine" per implementare correttamente il tutto
+    def rompo_oggetti(self, delta_time): #Stai cercando di implementare il metodo per rompere barili e secchi, ricorda che devi partire dalla "fine" per implementare correttamente il tutto
 
-        for muri in self.muri.scene["Walls"]:
+        d_muri = arcade.check_for_collision_with_list(self.p1, self.muri.scene["Colpibili"])
+
+        for muri in d_muri:
 
             if self.p1.attack_on == True and muri in self.muri.scene["Walls"]:
                 self.muri.scene["Walls"].remove(muri)
                 muri.vita -= self.p1.danno
                 if muri.vita <= 0:
+                    self.punteggio += muri.punteggio
                     muri.kill()
 
             elif self.p1.attack_on == False and muri not in self.muri.scene["Walls"] and muri.vita > 0:
@@ -288,7 +291,7 @@ class Gioco(arcade.View):
                     print(self.p1.vita)
                 pozione.kill()
 
-        # self.rompo_oggetti()
+        self.rompo_oggetti(delta_time)
 
         if self.punteggio >= 600:
             self.clear()
