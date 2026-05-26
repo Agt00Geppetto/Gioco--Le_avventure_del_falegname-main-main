@@ -36,9 +36,6 @@ class Gioco(arcade.View):
         self.punteggio = 0
         self.stato = None
 
-        # self.rotto = False
-        # self.barile_rotto = arcade.Sprite("./assets/barile_rotto.png")
-
         self.physics_engine = None
         self.scene = None
 
@@ -184,7 +181,6 @@ class Gioco(arcade.View):
                 self.muri.scene["Walls"].remove(muri)
                 muri.vita -= self.p1.danno
                 muri.preso_danno = True
-                print(muri.vita)
                 if muri.vita <= 0.0:
                     self.punteggio += muri.punteggio
                     if muri.tipo == "barile":
