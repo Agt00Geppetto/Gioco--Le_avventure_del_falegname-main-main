@@ -8,6 +8,7 @@ class Muri:
     def __init__(self, scene):
         
         self.scene = scene
+        self.barile_rotto = arcade.load_texture("./assets/barile_rotto.png")
         self.crea_muri()
         
     def crea_muri(self):
@@ -34,7 +35,7 @@ class Muri:
 
         # Terreno
         for x in range(-1000, 10000, 1000):
-            terreno = arcade.Sprite("assets/Wood/Background layers/sfondo10.png")
+            terreno = arcade.Sprite("./assets/Wood/Background layers/sfondo10.png")
             terreno.center_x = x
             terreno.center_y = 665
             terreno.scale = 1.8

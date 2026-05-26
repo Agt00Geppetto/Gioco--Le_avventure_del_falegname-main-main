@@ -185,9 +185,9 @@ class Gioco(arcade.View):
                 muri.vita -= self.p1.danno
                 muri.preso_danno = True
                 print(muri.vita)
-                if muri.vita <= 0:
+                if muri.vita <= 0.0:
                     self.punteggio += muri.punteggio
-                    muri.kill()
+                    muri.texture = self.muri.barile_rotto
 
             elif self.p1.attack_on == False and muri not in self.muri.scene["Walls"] and muri.vita > 0 and muri.preso_danno == True:
                 muri.preso_danno = False
@@ -310,7 +310,7 @@ class Gioco(arcade.View):
 
         self.rompo_oggetti(delta_time)
 
-        if self.punteggio >= 600:
+        if self.punteggio >= 700:
             self.clear()
             vittoria = WinView()
             self.window.show_view(vittoria)
