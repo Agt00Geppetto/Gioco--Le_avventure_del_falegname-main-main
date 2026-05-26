@@ -187,7 +187,10 @@ class Gioco(arcade.View):
                 print(muri.vita)
                 if muri.vita <= 0.0:
                     self.punteggio += muri.punteggio
-                    muri.texture = self.muri.barile_rotto
+                    if muri.tipo == "barile":
+                        muri.texture = self.muri.barile_rotto
+                    elif muri.tipo == "secchio":
+                        muri.texture = self.muri.secchio_rotto
 
             elif self.p1.attack_on == False and muri not in self.muri.scene["Walls"] and muri.vita > 0 and muri.preso_danno == True:
                 muri.preso_danno = False
@@ -253,21 +256,6 @@ class Gioco(arcade.View):
                 altezza = 10,
                 color = arcade.color.RED
             )
-
-        # for muri in self.scene["Colpibili"]:
-        #     muri.barra_vita.valore_corrente = muri.vita
-        #     y = muri.center_x + 100
-        #     if muri.vita <= 0:
-        #         self.punteggio += muri.punteggio
-        #         print(self.punteggio)
-        #         muri.kill()
-
-        #         muri.barra_vita.draw_barra( 
-        #         left = muri.center_x - (self.WIDTH_BARRA//2),
-        #         bottom = y,
-        #         altezza = 10,
-        #         color = arcade.color.RED
-        #     )
         
     def on_update(self, delta_time):
 

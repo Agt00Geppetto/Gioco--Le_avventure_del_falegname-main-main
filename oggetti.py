@@ -33,6 +33,7 @@ class Barile(Oggetti):
         
         self.texture = arcade.load_texture("./assets/barile.png")
         self.scale = 0.4
+        self.tipo = "barile"
 
 class Secchio(Oggetti):
 
@@ -50,5 +51,6 @@ class Secchio(Oggetti):
         
         self.texture = arcade.load_texture("./assets/secchio.png")
         self.scale = 0.25
+        self.tipo = "secchio"
 
 

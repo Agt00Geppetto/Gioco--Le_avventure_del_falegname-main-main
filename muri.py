@@ -9,6 +9,7 @@ class Muri:
         
         self.scene = scene
         self.barile_rotto = arcade.load_texture("./assets/barile_rotto.png")
+        self.secchio_rotto = arcade.load_texture("./assets/secchio_rotto.png")
         self.crea_muri()
         
     def crea_muri(self):
