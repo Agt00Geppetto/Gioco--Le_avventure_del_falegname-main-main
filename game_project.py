@@ -14,6 +14,7 @@ from monete import Monete
 from vittoria import WinView
 from sconfitta import GameOverView
 from pozioni import Pozioni
+from musica import Musica
 
 class Gioco(arcade.View):
 
@@ -35,6 +36,7 @@ class Gioco(arcade.View):
         self.pozioni = None
         self.punteggio = 0
         self.stato = None
+        self.suono = None
 
         self.physics_engine = None
         self.scene = None
@@ -61,6 +63,8 @@ class Gioco(arcade.View):
 
         self.muri = Muri(self.scene)
         self.piattaforme = Piattaforme(self.scene)
+
+        self.suono = Musica()
 
         self.physics_engine = arcade.PhysicsEnginePlatformer(
             player_sprite = self.p1,
