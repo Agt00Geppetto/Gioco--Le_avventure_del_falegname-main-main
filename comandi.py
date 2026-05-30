@@ -19,7 +19,7 @@ class ComandiView(arcade.View):
         
     def on_key_press(self, tasto, modifiers):
 
-        from musica import Musica
+        from musica import Musica #sposta la musica da qui, non va bene
         self.suono = Musica()
 
         if tasto == arcade.key.RETURN:
