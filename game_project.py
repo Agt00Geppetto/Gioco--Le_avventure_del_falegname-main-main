@@ -272,6 +272,7 @@ class Gioco(arcade.View):
         self.occhio.update_animation(delta_time)
 
         d_soldi = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
+        self.suono.volume = True
 
         for soldi in d_soldi:
 
@@ -283,6 +284,7 @@ class Gioco(arcade.View):
                 self.punteggio += self.soldi.valore_l
             elif soldi.texture == self.soldi.l_c:
                 self.punteggio += self.soldi.valore_l_c
+            arcade.play_sound(self.suono.collezionabili)
             soldi.kill()
 
         self.p1.barra_vita.valore_corrente = self.p1.vita
@@ -302,11 +304,13 @@ class Gioco(arcade.View):
             self.clear()
             vittoria = WinView()
             self.window.show_view(vittoria)
+            arcade.play_sound(self.suono.fine)
 
         if self.p1.vita <= 0:
             self.clear()
             sconfitta = GameOverView(self.punteggio)
             self.window.show_view(sconfitta)
+            arcade.play_sound(self.suono.perso)
 
         self.ia_nemici(delta_time)
 
@@ -321,6 +325,7 @@ class Gioco(arcade.View):
 
         if tasto == arcade.key.SPACE:
             self.p1.jump()
+            arcade.play_sound(self.suono.salto)
         elif tasto in (arcade.key.A, arcade.key.LEFT):
             self.p1.move_left()
             if modificatori & arcade.key.MOD_SHIFT:
@@ -334,6 +339,11 @@ class Gioco(arcade.View):
             self.window.show_view(pausa)
         elif tasto == arcade.key.E:
             self.p1.attack()
+            arcade.play_sound(self.suono.colpo)
+        elif tasto == arcade.key.M:
+            self.suono.volume = False
+            if self.suono.volume == False:
+                self.suono.volume = True
 
     def on_key_release(self, tasto, modificatori):
 
