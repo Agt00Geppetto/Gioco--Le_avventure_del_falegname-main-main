@@ -10,4 +10,3 @@ class Musica():
         self.colpo = arcade.load_sound("./assets/suoni/colpo.mp3")
         self.fine = arcade.load_sound("./assets/suoni/livello_superato.mp3")
         self.salto = arcade.load_sound("./assets/suoni/salto.mp3")
-        self.volume = True
