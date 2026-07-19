@@ -299,7 +299,11 @@ class Gioco(arcade.View):
             for pozione in d_pozioni:
                 if self.p1.vita <= (self.p1.vita_massima - self.pozioni.valore_cura):
                     self.p1.vita += self.pozioni.valore_cura
-                    print(self.p1.vita)
+                    print(self.pozioni.valore_cura)
+                else:
+                    self.pozioni.valore_cura = (self.p1.vita_massima - self.p1.vita)
+                    self.p1.vita += self.pozioni.valore_cura
+                    print(self.pozioni.valore_cura)
                 pozione.kill()
 
         self.rompo_oggetti(delta_time)
