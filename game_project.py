@@ -63,8 +63,17 @@ class Gioco(arcade.View):
 
         self.soldi = Monete(self.scene) 
 
-        self.fungo = Fungo(self.scene)
-        self.occhio = Occhio(self.scene)
+        coordinate_list_fungo = [[150, 125], [280, 125], [540, 125], [800, 125], [1060, 125], [1320, 125], [1580, 125], [1840, 125], [2100, 125], [2360, 125], [2620, 125], [2900, 125]]
+        posizioni_fungo = random.sample(coordinate_list_fungo, k=3)
+        self.funghi = []
+        for pos in posizioni_fungo:
+            self.funghi.append(Fungo(self.scene, pos))
+
+        coordinate_list_occhio = [[150, 300], [280, 309], [540, 318], [800, 327], [1060, 336], [1320, 345], [1580, 354], [1840, 363], [2100, 372], [2360, 381], [2620, 390], [2900, 400]]
+        posizioni_occhi = random.sample(coordinate_list_occhio, k=2)
+        self.occhi = []
+        for pos in posizioni_occhi:
+            self.occhi.append(Occhio(self.scene, pos))
 
         self.muri = Muri(self.scene)
         self.piattaforme = Piattaforme(self.scene)
@@ -132,7 +141,7 @@ class Gioco(arcade.View):
             elif nemico.stato == "Hurt":
                 nemico.timer_danno += delta_time
                 nemico.change_x = 0
-                if nemico == self.occhio:
+                if nemico in self.occhi:
                     nemico.change_y = 0
                 nemico.imposta_animazione("hurt")
                 if nemico.timer_danno >= 1.0:
@@ -145,7 +154,7 @@ class Gioco(arcade.View):
                     nemico.timer_attacco = 0.0
                 nemico.timer_attacco += delta_time
                 nemico.change_x = 0
-                if nemico == self.occhio:
+                if nemico in self.occhi:
                     nemico.change_y = 0
                 nemico.imposta_animazione("attack")
                 if nemico.timer_attacco >= 1.0 and nemico.stato == "Attack" and self.p1.preso_danno == False:
@@ -155,12 +164,12 @@ class Gioco(arcade.View):
                     nemico.stato = None
             elif abs(distanza) <= nemico.raggio_movimento and nemico.stato != "Attack":
                 if nemico.stato != "Run":
-                    if nemico == self.occhio:
+                    if nemico in self.occhi:
                         nemico.imposta_animazione("flight")
                     else:
                         nemico.imposta_animazione("run")        
                 nemico.stato = "Run"
-                if nemico == self.occhio:
+                if nemico in self.occhi:
                     if distanza > 0: nemico.change_x = 3
                     else: nemico.change_x = -3
                     if altezza > 0: nemico.change_y = 3
@@ -171,9 +180,9 @@ class Gioco(arcade.View):
             else:
                 nemico.stato = "Idle"
                 nemico.change_x = 0
-                if nemico == self.occhio:
+                if nemico in self.occhi:
                     nemico.change_y = 0
-                if nemico == self.occhio:
+                if nemico in self.occhi:
                     nemico.imposta_animazione("flight") 
                 else:
                     nemico.imposta_animazione("idle")
@@ -271,8 +280,10 @@ class Gioco(arcade.View):
         self.p1.aggiorna_stamina(delta_time)
         self.p1.barra_stamina.valore_corrente = self.p1.stamina
 
-        self.fungo.update_animation(delta_time)
-        self.occhio.update_animation(delta_time)
+        for fungo in self.funghi:
+            fungo.update_animation(delta_time)
+        for occhio in self.occhi:
+            occhio.update_animation(delta_time)
 
         d_soldi = arcade.check_for_collision_with_list(self.p1, self.soldi.scene["Coins"])
 
