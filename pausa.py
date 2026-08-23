@@ -43,7 +43,8 @@ class PauseView(arcade.View):
                          arcade.color.BLEU_DE_FRANCE, font_size=48, font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"), anchor_x="center")
         self.manager.draw()
     
-    def resume(self,event):
+    def resume(self, event):
+        self.game_view.player.play()
         self.window.show_view(self.game_view)
 
     def reset(self, event):

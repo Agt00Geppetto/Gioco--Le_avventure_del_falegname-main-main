@@ -39,6 +39,10 @@ class Gioco(arcade.View):
         self.suono = None
         self.volume = True
 
+        if self.volume:
+            self.suono = Musica()
+            self.player = arcade.play_sound(self.suono.gioco, volume = 0.1,  loop = True)
+
         self.physics_engine = None
         self.scene = None
 
@@ -64,11 +68,6 @@ class Gioco(arcade.View):
 
         self.muri = Muri(self.scene)
         self.piattaforme = Piattaforme(self.scene)
-
-        self.suono = Musica()
-        self.sottofondo = self.suono.gioco
-        if self.volume:
-            arcade.play_sound(self.sottofondo, volume = 0.1,  loop = True)
 
         self.physics_engine = arcade.PhysicsEnginePlatformer(
             player_sprite = self.p1,
@@ -301,7 +300,7 @@ class Gioco(arcade.View):
                     self.p1.vita += self.pozioni.valore_cura
                     print(self.pozioni.valore_cura)
                 else:
-                    self.pozioni.valore_cura = (self.p1.vita_massima - self.p1.vita)
+                    self.pozioni.valore_cura = self.p1.vita_massima - self.p1.vita
                     self.p1.vita += self.pozioni.valore_cura
                     print(self.pozioni.valore_cura)
                 pozione.kill()
@@ -310,12 +309,14 @@ class Gioco(arcade.View):
 
         if self.punteggio >= 700:
             self.clear()
+            self.player.pause()
             vittoria = WinView()
             self.window.show_view(vittoria)
             arcade.play_sound(self.suono.fine)
 
         if self.p1.vita <= 0:
             self.clear()
+            self.player.pause()
             sconfitta = GameOverView(self.punteggio)
             self.window.show_view(sconfitta)
             arcade.play_sound(self.suono.perso)
@@ -344,6 +345,7 @@ class Gioco(arcade.View):
             if modificatori & arcade.key.MOD_SHIFT:
                 self.p1.run_right()
         elif tasto == arcade.key.ESCAPE:
+            self.player.pause()
             pausa = PauseView(self)  # passiamo noi stessi per poter tornare in futuro, allo stato del gioco che avviene in questo momento
             self.window.show_view(pausa)
         elif tasto == arcade.key.E:
