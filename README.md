@@ -102,4 +102,3 @@ python avvio.py
 ## Possibili aggiornamenti
 
 1. Ottimizzazione della stamina
-2. Possibile spawn di più nemici
