@@ -37,11 +37,10 @@ class Gioco(arcade.View):
         self.punteggio = 0
         self.nemici_uccisi = 0
         self.stato = None
-        self.suono = None
+        self.suono = Musica()
         self.volume = True
 
         if self.volume:
-            self.suono = Musica()
             self.player = arcade.play_sound(self.suono.gioco, volume = 0.1,  loop = True)
 
         self.physics_engine = None
