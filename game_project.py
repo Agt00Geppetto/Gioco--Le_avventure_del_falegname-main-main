@@ -35,6 +35,7 @@ class Gioco(arcade.View):
         self.soldi = None
         self.pozioni = None
         self.punteggio = 0
+        self.nemici_uccisi = 0
         self.stato = None
         self.suono = None
         self.volume = True
@@ -252,6 +253,16 @@ class Gioco(arcade.View):
             font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"),
             bold = True 
             )
+
+        arcade.draw_text(
+                    x = 460,
+                    y = 10,
+                    text = f"Hai ucciso: {self.nemici_uccisi} nemico"  if self.nemici_uccisi == 1 else f"Hai ucciso: {self.nemici_uccisi} nemici ",
+                    color = arcade.color.WHITE, 
+                    font_size = 10,
+                    font_name = ("./assets/d_i_y_75/D.I.Y.'75.ttf"),
+                    bold = True 
+                    )
         
         old_y = 500
         for i, nemico in enumerate(self.scene["Enemy"]):
@@ -260,6 +271,7 @@ class Gioco(arcade.View):
             current_y = old_y - new_y
             if nemico.vita <= 0:
                 self.punteggio += nemico.punteggio
+                self.nemici_uccisi += 1
                 nemico.kill()
 
             nemico.barra_vita.draw_barra( 
@@ -307,18 +319,18 @@ class Gioco(arcade.View):
 
         if len(d_pozioni) > 0:
             for pozione in d_pozioni:
-                if self.p1.vita <= (self.p1.vita_massima - self.pozioni.valore_cura):
+                if  self.p1.vita >= (self.p1.vita_massima - self.pozioni.valore_cura):
+                    self.pozioni.valore_cura = self.p1.vita_massima - self.p1.vita
                     self.p1.vita += self.pozioni.valore_cura
                     print(self.pozioni.valore_cura)
-                else:
-                    self.pozioni.valore_cura = self.p1.vita_massima - self.p1.vita
+                elif self.p1.vita <= (self.p1.vita_massima - self.pozioni.valore_cura):
                     self.p1.vita += self.pozioni.valore_cura
                     print(self.pozioni.valore_cura)
                 pozione.kill()
 
         self.rompo_oggetti(delta_time)
 
-        if self.punteggio >= 700:
+        if self.nemici_uccisi == 5:
             self.clear()
             self.player.pause()
             vittoria = WinView()
@@ -328,7 +340,7 @@ class Gioco(arcade.View):
         if self.p1.vita <= 0:
             self.clear()
             self.player.pause()
-            sconfitta = GameOverView(self.punteggio)
+            sconfitta = GameOverView(self.punteggio, self.nemici_uccisi)
             self.window.show_view(sconfitta)
             arcade.play_sound(self.suono.perso)
 
