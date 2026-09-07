@@ -79,11 +79,13 @@ class Player(player):
             self.jump_since_ground = 0
 
     def aggiorna_stamina(self, delta_time):
-        if self.stamina == self.stamina_massima:
-            return
-        elif self.attack_on == False and self.corre == False:
-            self.stamina += 5    
-        elif self.stamina >= 0 and self.corre == True:
-            self.stamina -=  1
+
+        # for self.stamina in self.stamina_massima:
+        if  self.attack_on == False and self.corre == False:
+            self.stamina += 5
         elif self.stamina >= 0 and self.attack_on == True:
             self.stamina -= 5
+        elif self.stamina >= 0 and self.corre == True:
+            self.stamina -=  1
+        elif self.stamina == self.stamina_massima:
+            return
